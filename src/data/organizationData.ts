@@ -1,0 +1,1485 @@
+import { ActivityItem, NoticeItem, CommitteeMember, GalleryItem, FacebookPostItem, FlagshipProject, PartnerItem, AchievementItem, UnionWardItem } from '../types';
+
+export const ORG_DETAILS = {
+  nameBn: 'জয়মনিরহাট ইউনিয়ন যুব সংগঠন',
+  nameEn: 'Joymonirhat Union Youth Organization',
+  shortName: 'JUYO',
+  mottoBn: 'তারুণ্যের শক্তিতে গড়ি সচেতন, মাদকমুক্ত ও মানবিক সমাজ',
+  mottoEn: 'Building a Conscious, Drug-Free & Humanitarian Society with Youth Power',
+  secondaryMottoBn: 'তারুণ্যের শক্তি, স্বেচ্ছাসেবার অঙ্গীকার, সমাজ পরিবর্তনের প্রত্যয়।',
+  secondaryMottoEn: 'Power of Youth, Commitment to Volunteerism, Determination for Social Change.',
+  regNumberBn: 'যুউঅ/কুড়ি-৮৮/২০২৩',
+  regNumberEn: 'DYD-Kuri-88/2023',
+  regAuthorityBn: 'যুব উন্নয়ন অধিদপ্তর, কুড়িগ্রাম',
+  regAuthorityEn: 'Department of Youth Development, Kurigram',
+  establishedDateBn: '২১ ডিসেম্বর ২০২১',
+  establishedDateEn: 'December 21, 2021',
+  regDateBn: '৯ অক্টোবর ২০২৩',
+  regDateEn: 'October 9, 2023',
+  addressBn: 'অষ্টমীর ঘাট, জয়মনিরহাট, ভূরুঙ্গামারী, কুড়িগ্রাম',
+  addressEn: 'Ashtamir Ghat, Joymonirhat, Bhurungamari, Kurigram',
+  email: 'joymonirhatyouthorganaization@gmail.com',
+  whatsapp: '01705929049',
+  phoneFormatted: '+880 1705-929049',
+  bkash: '01705929049',
+  nagad: '01518969640',
+  whatsappUrl: 'https://wa.me/8801705929049?text=Hello%20JUYO%20Team',
+  facebookGroupUrl: 'https://www.facebook.com/share/g/1HntGmRGhi/',
+  facebookPageUrl: 'https://www.facebook.com/share/1MfuQfRQiC/',
+  facebookProfileUrl: 'https://www.facebook.com/share/1MfuQfRQiC/',
+  logoUrl: '/assets/aistudio/_____________________________LOGO_a05cfdbd.jpg',
+  establishedYear: '২০২১',
+  establishedYearEn: '2021',
+  regYear: '২০২৩',
+  regYearEn: '2023',
+  natureBn: 'সম্পূর্ণ অরাজনৈতিক, অলাভজনক ও সামাজিক যুব স্বেচ্ছাসেবী সংগঠন',
+  natureEn: 'Completely Non-political, Non-profit & Voluntary Youth Organization',
+  members: {
+    totalGeneral: 36,
+    male: 14,
+    female: 22,
+    ageRange: '১৮ থেকে ২৪ বছর',
+    executiveCount: 11,
+    tenureYears: 2
+  }
+};
+
+export const ACTIVITIES: ActivityItem[] = [
+  {
+    id: 'humanitarian-service',
+    titleBn: 'আত্ম-মানবতার সেবা',
+    titleEn: 'Selfless Humanitarian Service',
+    category: 'welfare',
+    categoryLabelBn: 'মানবকল্যাণ',
+    categoryLabelEn: 'Humanitarian',
+    shortDescBn: 'অসহায়, দুস্থ ও প্রান্তিক মানুষের পাশে মানবিক সহায়তা ও আপৎকালীন পাশে থাকা।',
+    shortDescEn: 'Standing by underprivileged and vulnerable community members in times of urgent need.',
+    fullDescBn: 'জয়মনিরহাট ইউনিয়নের প্রতিটি ওয়ার্ডে নিঃস্বার্থভাবে দরিদ্র, অসুস্থ ও অসহায় পরিবারগুলোর চিকিৎসা সহায়তা, পুষ্টিকর খাদ্য সহায়তা এবং সংকটকালে পাশে দাঁড়ানো আমাদের প্রধান ব্রত। কোনো রাজনৈতিক বা ব্যক্তিগত স্বার্থ ছাড়া আমরা মানবতার সেবায় ব্রতী।',
+    fullDescEn: 'Our paramount duty is providing unconditional relief, emergency medical funds, and subsistence support to destitute families across Joymonirhat Union without any political or financial bias.',
+    iconName: 'HeartHandshake',
+    impactMetricBn: '৫০০+ পরিবারে সহায়তা',
+    impactMetricEn: '500+ Families Assisted',
+    actionPointsBn: [
+      'দরিদ্র রোগীদের জরুরি ওষুধ ও চিকিৎসা অনুদান',
+      'অসহায় প্রবীণ ও প্রতিবন্ধী ব্যক্তিদের বিশেষ খাদ্য সহায়তা',
+      'প্রান্তিক শিক্ষার্থীদের শিক্ষা উপকরণ ও ফি সহায়তা'
+    ],
+    actionPointsEn: [
+      'Emergency medicine and treatment assistance for destitute patients',
+      'Special nourishment packages for elderly and disabled individuals',
+      'Educational supplies and examination fee grants for underprivileged students'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936283278_9a988cf1.jpg'
+  },
+  {
+    id: 'drug-prevention',
+    titleBn: 'মাদক প্রতিরোধ আন্দোলন',
+    titleEn: 'Drug Abuse Prevention',
+    category: 'social',
+    categoryLabelBn: 'সামাজিক আন্দোলন',
+    categoryLabelEn: 'Social Movement',
+    shortDescBn: 'মাদকমুক্ত সমাজ গঠনে তরুণদের সচেতনতা, পাহারা ও সঠিক পথে উদ্বুদ্ধকরণ।',
+    shortDescEn: 'Empowering youth against drug abuse through grassroots counseling, vigilance, and awareness rallies.',
+    fullDescBn: 'মাদক একটি পরিবার এবং পুরো সমাজকে ধ্বংস করে দেয়। জয়মনিরহাট ইউনিয়ন যুব সংগঠন স্থানীয় তরুণদের খেলাধুলা ও গঠনমূলক সমাজসেবায় সম্পৃক্ত করার মাধ্যমে মাদক বিস্তার রুখতে সক্রিয় অবস্থান নিয়েছে।',
+    fullDescEn: 'Drug menace destroys future generations. JUYO engages local youth in constructive sports, moral seminars, and community vigilance to safeguard Joymonirhat from illegal substances.',
+    iconName: 'ShieldAlert',
+    impactMetricBn: '১৫+ সচেতনতামূলক সভা',
+    impactMetricEn: '15+ Awareness Seminars',
+    actionPointsBn: [
+      'ইউনিয়নের হাট-বাজার ও শিক্ষাপ্রতিষ্ঠানে মাদকবিরোধী লিফলেট বিতরণ',
+      'মাদকাসক্ত যুবকদের পুনর্বাসন ও স্বাভাবিক জীবনে ফিরিয়ে আনতে কাউন্সেলিং',
+      'স্থানীয় প্রশাসনের সাথে সমন্বয় করে মাদকপ্রবণ এলাকায় সামাজিক নজরদারি'
+    ],
+    actionPointsEn: [
+      'Leaflet campaigns and open rallies across union bazaars and schools',
+      'Confidential counseling helping addicted youth transition into healthy livelihoods',
+      'Community vigilance in coordination with local civil administration'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936411324_95d46bc1.jpg',
+    facebookPosts: [
+      {
+        url: 'https://www.facebook.com/share/p/1MSNk1yDJa/',
+        titleBn: 'মাদকবিরোধী যুব সংহতি ও অরাজনৈতিক সমাজসেবার শপথ',
+        titleEn: 'Anti-Drug Youth Solidarity & Community Oath',
+        dateBn: 'মাঠপর্যায়ের আপডেট',
+        dateEn: 'Field Update',
+        summaryBn: 'জয়মনিরহাট ইউনিয়নকে মাদকমুক্ত করতে তরুণদের শপথ ও সমন্বিত সামাজিক প্রতিরোধ গড়ে তোলার ঘোষণা।',
+        summaryEn: 'Youth assembly and collective pledge advocating for an addiction-free Joymonirhat Union.',
+        highlight: 'অফিসিয়াল পোস্ট ১'
+      },
+      {
+        url: 'https://www.facebook.com/share/p/1CBVRGqQ4b/',
+        titleBn: '‘না বলুন মাদককে’ — শিক্ষাপ্রতিষ্ঠান ও শিক্ষার্থীদের নিয়ে সচেতনতামূলক র‍্যালি',
+        titleEn: '“Say No to Drugs” — School & Student Awareness Rally',
+        dateBn: 'মাঠপর্যায়ের আপডেট',
+        dateEn: 'Field Update',
+        summaryBn: 'শিক্ষার্থীদের সচেতন করে তুলতে মাদকবিরোধী পোস্টার, স্লোগান এবং জয়মনিরহাটের রাজপথে বর্ণাঢ্য পদযাত্রা।',
+        summaryEn: 'Vibrant student procession carrying anti-drug banners and slogans across key thoroughfares.',
+        highlight: 'অফিসিয়াল পোস্ট ২'
+      },
+      {
+        url: 'https://www.facebook.com/share/p/1Emry7ow3v/',
+        titleBn: 'মাদক প্রতিরোধে যুব সমাবেশ ও জনসচেতনতামূলক ক্যাম্পেইন',
+        titleEn: 'Anti-Drug Youth Gathering & Public Campaign',
+        dateBn: 'মাঠপর্যায়ের আপডেট',
+        dateEn: 'Field Update',
+        summaryBn: 'হাট-বাজারে গণসংযোগ, লিফলেট বিতরণ ও যুবকদের খেলাধুলার দিকে উৎসাহিত করার বিশেষ উদ্যোগ।',
+        summaryEn: 'Marketplace outreach, leaflet distribution, and redirecting youth towards constructive sports.',
+        highlight: 'অফিসিয়াল পোস্ট ৩'
+      },
+      {
+        url: 'https://www.facebook.com/share/p/1CG56JyTBy/',
+        titleBn: 'সীমান্তবর্তী এলাকায় মাদকের কুফল বিষয়ক জনসচেতনতা সভা',
+        titleEn: 'Border-Belt Drug Awareness Assembly',
+        dateBn: 'মাঠপর্যায়ের আপডেট',
+        dateEn: 'Field Update',
+        summaryBn: 'সীমান্ত সংলগ্ন ওয়ার্ডসমূহে মাদক বিস্তার রুখতে সচেতনতামূলক আলোচনা এবং অভিভাবকদের সম্পৃক্তকরণ।',
+        summaryEn: 'Border corridor community dialogue engaging parents and guardians against substance abuse.',
+        highlight: 'অফিসিয়াল পোস্ট ৪'
+      },
+      {
+        url: 'https://www.facebook.com/share/p/1HXd1GduPy/',
+        titleBn: 'মাদকমুক্ত জয়মনিরহাট গঠনে তরুণ নেতৃত্বের ঐক্য ও কর্মপরিকল্পনা',
+        titleEn: 'Youth Action Blueprint for a Drug-Free Joymonirhat',
+        dateBn: 'মাঠপর্যায়ের আপডেট',
+        dateEn: 'Field Update',
+        summaryBn: 'যুব সংগঠনের প্রতিনিধিদের নিয়ে কর্মপরিকল্পনা প্রণয়ন এবং তরুণদের ইতিবাচক কাজে সম্পৃক্ত করার সিদ্ধান্ত।',
+        summaryEn: 'Action blueprint to safeguard youth livelihoods and sustain an addiction-free community environment.',
+        highlight: 'অফিসিয়াল পোস্ট ৫'
+      }
+    ]
+  },
+  {
+    id: 'child-marriage-prevention',
+    titleBn: 'বাল্যবিবাহ প্রতিরোধ',
+    titleEn: 'Child Marriage Prevention',
+    category: 'rights',
+    categoryLabelBn: 'অধিকার রক্ষা',
+    categoryLabelEn: 'Rights Protection',
+    shortDescBn: 'কিশোরীদের উজ্জ্বল ভবিষ্যৎ ও শিক্ষা নিশ্চিতকরণে বাল্যবিবাহের বিরুদ্ধে সামাজিক প্রতিরোধ।',
+    shortDescEn: 'Protecting young girls from early marriage and ensuring uninterrupted secondary education.',
+    fullDescBn: 'কুড়িগ্রাম অঞ্চলের অন্যতম প্রধান সামাজিক সমস্যা বাল্যবিবাহ। আমাদের স্বেচ্ছাসেবী দল খবর পেলেই অভিভাবকদের বোঝানো, আইনি পরিণতি সম্পর্কে সচেতন করা এবং ক্ষেত্রবিশেষে প্রশাসনের সহায়তায় বাল্যবিবাহ বন্ধে সরাসরি ভূমিকা রাখে।',
+    fullDescEn: 'Child marriage truncates girl education and health. Our voluntary brigade proactively intervenes through parent counseling, legal awareness, and rapid response to protect adolescent girls.',
+    iconName: 'UserCheck',
+    impactMetricBn: '২০+ বাল্যবিবাহ রোধে ভূমিকা',
+    impactMetricEn: '20+ Child Marriages Intervened',
+    actionPointsBn: [
+      'বাল্যবিবাহের স্বাস্থ্যগত ও সামাজিক কুফল বিষয়ক সচেতনতা ক্যাম্পেইন',
+      'মেয়েদের বিদ্যালয়ে উপস্থিতি নিশ্চিত করতে অভিভাবকদের সাথে মতবিনিময়',
+      'স্থানীয় জনপ্রতিনিধি ও কাজী মহোদয়গণের সাথে সমন্বয় রক্ষা'
+    ],
+    actionPointsEn: [
+      'Awareness campaigns on maternal health risks of adolescent marriages',
+      'Parent-teacher dialogues advocating girl schooling continuity',
+      'Coordination with local marriage registrars and public representatives'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936368005_33215e73.jpg'
+  },
+  {
+    id: 'environmental-protection',
+    titleBn: 'পরিবেশ রক্ষা ও বৃক্ষরোপণ',
+    titleEn: 'Environmental Protection & Green Drives',
+    category: 'environment',
+    categoryLabelBn: 'পরিবেশ রক্ষা',
+    categoryLabelEn: 'Environment',
+    shortDescBn: 'সবুজ গ্রাম গড়ার প্রত্যয়ে ইউনিয়নব্যাপী বৃক্ষরোপণ এবং পরিবেশ দূষণ রোধ কর্মসূচি।',
+    shortDescEn: 'Afforestation, public hygiene campaigns, and roadside sapling planting across Joymonirhat.',
+    fullDescBn: 'জলবায়ু পরিবর্তনের ঝুঁকিপূর্ণ জেলা কুড়িগ্রামে পরিবেশের ভারসাম্য রক্ষা অপরিহার্য। জয়মনিরহাট ইউনিয়ন যুব সংগঠন প্রতি বর্ষা ও মৌসুমে রাস্তাঘাট, শিক্ষাপ্রতিষ্ঠান ও নদীপাড়ে ফলদ, বনজ ও ভেষজ বৃক্ষরোপণ এবং প্লাস্টিক বর্জ্য অপসারণ করে।',
+    fullDescEn: 'Kurigram faces frequent river erosion and climate volatility. JUYO organizes regular tree planting along highways, schoolyards, and river embankments to build a greener local ecosystem.',
+    iconName: 'Sprout',
+    impactMetricBn: '২,৫০০+ বৃক্ষরোপণ ও পরিচর্যা',
+    impactMetricEn: '2,500+ Saplings Planted',
+    actionPointsBn: [
+      'ইউনিয়নের রাস্তা ও খালপাড়ে ফলদ ও ঔষধি গাছের চারা রোপণ ও খাঁচা দিয়ে সংরক্ষণ',
+      'প্লাস্টিক ও পলিথিন বর্জ্য ব্যবহারের বিরুদ্ধে জনসচেতনতা সভা',
+      'পরিচ্ছন্ন গ্রাম কর্মসূচি ও বর্জ্য ব্যবস্থাপনায় তরুণদের সম্পৃক্তকরণ'
+    ],
+    actionPointsEn: [
+      'Planting and protecting fruit-bearing and indigenous trees along village corridors',
+      'Awareness drives against non-biodegradable polythene usage in weekly haats',
+      'Youth-led village cleanup and responsible organic waste composting'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936416482_4933e4df.jpg'
+  },
+  {
+    id: 'disaster-relief',
+    titleBn: 'প্রাকৃতিক দুর্যোগে সহায়তা',
+    titleEn: 'Disaster & Extreme Weather Relief',
+    category: 'welfare',
+    categoryLabelBn: 'দুর্যোগ ব্যবস্থাপনা',
+    categoryLabelEn: 'Disaster Management',
+    shortDescBn: 'কুড়িগ্রামের বন্যা ও তীব্র শৈত্যপ্রবাহে শীতার্ত ও বানভাসি মানুষের পাশে তাৎক্ষণিক ত্রাণ।',
+    shortDescEn: 'Rapid humanitarian emergency response during northern seasonal floods and severe winter cold waves.',
+    fullDescBn: 'সীমান্তবর্তী ও নদীবিধৌত ভূরুঙ্গামারী উপজেলায় বন্যা এবং শীতকালের তীব্র শৈত্যপ্রবাহে চরাঞ্চল ও দরিদ্র মানুষ চরম কষ্টে ভোগে। আমাদের স্বেচ্ছাসেবকরা নিজেরা তহবিল সংগ্রহ করে বাড়ি বাড়ি গিয়ে শুকনো খাবার, বিশুদ্ধ পানি ও গরম কাপড় পৌঁছে দেন।',
+    fullDescEn: 'During flood inundation and bitter winter cold fronts in Kurigram border belts, JUYO volunteers mobilize swift door-to-door distribution of warm blankets, dry rations, and clean water tablets.',
+    iconName: 'CloudRain',
+    impactMetricBn: '১,২০০+ শীতার্ত ও দুর্গতদের সেবা',
+    impactMetricEn: '1,200+ Beneficiaries in Crisis',
+    actionPointsBn: [
+      'শীতকালে শীতার্ত প্রবীণ, প্রতিবন্ধী ও শিশুদের মাঝে উষ্ণ কম্বল বিতরণ',
+      'বর্ষা ও বন্যায় পানিবন্দি পরিবারের কাছে নৌকাযোগে জরুরি খাদ্য ও পানি বিশুদ্ধকরণ ট্যাবলেট পৌঁছানো',
+      'দুর্যোগ পরবর্তী রোগবালাই প্রতিরোধে স্যালাইন ও প্রাথমিক চিকিৎসা বিতরণ'
+    ],
+    actionPointsEn: [
+      'Blanket and warm clothing distribution to elderly and destitute families in winter',
+      'Boat-assisted emergency rations and water purification tablets in monsoon floods',
+      'Post-disaster oral saline and basic healthcare provisions'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936384171_105fb705.jpg'
+  },
+  {
+    id: 'health-and-blood',
+    titleBn: 'স্বাস্থ্য সচেতনতা ও রক্তদান',
+    titleEn: 'Health Awareness & Blood Donation',
+    category: 'welfare',
+    categoryLabelBn: 'স্বাস্থ্যসেবা',
+    categoryLabelEn: 'Healthcare',
+    shortDescBn: 'জরুরি রক্তের প্রয়োজনে তাত্ক্ষণিক রক্তদাতা সরবরাহ এবং গ্রামীণ স্বাস্থ্য ক্যাম্পেইন।',
+    shortDescEn: '24/7 volunteer blood donor network and free rural health awareness consultations.',
+    fullDescBn: 'জয়মনিরহাট ইউনিয়ন যুব সংগঠনের রয়েছে একটি নিবেদিতপ্রাণ জরুরি রক্তদাতা স্কোয়াড। যেকোনো মুমূর্ষু রোগী, প্রসূতি মা কিংবা থ্যালাসেমিয়া আক্রান্ত রোগীর জন্য বিনামূল্যে রক্তদাতা খুঁজে দেওয়ার সার্বক্ষণিক সেবা দেওয়া হয়।',
+    fullDescEn: 'Our 24/7 Voluntary Blood Donor Squad connects emergency patients, expectant mothers, and accident victims with matched donors without delay, alongside free community medical awareness.',
+    iconName: 'Activity',
+    impactMetricBn: '৩৫০+ ব্যাগ রক্তদান ব্যবস্থাপনা',
+    impactMetricEn: '350+ Blood Units Donated',
+    actionPointsBn: [
+      'ইউনিয়নভিত্তিক রক্তের গ্রুপ নির্ণয় ও স্বেচ্ছায় রক্তদাতা ডেটাবেস সংরক্ষণ',
+      '২৪ ঘণ্টা জরুরি রক্তের চাহিদা মেটাতে হেল্পলাইন পরিচালনা',
+      'মৌসুমি রোগবালাই, ডেঙ্গু ও ডায়রিয়া প্রতিরোধে পরামর্শ ক্যাম্প'
+    ],
+    actionPointsEn: [
+      'Union-wide blood group screening and voluntary donor directory',
+      'Round-the-clock emergency blood request coordination hotline',
+      'Hygiene and disease prevention sessions on dengue, diarrhea, and fever'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936211080_9c473976.jpg'
+  },
+  {
+    id: 'women-child-rights',
+    titleBn: 'নারী ও শিশু অধিকার রক্ষা',
+    titleEn: "Women & Child Rights Protection",
+    category: 'rights',
+    categoryLabelBn: 'অধিকার রক্ষা',
+    categoryLabelEn: 'Rights Protection',
+    shortDescBn: 'নারীর নিরাপত্তা, শিশুদের সুরক্ষা এবং যেকোনো নির্যাতন প্রতিরোধে সামাজিক সোচ্চারতা।',
+    shortDescEn: 'Defending the dignity, safety, and legal rights of women and vulnerable children.',
+    fullDescBn: 'সমাজে নারী ও শিশুদের অধিকার নিশ্চিত না হলে কোনো উন্নয়ন স্থায়ী হতে পারে না। গৃহনির্যাতন, ইভটিজিং ও শিশুশ্রম প্রতিরোধে আমাদের যুব সংগঠন সর্বদা সজাগ এবং নির্যাতিতের পাশে আইনি সহায়তা প্রদানে সক্রিয় ভূমিকা রাখে।',
+    fullDescEn: 'Social progress is impossible without securing the rights of women and children. We actively stand against domestic violence, street harassment, and child labor in our locality.',
+    iconName: 'Shield',
+    impactMetricBn: 'শতভাগ সামাজিক নিরাপত্তা প্রচেষ্টা',
+    impactMetricEn: '100% Commitment to Safety',
+    actionPointsBn: [
+      'ইভটিজিং ও নারীর প্রতি হয়রানি প্রতিরোধে সচেতনতামূলক আলোচনা',
+      'ঝুঁকিপূর্ণ শিশুশ্রম নিরসনে অভিভাবকদের কাউন্সেলিং',
+      'জরুরি পরিস্থিতিতে জাতীয় হেল্পলাইন ৯৯৯ ও ১০৯ এর ব্যবহার প্রচার'
+    ],
+    actionPointsEn: [
+      'Community anti-harassment advocacy around schools and rural intersections',
+      'Counseling economically strained parents to keep young children in school',
+      'Promoting national emergency hotlines 999 and 109 across the union'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936426689_b6a87400.jpg'
+  },
+  {
+    id: 'civil-rights-awareness',
+    titleBn: 'নাগরিক অধিকার সচেতনতা',
+    titleEn: 'Civil Rights & Civic Awareness',
+    category: 'rights',
+    categoryLabelBn: 'নাগরিক সচেতনতা',
+    categoryLabelEn: 'Civic Awareness',
+    shortDescBn: 'ভোটাধিকার, সরকারি সেবা প্রাপ্তি এবং নাগরিক দায়িত্ব পালনে সাধারণ মানুষকে উদ্বুদ্ধকরণ।',
+    shortDescEn: 'Educating citizens on fundamental rights, public service entitlements, and civic duty.',
+    fullDescBn: 'একজন সচেতন নাগরিক একটি সচেতন দেশের ভিত্তি। ইউনিয়ন পরিষদ সেবা, জন্মনিবন্ধন, জাতীয় পরিচয়পত্র সংক্রান্ত জটিলতা নিরসনে এবং নাগরিকের মৌলিক অধিকার প্রতিষ্ঠায় আমরা তথ্য সহায়তা ও সচেতনতামূলক কার্যক্রম পরিচালনা করি।',
+    fullDescEn: 'An informed citizen drives community transformation. We assist rural villagers in navigating government civic services, birth registrations, NID verification, and public welfare entitlements.',
+    iconName: 'BookOpen',
+    impactMetricBn: '৮০০+ মানুষকে তথ্য সহায়তা',
+    impactMetricEn: '800+ Guided in Civic Services',
+    actionPointsBn: [
+      'ইউনিয়ন পরিষদ ও সরকারি বিভিন্ন সামাজিক নিরাপত্তা সেবার তথ্য প্রকাশ',
+      'প্রবীণ ভাতা, বিধবা ভাতা ও প্রতিবন্ধী কার্ড পাওয়ার সঠিক নিয়ম অবহিতকরণ',
+      'জাতীয় দিবস ও গণতান্ত্রিক মূল্যবোধের উদযাপন'
+    ],
+    actionPointsEn: [
+      'Information sharing regarding union council safety net programs',
+      'Guiding deserving villagers on old-age, widow, and disability benefit access',
+      'Observing national commemorative days fostering patriotic civic spirit'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936179973_bb5b6517.jpg'
+  },
+  {
+    id: 'rural-development',
+    titleBn: 'গ্রামীণ ও সামাজিক উন্নয়ন',
+    titleEn: 'Rural & Infrastructure Development',
+    category: 'environment',
+    categoryLabelBn: 'গ্রামীণ উন্নয়ন',
+    categoryLabelEn: 'Rural Development',
+    shortDescBn: 'গ্রামের চলাচলের রাস্তা মেরামত, সাঁকো সংস্কার ও জনকল্যাণমুখী স্বেচ্ছাশ্রম উদ্যোগ।',
+    shortDescEn: 'Community self-help labor repairing damaged roads, culverts, and wooden bridges.',
+    fullDescBn: 'গ্রামের কোনো রাস্তা ভেঙে গেলে বা বাঁশের সাঁকো ক্ষতিগ্রস্ত হলে আমরা যুবকরা স্বেচ্ছাশ্রমের ভিত্তিতে মাটি ভরাট ও মেরামতের কাজ করে চলাচলের পথ সুগম করি। এছাড়া ধর্মীয় প্রতিষ্ঠান, কবরস্থান ও শ্মশান পরিষ্কার-পরিচ্ছন্নতায় কাজ করি।',
+    fullDescEn: 'When unpaved roads and bamboo bridges collapse, our volunteers step up with shovels and bamboo poles to restore pedestrian transit without waiting for distant administrative grants.',
+    iconName: 'Pickaxe',
+    impactMetricBn: '১২+ স্বেচ্ছাশ্রম মেরামত উদ্যোগ',
+    impactMetricEn: '12+ Community Road Repair Drives',
+    actionPointsBn: [
+      'বর্ষা মৌসুমে ক্ষতিগ্রস্ত গ্রাম্য রাস্তায় স্বেচ্ছাশ্রমে মাটি ও ইট ফেলে পথ সংস্কার',
+      'পুকুর ও ড্রেনেজ নালা পরিষ্কার করে পানি নিষ্কাশনের ব্যবস্থা',
+      'হাট-বাজার ও জনবহুল স্থানে সুপেয় পানির সুবিধা সম্প্রসারণে উদ্যোগ'
+    ],
+    actionPointsEn: [
+      'Voluntary leveling and sand-bagging of rain-damaged village tracks',
+      'Clearing communal drainage culverts to mitigate waterlogging',
+      'Advocating for clean drinking tubewells in crowded public haats'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936434107_3f50184e.jpg'
+  },
+  {
+    id: 'youth-development',
+    titleBn: 'যুব উন্নয়ন ও ক্রীড়া চর্চা',
+    titleEn: 'Youth Skill Development & Sports',
+    category: 'youth',
+    categoryLabelBn: 'যুব উন্নয়ন',
+    categoryLabelEn: 'Youth Empowerment',
+    shortDescBn: 'যুব উন্নয়ন অধিদপ্তরের প্রশিক্ষণ সুবিধা গ্রহণ, খেলাধুলা ও নেতৃত্ব গুণাবলী বিকাশ।',
+    shortDescEn: 'Skill training with Youth Development Department, sports tournaments, and leadership coaching.',
+    fullDescBn: 'সংগঠনটি যুব উন্নয়ন অধিদপ্তর থেকে নিবন্ধিত (রেজি: যু.উ.অ/কুড়ি-৮৮/২০২৩)। অধিদপ্তরের কম্পিউটার প্রশিক্ষণ, মৎস্য চাষ, গবাদি পশু পালন ও আত্মকর্মসংস্থানমূলক প্রশিক্ষণে স্থানীয় বেকার যুবকদের সম্পৃক্ত করে আত্মনির্ভরশীল করে তোলাই আমাদের স্বপ্ন।',
+    fullDescEn: 'Officially registered under the Department of Youth Development (Reg: DYD-Kuri-88/2023), we channel local unemployed youths into certified vocational training, computer skills, and self-employment initiatives.',
+    iconName: 'Trophy',
+    impactMetricBn: '১৮০+ যুবক দক্ষতা কোর্সে যুক্ত',
+    impactMetricEn: '180+ Youths in Skill Training',
+    actionPointsBn: [
+      'যুব উন্নয়ন অধিদপ্তরের বিভিন্ন কারিগরি ও বৃত্তিমূলক কোর্সে ভর্তি সহায়তা',
+      'যুবকদের শারীরিক ও মানসিক বিকাশে বার্ষিক ফুটবল ও ক্রিকেট টুর্নামেন্ট আয়োজন',
+      'নেতৃত্ব বিকাশ, সামাজিক দায়িত্ব ও বিতর্ক কর্মশালার আয়োজন'
+    ],
+    actionPointsEn: [
+      'Facilitating enrollment in official technical and vocational self-employment courses',
+      'Organizing annual union football and cricket tournaments to steer youth toward fitness',
+      'Workshops on ethical leadership, public speaking, and community problem solving'
+    ],
+    imageSrc: '/assets/aistudio/FB_IMG_1792936429076_f830ad55.jpg'
+  }
+];
+
+export const NOTICES: NoticeItem[] = [
+  {
+    id: 'n-2026-01',
+    titleBn: 'জরুরি রক্তদাতা স্কোয়াডের তথ্য হালনাগাদ ও নতুন রক্তদাতা নিবন্ধন আহ্বান',
+    titleEn: 'Emergency Blood Donor Directory Update & Call for New Donors',
+    dateBn: '২৪ অক্টোবর, ২০২৬',
+    dateEn: 'October 24, 2026',
+    categoryBn: 'জরুরি নোটিশ',
+    categoryEn: 'Emergency Notice',
+    categoryType: 'emergency',
+    isImportant: true,
+    referenceNo: 'JUYO/NOT/2026/04',
+    contentBn: 'জয়মনিরহাট ইউনিয়ন যুব সংগঠনের আওতাধীন জরুরি রক্তদাতা সেলের তালিকা হালনাগাদ করা হচ্ছে। ইউনিয়নের সকল ১৮+ সুস্থ যুবক ও তরুণদের স্বেচ্ছায় রক্তদানে অংশ নিতে এবং নিজেদের রক্তের গ্রুপ তালিকাভুক্ত করার বিশেষ অনুরোধ জানানো হচ্ছে। রক্তদানের মাধ্যমে একজন মুমূর্ষু রোগীকে বাঁচিয়ে তোলাই আমাদের শ্রেষ্ঠ মানবসেবা। বিস্তারিত বা তথ্য অন্তর্ভুক্তির জন্য আমাদের সমন্বয়ক বা হটলাইনে (01705929049) যোগাযোগ করুন।',
+    contentEn: 'The emergency blood donor directory of JUYO is currently undergoing annual verification. We urge all healthy individuals aged 18+ across Joymonirhat Union to register their blood groups. In medical emergencies, your donation saves lives. Please register your details using the website Volunteer Form or call our hotline directly.'
+  },
+  {
+    id: 'n-2026-02',
+    titleBn: 'আসন্ন শীতবস্ত্র ও উষ্ণ কম্বল বিতরণ কর্মসূচি প্রস্তুতি এবং সহায়তা আহ্বান',
+    titleEn: 'Preparation & Donation Appeal for Upcoming Winter Warmth Distribution',
+    dateBn: '১৮ অক্টোবর, ২০২৬',
+    dateEn: 'October 18, 2026',
+    categoryBn: 'কার্যক্রম বিজ্ঞপ্তি',
+    categoryEn: 'Activity Notice',
+    categoryType: 'event',
+    isImportant: true,
+    referenceNo: 'JUYO/NOT/2026/03',
+    contentBn: 'কুড়িগ্রাম জেলায় আসন্ন শীতকালে চরম শৈত্যপ্রবাহের আশঙ্কা রয়েছে। প্রতি বছরের ন্যায় এবারও জয়মনিরহাট ইউনিয়ন যুব সংগঠন চরাঞ্চল ও অসহায় শীতার্ত মানুষের মাঝে কম্বল এবং শীতবস্ত্র বিতরণের বিশেষ উদ্যোগ গ্রহণ করেছে। প্রবাসী ভাইবোন এবং বিত্তবান সুধীজনকে এই মহতী উদ্যোগে সামর্থ্য অনুযায়ী এগিয়ে আসার সাদর আহ্বান জানানো হচ্ছে।',
+    contentEn: 'With winter approaching in cold-prone Kurigram, JUYO is organizing its flagship Warm Clothing and Blanket Drive for riverine char residents and impoverished elderly individuals. We welcome voluntary donations and support from compassionate well-wishers and expatriates.'
+  },
+  {
+    id: 'n-2026-03',
+    titleBn: 'নতুন সাধারণ সদস্য ও স্বেচ্ছাসেবী অন্তর্ভুক্তি ফর্ম উন্মুক্তকরণ',
+    titleEn: 'New General Member & Volunteer Enrollment Form Opened',
+    dateBn: '১০ অক্টোবর, ২০২৬',
+    dateEn: 'October 10, 2026',
+    categoryBn: 'সদস্য আহ্বান',
+    categoryEn: 'Membership Notice',
+    categoryType: 'recruitment',
+    isImportant: false,
+    referenceNo: 'JUYO/NOT/2026/02',
+    contentBn: 'জয়মনিরহাট ইউনিয়নের সমাজকল্যাণে ব্রতী, অরাজনৈতিক মানসিকতাসম্পন্ন যেকোনো তরুণ-তরুণী এখন ওয়েবসাইটের মাধ্যমে কিংবা সরাসরি অষ্টমীর ঘাট কার্যালয়ে এসে সংগঠনের সাধারণ সদস্য ও স্বেচ্ছাসেবী হিসেবে আবেদন করতে পারেন। আসুন, সবাই মিলে গড়ে তুলি একটি আলোকিত জয়মনিরহাট।',
+    contentEn: 'Dedicated, non-political youth passionate about community welfare can now apply for JUYO general membership through our online portal or in-person at our Ashtamir Ghat office. Let us unite to build an enlightened Joymonirhat.'
+  },
+  {
+    id: 'n-2026-04',
+    titleBn: 'যুব উন্নয়ন অধিদপ্তর অনুমোদিত কম্পিউটার ও আত্মকর্মসংস্থান প্রশিক্ষণ ব্যাচ',
+    titleEn: 'Registration Open for DYD Certified Youth Vocational & IT Courses',
+    dateBn: '২৮ সেপ্টেম্বর, ২০২৬',
+    dateEn: 'September 28, 2026',
+    categoryBn: 'প্রশিক্ষণ বিজ্ঞপ্তি',
+    categoryEn: 'Training Notice',
+    categoryType: 'general',
+    isImportant: false,
+    referenceNo: 'JUYO/NOT/2026/01',
+    contentBn: 'যুব উন্নয়ন অধিদপ্তর কুড়িগ্রাম জেলা কার্যালয় কর্তৃক পরিচালিত আধুনিক কম্পিউটার অফিস অ্যাপ্লিকেশন, মৎস্যচাষ ও গবাদিপশু পালন প্রশিক্ষণ কোর্সে জয়মনিরহাটের আগ্রহী যুবকদের নিবন্ধনে সংগঠন সার্বিক সহযোগিতা প্রদান করছে। আগ্রহীরা অবিলম্বে যোগাযোগ করুন।',
+    contentEn: 'JUYO is assisting local young men and women in enrolling in certified computer and livestock entrepreneurship training programs supervised by the Department of Youth Development, Kurigram.'
+  }
+];
+
+export const GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: 'g-01',
+    titleBn: 'মাদক প্রতিরোধে নাইট উঠান বৈঠক ও সামাজিক প্রতিরোধ',
+    titleEn: 'Anti-Drug Night Courtyard Vigilance Assembly',
+    categoryBn: 'মাদক প্রতিরোধ',
+    categoryEn: 'Anti-Drug Movement',
+    dateBn: 'মাঠপর্যায়ের উদ্যোগ',
+    dateEn: 'Field Program',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936411324_95d46bc1.jpg',
+    descriptionBn: 'ব্যানার: "জয়মনিরহাট ইউনিয়নের মাদকের প্রাদুর্ভাব রোধ করার জন্য উঠান বৈঠক" — মাদক বিস্তার রুখতে রাতে গ্রামবাসীর সাথে তরুণদের সচেতনতামূলক উন্মুক্ত আলোচনা।',
+    descriptionEn: 'Official Courtyard Assembly addressing illicit drug influx, community vigilance, and youth action in Joymonirhat.'
+  },
+  {
+    id: 'g-02',
+    titleBn: 'গ্রাম পুলিশ ও যুব স্বেচ্ছাসেবীদের যৌথ রাত্রিকালীন টহল ও পাহারা',
+    titleEn: 'Joint Night Patrol with Village Police & Youth Volunteers',
+    categoryBn: 'মাদক প্রতিরোধ',
+    categoryEn: 'Anti-Drug Movement',
+    dateBn: 'নৈশ পাহারা উদ্যোগ',
+    dateEn: 'Night Vigilance',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936349431_8dd4fd3d.jpg',
+    descriptionBn: 'মাদক অনুপ্রবেশ ও অপরাধ দমনে ইউনিয়ন গ্রাম পুলিশ ও যুব সংগঠনের স্বেচ্ছাসেবকদের সমন্বয়ে সীমান্তবর্তী এলাকায় যৌথ রাত্রিকালীন সতর্ক পাহারা।',
+    descriptionEn: 'Strategic community night watch coordinated between local Village Police and JUYO youth volunteers to curb narcotics transit.'
+  },
+  {
+    id: 'g-03',
+    titleBn: 'অভিভাবকদের নিয়ে মাদক প্রতিরোধী সমাবেশ (CNB প্রকল্প)',
+    titleEn: 'Parent Anti-Drug Assembly — Child Not Bride Project',
+    categoryBn: 'মাদক প্রতিরোধ',
+    categoryEn: 'Anti-Drug Movement',
+    dateBn: 'ছোট খাটামারী বকুলতলী',
+    dateEn: 'Chhoto Khatamari',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936236515_1ecf8245.jpg',
+    descriptionBn: 'ব্যানার: "অভিভাবকদের নিয়ে মাদক প্রতিরোধী সমাবেশ" — চাইল্ড নট ব্রাইড (CNB) প্রকল্পের আওতায় ছোট খাটামারী বকুলতলীতে অভিভাবকদের সাথে মতবিনিময়।',
+    descriptionEn: 'Parental anti-drug and child protection assembly at Chhoto Khatamari Bokultoli under the Child Not Bride (CNB) initiative.'
+  },
+  {
+    id: 'g-04',
+    titleBn: 'অষ্টমীর ঘাটে শিক্ষার্থীদের মাঝে মাদকবিরোধী সমাবেশ ও খাতা বিতরণ',
+    titleEn: 'Student Anti-Drug Assembly & Educational Notebooks Distribution',
+    categoryBn: 'মাদক প্রতিরোধ',
+    categoryEn: 'Anti-Drug Movement',
+    dateBn: 'অষ্টমীর ঘাট',
+    dateEn: 'Ashtamir Ghat',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936253622_2028a1b7.jpg',
+    descriptionBn: 'ব্যানার: "মাদক বিরোধী সমাবেশ" — তরুণ শিক্ষার্থীদের মাদকের কুফল সম্পর্কে সচেতন করে তুলতে শিক্ষা উপকরণ ও খাতা বিতরণ কর্মসূচি।',
+    descriptionEn: 'Anti-drug educational dialogue and notebook distribution inspiring school students to stay committed to learning.'
+  },
+  {
+    id: 'g-05',
+    titleBn: 'শিক্ষাপ্রতিষ্ঠানে মাদকবিরোধী লিটারেসি ও সচেতনতামূলক সেশন',
+    titleEn: 'School Anti-Drug Counseling & Student Interaction',
+    categoryBn: 'মাদক প্রতিরোধ',
+    categoryEn: 'Anti-Drug Movement',
+    dateBn: 'শিক্ষাপ্রতিষ্ঠান পরিক্রমা',
+    dateEn: 'School Outreach',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936245583_cd48f9b6.jpg',
+    descriptionBn: 'কিশোর শিক্ষার্থীদের মাদক থেকে নিরাপদ রাখতে এবং নৈতিক মূল্যবোধ জাগ্রত করতে শ্রেণিকক্ষে গঠনমূলক মতবিনিময় ও অনুপ্রেরণামূলক বক্তব্য।',
+    descriptionEn: 'Interactive classroom discussions educating teenagers on peer resistance, healthy hobbies, and psychological strength.'
+  },
+  {
+    id: 'g-06',
+    titleBn: 'মাদককে ‘না’ বলে শিক্ষার আলো ছড়ানোর প্রত্যয়ে শিক্ষার্থী সমাবেশ',
+    titleEn: 'Say No to Drugs — Classroom Solidarity Assembly',
+    categoryBn: 'মাদক প্রতিরোধ',
+    categoryEn: 'Anti-Drug Movement',
+    dateBn: 'সচেতনতা সেশন',
+    dateEn: 'Awareness Session',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936230259_c2af940a.jpg',
+    descriptionBn: 'কিশোর শিক্ষার্থীদের মাঝে মাদকবিরোধী শিক্ষা উপকরণ ও দিকনির্দেশনা বিতরণ এবং মাদকমুক্ত সুন্দর জীবন গড়ার সমবেত অঙ্গীকার।',
+    descriptionEn: 'Students proudly presenting anti-drug guidance notebooks and affirming their dedication to high academic values.'
+  },
+  {
+    id: 'g-07',
+    titleBn: 'মাদক, সন্ত্রাস ও বাল্যবিবাহের বিরুদ্ধে মহাসড়কে মানববন্ধন',
+    titleEn: 'Mass Human Chain on Highway Against Social Vices',
+    categoryBn: 'মাদক প্রতিরোধ',
+    categoryEn: 'Anti-Drug Movement',
+    dateBn: 'মহাসড়ক মানববন্ধন',
+    dateEn: 'Highway Human Chain',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936179973_bb5b6517.jpg',
+    descriptionBn: 'জয়মনিরহাটের প্রধান সড়কে শত শত শিক্ষার্থী ও যুবকদের অংশগ্রহণে মাদক, যৌতুক ও সামাজিক অবিচারের বিরুদ্ধে ঐতিহাসিক মানববন্ধন।',
+    descriptionEn: 'Large-scale citizen human chain lining the Joymonirhat highway demanding safe villages and drug eradication.'
+  },
+  {
+    id: 'g-08',
+    titleBn: 'চার ট্রাক্টর ইট দিয়ে জয়মনিরহাটের গ্রামীণ রাস্তা সংস্কার ২০২৪',
+    titleEn: 'Rural Road Reconstruction with 4 Tractors of Bricks 2024',
+    categoryBn: 'গ্রামীণ উন্নয়ন',
+    categoryEn: 'Rural Development',
+    dateBn: '২০২৪',
+    dateEn: '2024',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936434107_3f50184e.jpg',
+    descriptionBn: 'ব্যানার: "চার ট্রাক্টর ইট দিয়ে জয়মনিরহাটে বিভিন্ন রাস্তা মেরামত ২০২৪" — ইউনিয়ন পরিষদ চেয়ারম্যান ও ভাটা মালিকদের সহযোগিতায় যুবকদের স্বেচ্ছাশ্রম।',
+    descriptionEn: 'Youth-led community road restoration using 4 tractor loads of crushed bricks with UP Chairman and brick-kiln donor support.'
+  },
+  {
+    id: 'g-09',
+    titleBn: '৫০০টিরও বেশি ফলদ ও বনজ বৃক্ষ বিতরণ ও রোপণ অভিযান ২০২৪',
+    titleEn: 'Distribution & Planting of 500+ Tree Saplings 2024',
+    categoryBn: 'পরিবেশ ও বৃক্ষরোপণ',
+    categoryEn: 'Environment',
+    dateBn: '২০২৪',
+    dateEn: '2024',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936416482_4933e4df.jpg',
+    descriptionBn: 'ব্যানার: "৫০০টিরও বেশি বৃক্ষ বিতরণ এবং নিজ সদস্যরাও রোপন ২০২৪" — জয়মনিরহাটের পরিবেশ রক্ষায় শিক্ষার্থীদের মাঝে বিনামূল্যে বৃক্ষ বিতরণ ও রোপণ।',
+    descriptionEn: 'Distributing over 500 high-yield saplings to schools and community volunteers for widespread afforestation in Joymonirhat.'
+  },
+  {
+    id: 'g-10',
+    titleBn: '৩০ জন দরিদ্র যুবকের গরু মোটাতাজাকরণ ও গবাদিপশু পালন প্রশিক্ষণ',
+    titleEn: '7-Day Cattle Fattening Skills Training for 30 Rural Youths',
+    categoryBn: 'যুব উন্নয়ন ও প্রশিক্ষণ',
+    categoryEn: 'Youth Training',
+    dateBn: 'যুব উন্নয়ন অধিদপ্তর সহযোগী',
+    dateEn: 'DYD Collaborative',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936429076_f830ad55.jpg',
+    descriptionBn: 'ব্যানার: "৩০ জন দরিদ্র যুবকদের মাঝে যুব উন্নয়ন অধিদপ্তর হতে সাত দিনের গরু মোটাতাজাকরণ ট্রেইনিং" — আত্মকর্মসংস্থান ও অর্থনৈতিক স্বাবলম্বিতা অর্জন।',
+    descriptionEn: 'Official 7-day certified livestock rearing and cattle fattening workshop organized with the Department of Youth Development.'
+  },
+  {
+    id: 'g-11',
+    titleBn: 'জাতীয় যুব দিবস ২০২৩ র‍্যালিতে অংশগ্রহণ ও চারা গ্রহণ',
+    titleEn: 'National Youth Day 2023 Procession & Tree Sapling Award',
+    categoryBn: 'যুব উন্নয়ন ও প্রশিক্ষণ',
+    categoryEn: 'Youth Training',
+    dateBn: 'জাতীয় যুব দিবস ২০২৩',
+    dateEn: 'Youth Day 2023',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936419119_687ed6a7.jpg',
+    descriptionBn: 'উপজেলা প্রশাসন ও যুব উন্নয়ন অধিদপ্তরের আয়োজনে জাতীয় যুব দিবসের বর্ণাঢ্য র‍্যালিতে অংশগ্রহণ এবং সংগঠনের পক্ষ থেকে চারা গ্রহণ।',
+    descriptionEn: 'JUYO delegation actively marching in the Upazila Youth Day rally and receiving honor saplings from administrative officials.'
+  },
+  {
+    id: 'g-12',
+    titleBn: 'অষ্টমীর ঘাট কার্যালয় পরিদর্শন করেন উপজেলা যুব উন্নয়ন কর্মকর্তা',
+    titleEn: 'Ashtamir Ghat Office Inspection by Upazila Youth Development Officer',
+    categoryBn: 'প্রাতিষ্ঠানিক ও সাংগঠনিক',
+    categoryEn: 'Official Recognition',
+    dateBn: '২০২৩',
+    dateEn: '2023',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936431367_649b795e.jpg',
+    descriptionBn: 'ভূরুঙ্গামারী উপজেলার তৎকালীন উপজেলা যুব উন্নয়ন কর্মকর্তা ময়দান আলী মহোদয় সংগঠনের অষ্টমীর ঘাট প্রধান কার্যালয় পরিদর্শন ও দিকনির্দেশনা প্রদান করেন।',
+    descriptionEn: 'Former Bhurungamari Upazila Youth Development Officer Moydan Ali inspecting the JUYO Ashtamir Ghat office and registers.'
+  },
+  {
+    id: 'g-13',
+    titleBn: 'মহিদেব যুব কল্যাণ সমিতি (MJSKS)-এ প্রকল্প প্রস্তাবনা জমা',
+    titleEn: 'Submitting Joint Welfare Project Proposal to MJSKS',
+    categoryBn: 'প্রাতিষ্ঠানিক ও সাংগঠনিক',
+    categoryEn: 'Partnerships',
+    dateBn: 'অংশীদারিত্ব বৈঠক',
+    dateEn: 'Partnership Forum',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936424325_b5c1bbdd.jpg',
+    descriptionBn: 'জয়মনিরহাটের সুবিধাবঞ্চিত কিশোরী ও তরুণদের জন্য সামাজিক প্রকল্প অনুমোদন ও বাস্তবায়নে মহিদেব যুব কল্যাণ সমিতির সাথে আনুষ্ঠানিক মতবিনিময়।',
+    descriptionEn: 'Executive leadership presenting action blueprint and community project proposal at MJSKS regional development office.'
+  },
+  {
+    id: 'g-14',
+    titleBn: 'বাল্যবিবাহ প্রতিরোধে ব্র্যাকের সাথে যৌথ ‘সজাগ কমিটি’ গঠন',
+    titleEn: 'Forming Grassroots "Sojag Committee" Against Child Marriage with BRAC',
+    categoryBn: 'বাল্যবিবাহ প্রতিরোধ',
+    categoryEn: 'Child Protection',
+    dateBn: 'ব্র্যাক অংশীদারিত্ব',
+    dateEn: 'BRAC Synergy',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936426689_b6a87400.jpg',
+    descriptionBn: 'ব্র্যাক সামাজিক ক্ষমতায়ন কর্মসূচির সাথে জয়মনিরহাটে ঝুঁকিপূর্ণ কিশোরীদের বাল্যবিবাহ রোধে স্থানীয় তরুণ ও মুরব্বিদের নিয়ে সজাগ কমিটি গঠন।',
+    descriptionEn: 'Forming a grassroots vigilance watchdog committee jointly with BRAC to eliminate underage marriages across Joymonirhat.'
+  },
+  {
+    id: 'g-15',
+    titleBn: 'বাল্যবিবাহ নিরোধে শিক্ষার্থী বিতর্ক, নাটক ও গণসমাবেশ',
+    titleEn: 'Community Gathering, Debate & Drama Against Early Marriage',
+    categoryBn: 'বাল্যবিবাহ প্রতিরোধ',
+    categoryEn: 'Child Protection',
+    dateBn: 'সামাজিক সমাবেশ',
+    dateEn: 'Mass Assembly',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936358769_09e93d60.jpg',
+    descriptionBn: 'গ্রামের শত শত অভিভাবক ও শিক্ষার্থীদের উপস্থিতিতে বাল্যবিবাহের ক্ষতিকর প্রভাব নিয়ে তথ্যবহুল বিতর্ক ও সামাজিক সচেতনতামূলক সমাবেশ।',
+    descriptionEn: 'Hundreds of rural villagers and schoolgirls participating in an anti-child marriage awareness colloquium and drama presentation.'
+  },
+  {
+    id: 'g-16',
+    titleBn: 'ইউএনও দীপজন মিত্র ও ইউপি চেয়ারম্যানের উপস্থিতিতে যুব সমাবেশ',
+    titleEn: 'High-Level Civic Forum with UNO Dipjan Mitra & UP Chairman',
+    categoryBn: 'প্রাতিষ্ঠানিক ও সাংগঠনিক',
+    categoryEn: 'Official Recognition',
+    dateBn: 'প্রশাসনিক সংলাপ',
+    dateEn: 'Administrative Forum',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936368005_33215e73.jpg',
+    descriptionBn: 'ভূরুঙ্গামারী উপজেলার তৎকালীন ইউএনও দীপজন মিত্র এবং জয়মনিরহাট ইউপি চেয়ারম্যান মোঃ আব্দুল ওয়াদুদ মহোদয়ের সাথে বাল্যবিবাহ ও সামাজিক অধিকার সমাবেশ।',
+    descriptionEn: 'Civic summit addressing adolescent rights and community welfare attended by Upazila Nirbahi Officer Dipjan Mitra and UP Chairman.'
+  },
+  {
+    id: 'g-17',
+    titleBn: 'সামাজিক সচেতনতামূলক লোকনাটক ও সাংস্কৃতিক প্রদর্শনী',
+    titleEn: 'Grassroots Folk Theatre & Cultural Awareness Show',
+    categoryBn: 'খেলাধুলা ও শিক্ষা',
+    categoryEn: 'Culture & Education',
+    dateBn: 'লোকসংস্কৃতি সেশন',
+    dateEn: 'Cultural Drama',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936375385_c77a90e3.jpg',
+    descriptionBn: 'গ্রামীণ সমাজে কুসংস্কার দূরীকরণ ও কন্যাশিশুর অধিকার সুরক্ষায় তরুণদের পরিবেশনায় পথনাটক ও লোকসাংস্কৃতিক অনুষ্ঠান।',
+    descriptionEn: 'Enthusiastic folk theatre performance illustrating the perils of child marriage and importance of secondary schooling.'
+  },
+  {
+    id: 'g-18',
+    titleBn: 'জয়মনিরহাট মহিউদ্দিন উচ্চ বিদ্যালয় মাঠে শিক্ষার্থী সাইকেল র‍্যালি',
+    titleEn: 'Students Bicycle Rally for Health & Anti-Drug Solidarity',
+    categoryBn: 'খেলাধুলা ও শিক্ষা',
+    categoryEn: 'Sports & Youth',
+    dateBn: 'মহিউদ্দিন উচ্চ বিদ্যালয়',
+    dateEn: 'Mohiuddin High School',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936190930_98fb7237.jpg',
+    descriptionBn: 'মাদক বর্জন ও সুস্থ জীবন গড়ার প্রত্যয়ে জয়মনিরহাট মহিউদ্দিন উচ্চ বিদ্যালয় মাঠে শিক্ষার্থী ও তরুণদের প্রাণবন্ত সাইকেল র‍্যালি।',
+    descriptionEn: 'Vibrant student cycle procession promoting positive youth fitness, sports culture, and zero drug tolerance.'
+  },
+  {
+    id: 'g-19',
+    titleBn: 'কিশোরী ও তরুণদের হ্যান্ডবল টুর্নামেন্ট ও ক্রীড়া সামগ্রী বিতরণ',
+    titleEn: 'Girls Handball Tournament & Sports Kit Handover',
+    categoryBn: 'খেলাধুলা ও শিক্ষা',
+    categoryEn: 'Sports & Youth',
+    dateBn: 'ক্রীড়া উৎসব',
+    dateEn: 'Sports Festival',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936217719_83770c4c.jpg',
+    descriptionBn: 'মেয়েদের শরীরচর্চা ও মানসিক বিকাশের লক্ষ্যে স্থানীয় বিদ্যালয়ে প্রীতি হ্যান্ডবল টুর্নামেন্ট এবং বিজয়ী দলের মাঝে ট্রফি ও বল উপহার।',
+    descriptionEn: 'Exciting girls handball tournament promoting adolescent physical empowerment and team spirit across rural schools.'
+  },
+  {
+    id: 'g-20',
+    titleBn: 'শিক্ষার্থীদের মেধা অন্বেষণ ও সাধারণ জ্ঞান কুইজ প্রতিযোগিতা',
+    titleEn: 'Student Talent Hunt & General Knowledge Quiz Competition',
+    categoryBn: 'খেলাধুলা ও শিক্ষা',
+    categoryEn: 'Culture & Education',
+    dateBn: 'মেধা উৎসব',
+    dateEn: 'Talent Quest',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936199390_10ecadaa.jpg',
+    descriptionBn: 'বিদ্যালয়ের শিক্ষার্থীদের সাধারণ জ্ঞান, বিজ্ঞান ও সামাজিক সচেতনতা বৃদ্ধির লক্ষ্যে কুইজ প্রতিযোগিতা ও পুরস্কার বিতরণ।',
+    descriptionEn: 'Academic quiz competition testing general knowledge and motivating school pupils towards higher academic achievement.'
+  },
+  {
+    id: 'g-21',
+    titleBn: 'আন্তর্জাতিক কন্যাশিশু দিবসে চিত্রাঙ্কন প্রতিযোগিতা ও পুরস্কার',
+    titleEn: 'International Day of the Girl Child Art Competition',
+    categoryBn: 'বাল্যবিবাহ প্রতিরোধ',
+    categoryEn: 'Child Protection',
+    dateBn: 'আন্তর্জাতিক কন্যাশিশু দিবস',
+    dateEn: 'Girl Child Day',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936273982_31de0c83.jpg',
+    descriptionBn: 'ইউনিয়ন পরিষদ মিলনায়তনে আন্তর্জাতিক কন্যাশিশু দিবস উপলক্ষে শিশু-কিশোরীদের নিয়ে চিত্রাঙ্কন ও পুরষ্কার বিতরণী অনুষ্ঠান।',
+    descriptionEn: 'Auditorium art exhibition and program honoring creative girl students on International Day of the Girl Child.'
+  },
+  {
+    id: 'g-22',
+    titleBn: 'বন্যাবিধৌত এলাকায় বাঁশের সাঁকো সংস্কার ও খুঁটি স্থাপন',
+    titleEn: 'Bamboo Bridge Repair & Outpost Pole Installation',
+    categoryBn: 'গ্রামীণ উন্নয়ন',
+    categoryEn: 'Rural Development',
+    dateBn: 'স্বেচ্ছাশ্রম উদ্যোগ',
+    dateEn: 'Self-Help Labor',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936322924_716076ed.jpg',
+    descriptionBn: 'বর্ষায় ক্ষতিগ্রস্ত গ্রামীণ খালের ওপর চলাচলের সাঁকো মেরামত ও বৈদ্যুতিক নিরাপত্তার খুঁটি স্থাপনে যুবকদের সম্মিলিত স্বেচ্ছাশ্রম।',
+    descriptionEn: 'JUYO volunteers setting up structural support poles and fixing wooden footbridges over flooded canals.'
+  },
+  {
+    id: 'g-23',
+    titleBn: 'ভাঙা রাস্তায় মাটি ভরাট ও গ্রামীণ পথ সুগমকরণ',
+    titleEn: 'Dirt Road Grading & Emergency Transit Restoration',
+    categoryBn: 'গ্রামীণ উন্নয়ন',
+    categoryEn: 'Rural Development',
+    dateBn: 'মাটি ভরাট প্রকল্প',
+    dateEn: 'Road Labor',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936300191_94a19b01.jpg',
+    descriptionBn: 'ভারী বর্ষণে ভেঙে যাওয়া গ্রামীণ কাঁচা রাস্তায় যুবকদের মাটি ফেলে হাঁটা ও জরুরি রোগী পরিবহনের উপযোগী করে তোলা।',
+    descriptionEn: 'Repairing eroded rural dirt paths to restore pedestrian transit and agricultural transport during rains.'
+  },
+  {
+    id: 'g-24',
+    titleBn: 'উপজেলা ও জেলা পর্যায়ের যুব প্রশিক্ষণ ও নাগরিক সম্মেলনে অংশগ্রহণ',
+    titleEn: 'Participation in Upazila & District Youth Leadership Summits',
+    categoryBn: 'প্রাতিষ্ঠানিক ও সাংগঠনিক',
+    categoryEn: 'Official Recognition',
+    dateBn: 'প্রশাসনিক সম্মেলন',
+    dateEn: 'District Forum',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936414491_4dcd78c4.jpg',
+    descriptionBn: 'কুড়িগ্রাম জেলা ও ভূরুঙ্গামারী উপজেলা যুব সম্মেলনে সংগঠনের প্রতিনিধিদলের সক্রিয় উপস্থিতি ও সমন্বয়।',
+    descriptionEn: 'Representative delegation showcasing grassroots volunteer initiatives at district and regional youth assemblies.'
+  },
+  {
+    id: 'g-25',
+    titleBn: 'কমিউনিটি স্বেচ্ছাসেবক ও কৃতি শিক্ষার্থীদের সম্মাননা প্রদান',
+    titleEn: 'Felicitation & Awards to Community Volunteers & Students',
+    categoryBn: 'খেলাধুলা ও শিক্ষা',
+    categoryEn: 'Culture & Education',
+    dateBn: 'সম্মাননা প্রদান',
+    dateEn: 'Award Ceremony',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936283278_9a988cf1.jpg',
+    descriptionBn: 'মাঠপর্যায়ে নিঃস্বার্থ সামাজিক অবদান রাখা তরুণ ভলান্টিয়ার ও কৃতি শিক্ষার্থীদের হাতে সম্মাননা ক্রেস্ট ও সনদ তুলে দেওয়া।',
+    descriptionEn: 'Conferring certificates of merit and appreciation mementos to standout grassroots volunteers and high-achieving youth.'
+  },
+  {
+    id: 'g-26',
+    titleBn: 'মুরব্বি ও শিক্ষকদের সাথে যুব সংগঠনের সার্বিক মূল্যায়ন সভা',
+    titleEn: 'Community Advisory Consultation with Elders & Educators',
+    categoryBn: 'প্রাতিষ্ঠানিক ও সাংগঠনিক',
+    categoryEn: 'Organizational',
+    dateBn: 'পরামর্শ সভা',
+    dateEn: 'Advisory Council',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936292893_236718ab.jpg',
+    descriptionBn: 'সংগঠনের সেবামূলক কার্যক্রমকে আরও গতিশীল করতে এলাকার প্রবীণ মুরব্বি, শিক্ষক ও শুভাকাঙ্ক্ষীদের সাথে পর্যালোচনা বৈঠক।',
+    descriptionEn: 'Review meeting receiving counsel from revered local educators and elders to enhance social welfare programs.'
+  },
+  {
+    id: 'g-27',
+    titleBn: 'কিশোরী ও তরুণীদের জীবনদক্ষতা ও সুরক্ষা প্রশিক্ষণ সেশন',
+    titleEn: 'Adolescent Girls Life-Skills & Self-Protection Workshop',
+    categoryBn: 'বাল্যবিবাহ প্রতিরোধ',
+    categoryEn: 'Child Protection',
+    dateBn: 'জীবনদক্ষতা সেশন',
+    dateEn: 'Life-Skills Camp',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936211080_9c473976.jpg',
+    descriptionBn: 'নারী নেতৃত্ব বিকাশ, বয়ঃসন্ধিকালীন স্বাস্থ্য সচেতনতা ও অধিকার আদায়ে নারী সদস্যদের পরিচালনায় বিশেষ কর্মশালা।',
+    descriptionEn: 'Interactive life-skills mentoring program instilling self-confidence and health knowledge among young village girls.'
+  },
+  {
+    id: 'g-28',
+    titleBn: 'নাগরিক অধিকার ও দুর্যোগকালীন সামাজিক প্রস্তুতি সভা',
+    titleEn: 'Civic Rights & Community Disaster Preparedness Forum',
+    categoryBn: 'প্রাতিষ্ঠানিক ও সাংগঠনিক',
+    categoryEn: 'Organizational',
+    dateBn: 'নাগরিক সভা',
+    dateEn: 'Civic Assembly',
+    imageSrc: '/assets/aistudio/FB_IMG_1792936384171_105fb705.jpg',
+    descriptionBn: 'বন্যা ও শীতের মতো প্রাকৃতিক দুর্যোগে গ্রামবাসীর পাশে দাঁড়ানো এবং মৌলিক নাগরিক অধিকার সম্পর্কে জনসচেতনতামূলক সভা।',
+    descriptionEn: 'Community preparation dialogue discussing rapid emergency response during floods, river erosion, and cold spells.'
+  },
+  {
+    id: 'g-29',
+    titleBn: 'অষ্টমীর ঘাট কার্যালয়ে কার্যনির্বাহী কমিটির কৌশলগত মাসিক সভা',
+    titleEn: 'Executive Board Strategy Session at Ashtamir Ghat Headquarters',
+    categoryBn: 'প্রাতিষ্ঠানিক ও সাংগঠনিক',
+    categoryEn: 'Organizational',
+    dateBn: 'মাসিক পর্যালোচনা',
+    dateEn: 'Monthly Board Review',
+    imageSrc: '/assets/aistudio/FB_IMG_1792932566745_2309fe57.jpg',
+    descriptionBn: 'সংগঠনের ১১ সদস্যের কার্যনির্বাহী পরিষদ ও কোর টিমের নিয়মিত মাসিক পরিকল্পনা, বাজেট পর্যালোচনা ও নতুন কর্মসূচি নির্ধারণ।',
+    descriptionEn: 'Core executive leaders deliberating monthly action plans, budget accountability, and ward outreach schedules.'
+  },
+  {
+    id: 'g-30',
+    titleBn: 'সংগঠনের সভাপতি: মোঃ আবুল কালাম',
+    titleEn: 'Organization President: Md. Abul Kalam',
+    categoryBn: 'প্রাতিষ্ঠানিক ও সাংগঠনিক',
+    categoryEn: 'Organizational',
+    dateBn: 'কার্যনির্বাহী পরিষদ',
+    dateEn: 'Executive Leadership',
+    imageSrc: '/assets/aistudio/FB_IMG_1792937564703_5699feaf.jpg',
+    descriptionBn: 'জয়মনিরহাট ইউনিয়ন যুব সংগঠনের সভাপতি মোঃ আবুল কালাম। আত্ম-মানবতার সেবায় তারুণ্যকে ঐক্যবদ্ধ করে একটি মাদকমুক্ত ও সচেতন জয়মনিরহাট গড়ে তোলাই তাঁর মূল লক্ষ্য।',
+    descriptionEn: 'Official portrait of Md. Abul Kalam, President of Joymonirhat Union Youth Organization, leading community progress and non-political youth empowerment.'
+  },
+  {
+    id: 'g-31',
+    titleBn: 'সংগঠনের সাধারণ সম্পাদক: মোঃ নুরে আলম সিদ্দিকী শান্ত',
+    titleEn: 'Organization General Secretary: Md. Nure Alam Siddique Shanto',
+    categoryBn: 'প্রাতিষ্ঠানিক ও সাংগঠনিক',
+    categoryEn: 'Organizational',
+    dateBn: 'কার্যনির্বাহী পরিষদ',
+    dateEn: 'Executive Leadership',
+    imageSrc: '/assets/aistudio/DSC_0859_28a1683f.JPG',
+    descriptionBn: 'জয়মনিরহাট ইউনিয়ন যুব সংগঠনের সাধারণ সম্পাদক মোঃ নুরে আলম সিদ্দিকী শান্ত। তৃণমূল যুবকদের সংগঠিত করে জনকল্যাণমুখী সেবাকাজে নিবেদিত।',
+    descriptionEn: 'Official portrait of Md. Nure Alam Siddique Shanto, General Secretary of Joymonirhat Union Youth Organization, spearheading grassroots volunteer activities.'
+  }
+];
+
+export const COMMITTEE_SUMMARY = {
+  executiveCountBn: '১১ জন',
+  executiveCountEn: '11 Members',
+  generalCountBn: '৩৬ জন',
+  generalCountEn: '36 Members',
+  totalMembersBn: '৪৭ জন',
+  totalMembersEn: '47 Members',
+  descriptionBn: 'জয়মনিরহাট ইউনিয়ন যুব সংগঠনের ১১ সদস্য বিশিষ্ট পূর্ণাঙ্গ কার্যনির্বাহী পরিষদ এবং আরও ৩৬ জন সাধারণ ও সক্রিয় সদস্য নিয়ে মোট ৪৭ জন নিবেদিতপ্রাণ তরুণের ঐক্যবদ্ধ পরিবার।',
+  descriptionEn: 'The full team of Joymonirhat Union Youth Organization comprises 11 Executive Committee leaders alongside 36 general and field members—a united force of 47 dedicated youth.',
+};
+
+export const COMMITTEE_MEMBERS: CommitteeMember[] = [
+  {
+    id: 'm-01',
+    serialNo: 1,
+    serialBn: '০১',
+    serialEn: '01',
+    nameBn: 'মোঃ আবুল কালাম',
+    nameEn: 'Md. Abul Kalam',
+    designationBn: 'সভাপতি',
+    designationEn: 'President',
+    age: 24,
+    ageBn: '২৪ বছর',
+    phone: '01738656008',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'abulkalam',
+    photo: '/assets/aistudio/FB_IMG_1792937564703_5699feaf.jpg',
+    messageBn: 'আত্ম-মানবতার সেবায় তারুণ্যকে ঐক্যবদ্ধ করে একটি মাদকমুক্ত ও সচেতন জয়মনিরহাট গড়ে তোলাই আমাদের লক্ষ্য।',
+    messageEn: 'Uniting youth in selfless service to build a drug-free, educated, and progressive Joymonirhat is our sacred mission.'
+  },
+  {
+    id: 'm-02',
+    serialNo: 2,
+    serialBn: '০২',
+    serialEn: '02',
+    nameBn: 'মোছাঃ লিমা আক্তার',
+    nameEn: 'Mosammat Lima Akter',
+    designationBn: 'সহ-সভাপতি',
+    designationEn: 'Vice-President',
+    age: 22,
+    ageBn: '২২ বছর',
+    phone: '01738787793',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'limaakter',
+    messageBn: 'নারীদের অধিকার সুরক্ষা, বাল্যবিবাহ প্রতিরোধ এবং সুবিধাবঞ্চিত মানুষের পাশে দাঁড়াতে আমরা প্রতিশ্রুতিবদ্ধ।',
+    messageEn: 'Committed to defending womens rights, preventing early marriage, and uplifting vulnerable community members.'
+  },
+  {
+    id: 'm-03',
+    serialNo: 3,
+    serialBn: '০৩',
+    serialEn: '03',
+    nameBn: 'মোঃ নুরে আলম সিদ্দিকী শান্ত',
+    nameEn: 'Md. Nure Alam Siddique Shanto',
+    designationBn: 'সাধারণ সম্পাদক',
+    designationEn: 'General Secretary',
+    age: 20,
+    ageBn: '২০ বছর',
+    phone: '01705929049',
+    villageBn: 'অষ্টমীর ঘাট, জয়মনিরহাট',
+    villageEn: 'Ashtamir Ghat, Joymonirhat',
+    avatarSeed: 'shanto',
+    photo: '/assets/aistudio/DSC_0859_28a1683f.JPG',
+    messageBn: 'আমাদের সংগঠনের প্রতিটি কার্যক্রম সম্পূর্ণ অরাজনৈতিক ও জনকল্যাণমুখী। তারুণ্যের ইতিবাচক শক্তি দিয়েই সমাজ বদলাবে।',
+    messageEn: 'Every endeavor is strictly non-political and community-centric. Positive youth engagement will transform our society.'
+  },
+  {
+    id: 'm-04',
+    serialNo: 4,
+    serialBn: '০৪',
+    serialEn: '04',
+    nameBn: 'মোছাঃ আল্পনা আক্তার আলো',
+    nameEn: 'Mosammat Alpana Akter Alo',
+    designationBn: 'যুগ্ম সাধারণ সম্পাদক',
+    designationEn: 'Joint General Secretary',
+    age: 21,
+    ageBn: '২১ বছর',
+    phone: '01744262656',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'alpana',
+    messageBn: 'সংগঠনের সার্বিক শৃঙ্খলা ও প্রতিটি সামাজিক কর্মসূচি সফলভাবে বাস্তবায়নে আমরা ঐক্যবদ্ধভাবে কাজ করছি।',
+    messageEn: 'Working shoulder-to-shoulder to execute field programs with discipline, compassion, and transparency.'
+  },
+  {
+    id: 'm-05',
+    serialNo: 5,
+    serialBn: '০৫',
+    serialEn: '05',
+    nameBn: 'মোঃ মেহেদী হাসান',
+    nameEn: 'Md. Mehedi Hasan',
+    designationBn: 'সাংগঠনিক সম্পাদক',
+    designationEn: 'Organizing Secretary',
+    age: 22,
+    ageBn: '২২ বছর',
+    phone: '01797965615',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'mehedi',
+    messageBn: 'ইউনিয়নের ৯টি ওয়ার্ডের প্রতিটি পাড়া-মহল্লায় তরুণদের সংগঠিত করে মানবিক কাজে যুক্ত করাই আমাদের মূল লক্ষ্য।',
+    messageEn: 'Mobilizing energetic youth across all 9 wards of Joymonirhat Union into organized humanitarian service.'
+  },
+  {
+    id: 'm-06',
+    serialNo: 6,
+    serialBn: '০৬',
+    serialEn: '06',
+    nameBn: 'মোঃ রেদওয়ানুল হক নয়ন',
+    nameEn: 'Md. Redwanul Haque Noyon',
+    designationBn: 'প্রচার সম্পাদক',
+    designationEn: 'Publicity & Media Secretary',
+    age: 22,
+    ageBn: '২২ বছর',
+    phone: '01717061413',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'noyon',
+    messageBn: 'সংগঠনের সেবা ও সচেতনতামূলক বার্তা ঘরে ঘরে এবং সামাজিক যোগাযোগমাধ্যমে ইতিবাচকভাবে ছড়িয়ে দিতে আমরা সক্রিয়।',
+    messageEn: 'Spreading our social awareness, campaigns, and relief updates across the union and digital media.'
+  },
+  {
+    id: 'm-07',
+    serialNo: 7,
+    serialBn: '০৭',
+    serialEn: '07',
+    nameBn: 'মোঃ মিলন মিয়া',
+    nameEn: 'Md. Milon Mia',
+    designationBn: 'অর্থ বিষয়ক সম্পাদক',
+    designationEn: 'Finance Secretary',
+    age: 24,
+    ageBn: '২৪ বছর',
+    phone: '01750389983',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'milon',
+    messageBn: 'সংগঠনের তহবিলের প্রতিটি টাকার স্বচ্ছ ও দায়িত্বশীল ব্যবহার নিশ্চিত করাই আমাদের প্রধান অঙ্গীকার।',
+    messageEn: 'Ensuring 100% financial accountability, transparency, and integrity for every community donation.'
+  },
+  {
+    id: 'm-08',
+    serialNo: 8,
+    serialBn: '০৮',
+    serialEn: '08',
+    nameBn: 'মোছাঃ শারমিন আক্তার',
+    nameEn: 'Mosammat Sharmin Akter',
+    designationBn: 'নারী ও শিশু বিষয়ক সম্পাদক',
+    designationEn: 'Women & Children Affairs Secretary',
+    age: 22,
+    ageBn: '২২ বছর',
+    phone: '01738787694',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'sharmin',
+    messageBn: 'নারীদের স্বাবলম্বী করা, কন্যাশিশুদের শিক্ষা নিশ্চিত এবং পারিবারিক সহিংসতামুক্ত গ্রাম প্রতিষ্ঠায় আমরা অবিচল।',
+    messageEn: 'Empowering women with skills, keeping adolescent girls in schools, and stopping domestic neglect.'
+  },
+  {
+    id: 'm-09',
+    serialNo: 9,
+    serialBn: '০৯',
+    serialEn: '09',
+    nameBn: 'মোছাঃ জুঁই খাতুন',
+    nameEn: 'Mosammat Jui Khatun',
+    designationBn: 'প্রশিক্ষণ বিষয়ক সম্পাদক',
+    designationEn: 'Training & Development Secretary',
+    age: 17,
+    ageBn: '১৭ বছর',
+    phone: '01304307969',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'jui',
+    messageBn: 'যুব উন্নয়ন অধিদপ্তরের কারিগরি ও আইটি প্রশিক্ষণের মাধ্যমে বেকার তরুণদের কর্মক্ষম করে তোলাই আমাদের কাজ।',
+    messageEn: 'Channeling young men and women into government certified technical, computer, and vocational programs.'
+  },
+  {
+    id: 'm-10',
+    serialNo: 10,
+    serialBn: '১০',
+    serialEn: '10',
+    nameBn: 'মোঃ হারুন অর রশিদ',
+    nameEn: 'Md. Harun Or Rashid',
+    designationBn: 'ধর্ম বিষয়ক সম্পাদক',
+    designationEn: 'Religious & Ethical Affairs Secretary',
+    age: 24,
+    ageBn: '২৪ বছর',
+    phone: '01744893024',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'harun',
+    messageBn: 'ধর্মীয় সম্প্রীতি রক্ষা, নৈতিক চরিত্র গঠন এবং ধর্মীয় প্রতিষ্ঠানের উন্নয়ন ও পরিষ্কার-পরিচ্ছন্নতায় আমরা নিবেদিত।',
+    messageEn: 'Promoting interfaith harmony, moral ethics among youth, and communal respect across all denominations.'
+  },
+  {
+    id: 'm-11',
+    serialNo: 11,
+    serialBn: '১১',
+    serialEn: '11',
+    nameBn: 'মোছাঃ মিষ্টি খাতুন',
+    nameEn: 'Mosammat Mishti Khatun',
+    designationBn: 'যুব ও ক্রীড়া বিষয়ক সম্পাদক',
+    designationEn: 'Youth & Sports Affairs Secretary',
+    age: 19,
+    ageBn: '১৯ বছর',
+    phone: '01727773642',
+    villageBn: 'জয়মনিরহাট, ভূরুঙ্গামারী',
+    villageEn: 'Joymonirhat, Bhurungamari',
+    avatarSeed: 'mishti',
+    messageBn: 'মাদক বর্জন করে তরুণদের খেলার মাঠে ফিরিয়ে আনতে নিয়মিত ক্রীড়া প্রতিযোগিতা ও যুব উৎসব আয়োজন করি।',
+    messageEn: 'Organizing sports tournaments and fitness drives to steer youth away from addictions and into healthy recreation.'
+  }
+];
+
+export const IMPACT_STATS = [
+  { valueBn: '১০০%+', valueEn: '100%+', labelBn: 'অরাজনৈতিক ও স্বচ্ছ কার্যক্রম', labelEn: 'Non-Political & Transparent' },
+  { valueBn: '২,৫০০+', valueEn: '2,500+', labelBn: 'রোপিত বৃক্ষ ও চারা বিতরণ', labelEn: 'Trees Planted & Nurtured' },
+  { valueBn: '১,২০০+', valueEn: '1,200+', labelBn: 'দুর্যোগে শীতবস্ত্র ও খাদ্য সহায়তা', labelEn: 'Winter Blankets & Relief Given' },
+  { valueBn: '৩৫০+', valueEn: '350+', labelBn: 'জরুরি রক্তদান ও গ্রুপ নির্ণয়', labelEn: 'Emergency Blood Units Connected' },
+  { valueBn: '১৫০+', valueEn: '150+', labelBn: 'সক্রিয় নিবন্ধিত যুব স্বেচ্ছাসেবক', labelEn: 'Registered Active Youth Volunteers' }
+];
+
+export const FAQS = [
+  {
+    qBn: 'জয়মনিরহাট ইউনিয়ন যুব সংগঠন কি কোনো রাজনৈতিক দলের সাথে যুক্ত?',
+    qEn: 'Is Joymonirhat Union Youth Organization affiliated with any political party?',
+    aBn: 'না। সংগঠনটি শতভাগ অরাজনৈতিক, অলাভজনক এবং যুব উন্নয়ন অধিদপ্তর থেকে নিবন্ধিত (রেজি: যু.উ.অ/কুড়ি-৮৮/২০২৩)। আমাদের একমাত্র উদ্দেশ্য আত্ম-মানবতার সেবা ও এলাকার সার্বিক সামাজিক উন্নয়ন।',
+    aEn: 'No. The organization is 100% non-political, non-profit, and legally registered with the Department of Youth Development (Reg: DYD-Kuri-88/2023). Our exclusive purpose is selfless humanitarian service and rural empowerment.'
+  },
+  {
+    qBn: 'আমি কীভাবে সংগঠনের একজন স্বেচ্ছাসেবক বা সদস্য হতে পারি?',
+    qEn: 'How can I become a volunteer or member of JUYO?',
+    aBn: 'জয়মনিরহাট ইউনিয়নের যেকোনো আগ্রহী ও সমাজসেবী মানসিকতার তরুণ-তরুণী এই ওয়েবসাইটের "স্বেচ্ছাসেবক হিসেবে যুক্ত হন" ফর্ম পূরণ করে অথবা সরাসরি অষ্টমীর ঘাট কার্যালয়ে যোগাযোগ করে যুক্ত হতে পারেন।',
+    aEn: 'Any energetic youth living in or originating from Joymonirhat Union who shares our commitment to community service can apply through the online Volunteer form or by visiting our office at Ashtamir Ghat.'
+  },
+  {
+    qBn: 'জরুরি রক্তের প্রয়োজনে আমরা কীভাবে আপনাদের সাথে যোগাযোগ করব?',
+    qEn: 'How can someone request emergency blood assistance?',
+    aBn: 'যেকোনো সময় আমাদের অফিসিয়াল হোয়াটসঅ্যাপ বা হটলাইন নম্বরে (01705929049) রোগীর নাম, প্রয়োজনীয় রক্তের গ্রুপ, হাসপাতাল ও বিস্তারিত জানিয়ে মেসেজ বা কল করুন। আমাদের ভলান্টিয়ার দল তাৎক্ষণিক রক্তদাতা খুঁজে দিতে কাজ করবে।',
+    aEn: 'Contact our 24/7 hotline or WhatsApp at 01705929049 with patient details, required blood group, hospital location, and urgency. Our dedicated team will immediately search matching local donors.'
+  },
+  {
+    qBn: 'সংগঠনের তহবিল কীভাবে পরিচালিত হয় এবং স্বচ্ছতা কীভাবে রক্ষা করা হয়?',
+    qEn: 'How are organization funds managed and transparency maintained?',
+    aBn: 'সংগঠনের সকল কার্যক্রম সদস্য চাঁদা এবং শুভাকাঙ্ক্ষীদের স্বেচ্ছাপ্রণোদিত অনুদানের মাধ্যমে পরিচালিত হয়। প্রতিটি ব্যয়ের ভাউচার সংরক্ষণ এবং সাধারণ সভায় নিয়মিত অডিট রিপোর্ট উপস্থাপন করা হয়।',
+    aEn: 'All initiatives are funded through member contributions and voluntary gifts from well-wishers. Strict account ledgers and expense vouchers are audited and reviewed transparently in executive assemblies.'
+  }
+];
+
+export const DRUG_PREVENTION_POSTS = [
+  {
+    id: 'dp-1',
+    url: 'https://www.facebook.com/share/p/1MSNk1yDJa/',
+    titleBn: 'মাদকবিরোধী যুব সংহতি ও অরাজনৈতিক সমাজসেবার শপথ',
+    titleEn: 'Anti-Drug Youth Solidarity & Community Oath',
+    dateBn: 'মাঠপর্যায়ের পোস্ট ১',
+    dateEn: 'Official Post 1',
+    summaryBn: 'জয়মনিরহাট ইউনিয়নকে মাদকমুক্ত করতে তরুণদের শপথ ও সমন্বিত সামাজিক প্রতিরোধ গড়ে তোলার ঘোষণা।',
+    summaryEn: 'Youth assembly and collective pledge advocating for an addiction-free Joymonirhat Union.',
+    highlightBn: 'যুব সমাবেশ ও শপথ',
+    highlightEn: 'Youth Oath'
+  },
+  {
+    id: 'dp-2',
+    url: 'https://www.facebook.com/share/p/1CBVRGqQ4b/',
+    titleBn: '‘না বলুন মাদককে’ — শিক্ষাপ্রতিষ্ঠান ও শিক্ষার্থীদের নিয়ে সচেতনতামূলক র‍্যালি',
+    titleEn: '“Say No to Drugs” — School & Student Awareness Rally',
+    dateBn: 'মাঠপর্যায়ের পোস্ট ২',
+    dateEn: 'Official Post 2',
+    summaryBn: 'শিক্ষার্থীদের সচেতন করে তুলতে মাদকবিরোধী পোস্টার, স্লোগান এবং জয়মনিরহাটের রাজপথে বর্ণাঢ্য পদযাত্রা।',
+    summaryEn: 'Vibrant student procession carrying anti-drug banners and slogans across key thoroughfares.',
+    highlightBn: 'শিক্ষার্থীদের সচেতনতা র‍্যালি',
+    highlightEn: 'School Rally'
+  },
+  {
+    id: 'dp-3',
+    url: 'https://www.facebook.com/share/p/1Emry7ow3v/',
+    titleBn: 'মাদক প্রতিরোধে যুব সমাবেশ ও জনসচেতনতামূলক ক্যাম্পেইন',
+    titleEn: 'Anti-Drug Youth Gathering & Public Campaign',
+    dateBn: 'মাঠপর্যায়ের পোস্ট ৩',
+    dateEn: 'Official Post 3',
+    summaryBn: 'হাট-বাজারে গণসংযোগ, লিফলেট বিতরণ ও যুবকদের খেলাধুলার দিকে উৎসাহিত করার বিশেষ উদ্যোগ।',
+    summaryEn: 'Marketplace outreach, leaflet distribution, and redirecting youth towards constructive sports.',
+    highlightBn: 'গণসংযোগ ও লিফলেট বিতরণ',
+    highlightEn: 'Public Campaign'
+  },
+  {
+    id: 'dp-4',
+    url: 'https://www.facebook.com/share/p/1CG56JyTBy/',
+    titleBn: 'সীমান্তবর্তী এলাকায় মাদকের কুফল বিষয়ক জনসচেতনতা সভা',
+    titleEn: 'Border-Belt Drug Awareness Assembly',
+    dateBn: 'মাঠপর্যায়ের পোস্ট ৪',
+    dateEn: 'Official Post 4',
+    summaryBn: 'সীমান্ত সংলগ্ন ওয়ার্ডসমূহে মাদক বিস্তার রুখতে সচেতনতামূলক আলোচনা এবং অভিভাবকদের সম্পৃক্তকরণ।',
+    summaryEn: 'Border corridor community dialogue engaging parents and guardians against substance abuse.',
+    highlightBn: 'সীমান্ত এলাকা নজরদারি',
+    highlightEn: 'Border Vigilance'
+  },
+  {
+    id: 'dp-5',
+    url: 'https://www.facebook.com/share/p/1HXd1GduPy/',
+    titleBn: 'মাদকমুক্ত জয়মনিরহাট গঠনে তরুণ নেতৃত্বের ঐক্য ও কর্মপরিকল্পনা',
+    titleEn: 'Youth Action Blueprint for a Drug-Free Joymonirhat',
+    dateBn: 'মাঠপর্যায়ের পোস্ট ৫',
+    dateEn: 'Official Post 5',
+    summaryBn: 'যুব সংগঠনের প্রতিনিধিদের নিয়ে কর্মপরিকল্পনা প্রণয়ন এবং তরুণদের ইতিবাচক কাজে সম্পৃক্ত করার সিদ্ধান্ত।',
+    summaryEn: 'Action blueprint to safeguard youth livelihoods and sustain an addiction-free community environment.',
+    highlightBn: 'তরুণ নেতৃত্বের কর্মপরিকল্পনা',
+    highlightEn: 'Action Blueprint'
+  }
+];
+
+export const BORDER_CONTEXT = {
+  titleBn: 'জয়মনিরহাট ইউনিয়নের প্রেক্ষাপট ও মাদক সমস্যার বাস্তবতা',
+  titleEn: 'Context of Joymonirhat Union & Borderline Substance Challenges',
+  locationDetailsBn: 'কুড়িগ্রাম জেলার ভূরুঙ্গামারী উপজেলার সীমান্তবর্তী ইউনিয়ন জয়মনিরহাট। ইউনিয়নটির দুই দিক ভারতীয় সীমান্তসংলগ্ন হওয়ায় এখানে মাদকদ্রব্যের অনুপ্রবেশ ও বিস্তার প্রতিরোধ একটি অন্যতম গুরুত্বপূর্ণ সামাজিক চ্যালেঞ্জ।',
+  locationDetailsEn: 'Joymonirhat Union in Bhurungamari Upazila of Kurigram is bordered by India on two sides, making the prevention of illicit drug transit a vital grassroots challenge.',
+  communityImpactBn: 'মাদক শিক্ষার্থী, তরুণ-তরুণী ও সাধারণ পরিবারের নিরাপত্তা বিঘ্নিত করে এবং পারিবারিক কলহ ও অপরাধের ঝুঁকি বৃদ্ধি করে। এছাড়া সমাজে প্রচলিত ভুল ধারণা—"মাদকাসক্ত ব্যক্তিকে বিয়ে দিলেই সে ভালো হয়ে যাবে"—বাস্তবে দাম্পত্য সংকট ও বাল্যবিবাহের ঝুঁকি বাড়িয়ে তোলে।',
+  communityImpactEn: 'Substance abuse threatens students, youth, and families, escalating domestic friction and crime. The local myth that marriage cures an addict often leads to severe marital distress and child marriage.',
+  solutionPillarsBn: 'শুধুমাত্র আইন প্রয়োগ যথেষ্ট নয়; এর সঙ্গে প্রয়োজন সমন্বিত সামাজিক আন্দোলন, বিজ্ঞানসম্মত তথ্যভিত্তিক সচেতনতা, পরিবার ও শিক্ষাপ্রতিষ্ঠানের সক্রিয় ভূমিকা এবং মাদকাসক্ত ব্যক্তিদের প্রতি মানবিক সহমর্মিতা ও চিকিৎসা সহায়তা।',
+  solutionPillarsEn: 'Enforcement alone is not enough; sustainable success demands united social campaigns, school-parent vigilance, and compassionate clinical rehabilitation.'
+};
+
+export const FLAGSHIP_PROJECT: FlagshipProject = {
+  titleBn: 'মাদকমুক্ত জয়মনিরহাট গড়তে যুবসমাজের ঐক্যবদ্ধ উদ্যোগ',
+  titleEn: 'Youth United Initiative for a Drug-Free Joymonirhat',
+  subtitleBn: 'মাদকবিরোধী সচেতনতা, কিশোর-কিশোরী সুরক্ষা ও যুবসমাজের ইতিবাচক সম্পৃক্ততা কর্মসূচি',
+  subtitleEn: 'Anti-Drug Awareness, Adolescent Safeguarding & Positive Youth Mobilization Program',
+  necessityBn: 'জয়মনিরহাট ইউনিয়নের অধিকাংশ শিক্ষার্থী স্থানীয় ২টি উচ্চ বিদ্যালয় ও ২টি মাদ্রাসায় পড়াশোনা করে। এসব শিক্ষাপ্রতিষ্ঠানের কিশোর-কিশোরীদের মধ্যে মাদকের ক্ষতিকর প্রভাব, আইনগত দিক এবং প্রতিরোধের উপায় সম্পর্কে সচেতনতা সৃষ্টি করা গেলে পরিবার ও সমাজে এর সুদূরপ্রসারী সুফল পড়বে।',
+  necessityEn: 'Most local students attend 2 high schools and 2 madrasas across Joymonirhat. Equipping these young students with factual awareness and leadership skills creates a resilient social defense against illicit drugs.',
+  targetInstitutionsBn: ['জয়মনিরহাট উচ্চ বিদ্যালয়', 'ভুরুঙ্গামারী সীমান্ত সংলগ্ন উচ্চ বিদ্যালয়', 'স্থানীয় ফাজিল/দাখিল মাদ্রাসা-১', 'স্থানীয় বালিকা মাদ্রাসা-২'],
+  targetInstitutionsEn: ['Joymonirhat High School', 'Border Belt High School', 'Local Senior Madrasa', 'Local Girls Madrasa'],
+  locations: [
+    { nameBn: '১. জয়মনিরহাট সদর (২ নং ওয়ার্ড)', nameEn: '1. Joymonirhat Sadar (Ward 2)', detailsBn: 'জয়মনিরহাট সদর ও ছোটখাটামারী দক্ষিণ — কেন্দ্রীয় বাজার, শিক্ষাপ্রতিষ্ঠান ও প্রশাসনিক সমন্বয় কেন্দ্র', detailsEn: 'Joymonirhat Sadar & Chhoto Khatamari South — Central marketplace, major school zone & civic hub' },
+    { nameBn: '২. বাউসমারী (৫ নং ওয়ার্ড)', nameEn: '2. Bausmari (Ward 5)', detailsBn: 'ভোলা মোড়, বাউসমারী ও দলবাড়ী — জনবহুল গ্রামীণ ও চরাঞ্চল সংলগ্ন এলাকা', detailsEn: 'Bhola More, Bausmari & Dalbari — High-density rural and riverine belt' },
+    { nameBn: '৩. অষ্টমীর ঘাট (১ নং ওয়ার্ড)', nameEn: '3. Ashtamir Ghat (Ward 1)', detailsBn: 'অষ্টমীর ঘাট, বকুলতলী, চৌরাস্তা মোড় এবং ছোটখাটামারী উত্তর — সংগঠনের মূল কার্যালয় ও ট্রানজিট এলাকা', detailsEn: 'Ashtamir Ghat, Bokultoli, Chowrasta More & Chhoto Khatamari North — JUYO Headquarters & border transit corridor' }
+  ],
+
+  activities: [
+    {
+      id: 1,
+      titleBn: 'সচেতনতামূলক সেমিনার ও উঠান বৈঠক',
+      titleEn: 'Awareness Seminars & Courtyard Meetings',
+      descBn: 'শিক্ষার্থী, অভিভাবক, শিক্ষক ও স্থানীয় জনগণের অংশগ্রহণে মাদকাসক্তির ক্ষতিকর প্রভাব, প্রতিরোধের উপায় ও সামাজিক দায়বদ্ধতা নিয়ে সরাসরি উন্মুক্ত আলোচনা।',
+      descEn: 'Open interactive dialogues with students, guardians, and educators on drug hazards and civic vigilance.',
+      icon: 'BookOpen'
+    },
+    {
+      id: 2,
+      titleBn: 'কিশোর-কিশোরীদের জন্য সচেতনতামূলক নির্দেশিকা',
+      titleEn: 'Adolescent Life-Skill & Awareness Guidelines',
+      descBn: 'মাদক থেকে দূরে থাকার কৌশল, সহপাঠীদের ইতিবাচক সহযোগিতা ও প্রয়োজনে বিশ্বস্ত ব্যক্তি বা হেল্পলাইনের সহায়তা নেওয়ার সহজ নির্দেশিকা বিতরণ।',
+      descEn: 'Easy-to-follow guidebooks on peer pressure resistance, life skills, and accessing confidential helplines.',
+      icon: 'ShieldCheck'
+    },
+    {
+      id: 3,
+      titleBn: 'খেলাধুলা ও সুস্থ বিনোদনে তরুণদের সম্পৃক্তকরণ',
+      titleEn: 'Sports Tournaments & Creative Recreation',
+      descBn: 'মাদকমুক্ত অবসর, শারীরিক সুস্থতা ও পারস্পরিক সৌহার্দ্য গড়ে তুলতে ইউনিয়নব্যাপী ফুটবল ও ক্রিকেট টুর্নামেন্ট আয়োজন।',
+      descEn: 'Union-wide football and cricket tournaments providing healthy physical outlets away from drug influences.',
+      icon: 'Trophy'
+    },
+    {
+      id: 4,
+      titleBn: 'আইনবিষয়ক আলোচনা সভা',
+      titleEn: 'Legal Literacy & Rights Consultation',
+      descBn: 'মাদকদ্রব্য নিয়ন্ত্রণ আইন, বাল্যবিবাহ নিরোধ আইন ২০১৭ এবং নারী ও শিশু সুরক্ষা সম্পর্কে আইনজীবী ও প্রশাসনের সহযোগিতায় আলোচনা।',
+      descEn: 'Legal awareness workshops covering Narcotics Control Act and Child Marriage Restraint Act 2017.',
+      icon: 'Scale'
+    },
+    {
+      id: 5,
+      titleBn: 'পরিবার ও সমাজভিত্তিক সচেতনতা',
+      titleEn: 'Family & Community-Based Counseling',
+      descBn: 'অভিভাবক, শিক্ষক, ধর্মীয় নেতৃবৃন্দ ও জনপ্রতিনিধিদের সম্পৃক্ত করে পারিবারিক বন্ধন জোরদার এবং মাদকাসক্তি বিষয়ে ভুল ধারণা দূরীকরণ।',
+      descEn: 'Engaging religious leaders, teachers, and guardians to break taboos and strengthen domestic vigilance.',
+      icon: 'Users'
+    },
+    {
+      id: 6,
+      titleBn: 'মাদকাসক্ত ব্যক্তিদের সহায়তা ও পুনর্বাসনে উৎসাহ',
+      titleEn: 'Rehabilitation Guidance & Clinical Referral',
+      descBn: 'মাদকাসক্তদের প্রতি বৈষম্য ও ঘৃণা পরিহার করে তাঁদের চিকিৎসা, কাউন্সেলিং এবং উপযুক্ত সরকারি-বেসরকারি পুনর্বাসনসেবা গ্রহণে সহায়তা।',
+      descEn: 'Stigma-free counseling connecting addicted youth with authorized medical detox and vocational rehabilitation.',
+      icon: 'HeartHandshake'
+    },
+    {
+      id: 7,
+      titleBn: 'সামাজিক পর্যবেক্ষণ ও সমন্বয় সেল',
+      titleEn: 'Community Vigilance & Rapid Coordination',
+      descBn: 'স্থানীয় জনগণের সহযোগিতায় মাদকবিরোধী ধারাবাহিক পর্যবেক্ষণ এবং অপরাধের তথ্য আইন প্রয়োগকারী সংস্থাকে জানাতে সামাজিক দায়িত্ববোধ তৈরি।',
+      descEn: 'Citizen oversight groups coordinating responsibly with local civil and police administration.',
+      icon: 'Eye'
+    }
+  ],
+  expectedOutcomesBn: [
+    'কিশোর-কিশোরী ও তরুণদের মাঝে মাদক থেকে দূরে থাকার ইতিবাচক মানসিকতা ও জীবনদক্ষতা গড়ে উঠবে।',
+    'খেলাধুলা ও সমাজকল্যাণমূলক কর্মকাণ্ডে যুবকদের স্বতঃস্ফূর্ত অংশগ্রহণ বৃদ্ধি পাবে।',
+    'পরিবার, শিক্ষাপ্রতিষ্ঠান ও স্থানীয় জনগণের মধ্যে মাদক প্রতিরোধে ঐক্যবদ্ধ সামাজিক প্রতিরোধ গড়ে উঠবে।',
+    'মাদকাসক্ত ব্যক্তিদের চিকিৎসা ও মানবিক পুনর্বাসন সম্পর্কে সমাজে ইতিবাচক দৃষ্টিভঙ্গি তৈরি হবে।',
+    'বাল্যবিবাহ, পারিবারিক কলহ ও নারীর প্রতি সহিংসতার ঝুঁকি উল্লেখযোগ্যভাবে হ্রাস পাবে।',
+    'মাদকমুক্ত জয়মনিরহাট গড়তে তৃণমূল পর্যায়ে একটি স্থায়ী সক্রিয় যুব নেটওয়ার্ক গড়ে উঠবে।'
+  ],
+  expectedOutcomesEn: [
+    'Youth and school students will build strong psychological resilience and life skills against substance abuse.',
+    'Massive increase in youth engagement in constructive outdoor sports and social service.',
+    'Unified parent-teacher-civic resistance networks against illegal border narcotics.',
+    'Shift toward compassionate, stigma-free medical treatment and rehabilitation for victims.',
+    'Measurable drop in child marriages, domestic violence, and petty crimes across the union.',
+    'A sustainable grassroots youth network actively guarding the community for years to come.'
+  ]
+};
+
+export const PAST_ACHIEVEMENTS: AchievementItem[] = [
+  {
+    id: 'ach-1',
+    categoryBn: 'বাল্যবিবাহ ও শিশু সুরক্ষা',
+    categoryEn: 'Child Marriage Prevention & Child Safety',
+    metricBn: '২০০ জন কন্যাশিশু',
+    metricEn: '200 Vulnerable Girls',
+    titleBn: 'ঝুঁকিপূর্ণ মেয়ে শিশু মনিটরিং ও বাল্যবিবাহ নিরোধ',
+    titleEn: 'Monitoring Vulnerable Girls & Preventing Child Marriage',
+    pointsBn: [
+      'জয়মনিরহাট ইউনিয়নের ২০০ জন ঝুঁকিপূর্ণ মেয়ে শিশুর বিস্তারিত তালিকা তৈরি ও পরিস্থিতি পর্যবেক্ষণ।',
+      'বাল্যবিবাহের স্বাস্থ্যগত ও সামাজিক কুফল নিয়ে ৫টি পৃথক সচেতনতামূলক উঠান বৈঠক।',
+      'বাল্যবিবাহ নিরোধ আইন, ২০১৭ সম্পর্কে ইউনিয়নব্যাপী ব্যাপক প্রচার এবং প্রায় ২০০টি সচেতনতামূলক লিফলেট বিতরণ।',
+      'MJSKS-এর CNB প্রকল্পের আর্থিক সহায়তায় ৫০,০০০ টাকার বাল্যবিবাহ প্রতিরোধ প্রকল্প সফল বাস্তবায়ন।'
+    ],
+    pointsEn: [
+      'Profiled and actively monitored 200 vulnerable young girls across Joymonirhat Union.',
+      'Conducted 5 independent grassroots courtyard meetings on maternal health and legal hazards.',
+      'Distributed 200 informative leaflets explaining the Child Marriage Restraint Act 2017.',
+      'Successfully executed a dedicated 50,000 BDT anti-child marriage project supported by MJSKS (CNB Project).'
+    ]
+  },
+  {
+    id: 'ach-2',
+    categoryBn: 'মাদকবিরোধী সামাজিক আন্দোলন',
+    categoryEn: 'Anti-Drug Social Movement',
+    metricBn: '৪টি উঠান বৈঠক ও র‍্যালি',
+    metricEn: '4 Courtyard Meetings & Rallies',
+    titleBn: 'মাদকবিরোধী গণসচেতনতা ও তরুণদের ইতিবাচক সম্পৃক্তকরণ',
+    titleEn: 'Anti-Drug Civic Awareness & Youth Mobilization',
+    pointsBn: [
+      'মাদকের কুফল ও সামাজিক পরিণতি নিয়ে ৪টি পৃথক উঠান বৈঠক ও উন্মুক্ত গণসংযোগ।',
+      'শিক্ষার্থীদের নিয়ে বর্ণাঢ্য সচেতনতামূলক র‍্যালি ও শিক্ষাপ্রতিষ্ঠানে মাদকবিরোধী পোস্টারিং।',
+      'কিশোর-কিশোরীদের খেলাধুলা ও সাংস্কৃতিক কর্মকাণ্ডে সম্পৃক্ত করে মাদকমুক্ত বিনোদনের সুযোগ তৈরি।'
+    ],
+    pointsEn: [
+      'Organized 4 extensive courtyard assemblies addressing border drug hazards.',
+      'Vibrant student processions and poster distribution around marketplaces and school corridors.',
+      'Channeling adolescent energies into sports to shield them from drug exploitation.'
+    ]
+  },
+  {
+    id: 'ach-3',
+    categoryBn: 'মানবিক সহায়তা ও সেবা',
+    categoryEn: 'Humanitarian Aid & Social Welfare',
+    metricBn: '১৩০+ পরিবার ও ব্যক্তি',
+    metricEn: '130+ Families Assisted',
+    titleBn: 'ঈদবস্ত্র, শীতবস্ত্র বিতরণ ও বিনামূল্যে রক্তের গ্রুপ নির্ণয়',
+    titleEn: 'Eid Gifts, Winter Warmth & Blood Group Screening',
+    pointsBn: [
+      'পবিত্র ঈদ উপলক্ষে ৮০টি দরিদ্র ও সুবিধাবঞ্চিত পরিবারের মাঝে নতুন পোশাক বিতরণ।',
+      'তীব্র শৈত্যপ্রবাহে ৫০ জন শীতার্ত ও প্রবীণ মানুষের মাঝে উষ্ণ শীতবস্ত্র ও কম্বল বিতরণ।',
+      '১০০ জন কিশোর-কিশোরী ও সাধারণ মানুষের বিনামূল্যে রক্তের গ্রুপ নির্ণয় ও ডাটাবেজ তৈরি।',
+      'সংগঠনের স্বেচ্ছাসেবকদের সার্বক্ষণিক অংশগ্রহণে মুমূর্ষু রোগীদের জন্য জরুরি রক্তদান পরিচালনা।'
+    ],
+    pointsEn: [
+      'Distributed brand-new Eid festive clothing to 80 destitute families.',
+      'Handed warm winter blankets to 50 impoverished elderly individuals during severe cold waves.',
+      'Screened and recorded blood groups for 100 rural adolescents and community members.',
+      '24/7 blood donation coordination saving patients and expectant mothers in local clinics.'
+    ]
+  },
+  {
+    id: 'ach-4',
+    categoryBn: 'যুব উন্নয়ন ও কারিগরি প্রশিক্ষণ',
+    categoryEn: 'Youth Skill Development & TVET',
+    metricBn: '৮১ জন প্রশিক্ষণার্থী',
+    metricEn: '81 Youth Trainees',
+    titleBn: 'আইসিটি, কারিগরি শিক্ষা ও আত্মকর্মসংস্থান সৃষ্টি',
+    titleEn: 'ICT, Vocational TVET & Self-Employment Training',
+    pointsBn: [
+      'যুব উন্নয়ন অধিদপ্তরের মাধ্যমে ৬০ জন যুবকের গবাদিপশু পালন ও গরু মোটাতাজাকরণ প্রশিক্ষণ সম্পন্ন।',
+      'MJSKS-এর CNB প্রকল্পের আওতায় ৬ জনকে তথ্য ও যোগাযোগ প্রযুক্তি (ICT) কম্পিউটার প্রশিক্ষণ প্রদান।',
+      'BTEB (বাংলাদেশ কারিগরি শিক্ষা বোর্ড)-এর অধীনে ৬ জনকে TVET কারিগরি প্রশিক্ষণে অন্তর্ভুক্তি।',
+      '৫ জন কর্মঠ তরুণকে পেশাদার ড্রাইভিং প্রশিক্ষণ এবং ৪ জনকে YC নেতৃত্ব প্রশিক্ষণে সহায়তা।'
+    ],
+    pointsEn: [
+      'Trained 60 rural youths in certified livestock rearing and cattle fattening via Youth Development Dept.',
+      'Sponsored 6 youths for ICT Computer Office Applications via MJSKS CNB Project.',
+      'Enrolled 6 youths into BTEB accredited TVET technical education courses.',
+      'Facilitated professional driving training for 5 youths and YC leadership coaching for 4 youth delegates.'
+    ]
+  },
+  {
+    id: 'ach-5',
+    categoryBn: 'সরকারি অনুদান ও প্রকল্প',
+    categoryEn: 'Government Grant & Project Execution',
+    metricBn: '৫০,০০০ টাকা সরকারি অনুদান',
+    metricEn: '50,000 BDT Gov Grant',
+    titleBn: 'যুব উন্নয়ন অধিদপ্তর অনুমোদিত মৎস্য প্রকল্প বাস্তবায়ন',
+    titleEn: 'Department of Youth Development Fisheries Project Execution',
+    pointsBn: [
+      '২০২৫ অর্থবছরে যুব উন্নয়ন অধিদপ্তর থেকে নিবন্ধিত যুব সংগঠনের জন্য বিশেষ অনুদান লাভ।',
+      '৫০,০০০ টাকার সরকারি অর্থায়নে একটি আধুনিক মৎস্য চাষ প্রকল্প সফলভাবে বাস্তবায়ন।',
+      'স্থানীয় বেকার যুবকদের প্রত্যক্ষ কাজের সুযোগ ও ভবিষ্যৎ উদ্যোক্তা হিসেবে গড়ে তোলার প্ল্যাটফর্ম।'
+    ],
+    pointsEn: [
+      'Awarded competitive fiscal grant 2025 from Department of Youth Development, Kurigram.',
+      'Successfully implemented a 50,000 BDT community aquaculture and fisheries project.',
+      'Generated direct income opportunities and sustainable entrepreneurial skills for local youth.'
+    ]
+  }
+];
+
+export const PARTNERS_COLLABORATORS: PartnerItem[] = [
+  { nameBn: 'ইউনিয়ন পরিষদ, জয়মনিরহাট', nameEn: 'Joymonirhat Union Parishad', category: 'gov', categoryLabelBn: 'স্থানীয় সরকার', categoryLabelEn: 'Local Government', roleBn: 'স্থানীয় উন্নয়ন ও সামাজিক সনদ সমন্বয়', roleEn: 'Civic governance & administrative synergy' },
+  { nameBn: 'যুব উন্নয়ন অধিদপ্তর, কুড়িগ্রাম', nameEn: 'Department of Youth Development, Kurigram', category: 'gov', categoryLabelBn: 'সরকারি অধিদপ্তর', categoryLabelEn: 'Govt Department', roleBn: 'সংগঠনের নিবন্ধন কর্তৃপক্ষ ও কারিগরি প্রশিক্ষণ সহযোগী', roleEn: 'Official registration authority & vocational training provider' },
+  { nameBn: 'কৃষি অধিদপ্তর', nameEn: 'Department of Agricultural Extension', category: 'gov', categoryLabelBn: 'সরকারি অধিদপ্তর', categoryLabelEn: 'Govt Department', roleBn: 'বৃক্ষরোপণ, সবুজায়ন ও কৃষি দক্ষতা পরামর্শ', roleEn: 'Afforestation, green drives & agricultural guidance' },
+  { nameBn: 'সমাজসেবা অধিদপ্তর', nameEn: 'Department of Social Services', category: 'gov', categoryLabelBn: 'সরকারি অধিদপ্তর', categoryLabelEn: 'Govt Department', roleBn: 'প্রান্তিক জনগোষ্ঠীর নিরাপত্তা ও মানবিক সহায়তা সমন্বয়', roleEn: 'Social safety net guidance & marginalized advocacy' },
+  { nameBn: 'MJSKS (CNB প্রকল্প)', nameEn: 'MJSKS (CNB Project)', category: 'ngo', categoryLabelBn: 'বেসরকারি উন্নয়ন সংস্থা', categoryLabelEn: 'NGO Partner', roleBn: 'বাল্যবিবাহ প্রতিরোধ ও আইসিটি প্রশিক্ষণে সরাসরি অর্থায়ন', roleEn: 'Direct funding in child marriage prevention & ICT coaching' },
+  { nameBn: 'RDRS বাংলাদেশ', nameEn: 'RDRS Bangladesh', category: 'ngo', categoryLabelBn: 'উন্নয়ন সহযোগী', categoryLabelEn: 'Development Partner', roleBn: 'চরাঞ্চল উন্নয়ন ও সামাজিক সুরক্ষা অংশীদারিত্ব', roleEn: 'Char development & community mobilization partner' },
+  { nameBn: 'অপরাজেয় বাংলাদেশ', nameEn: 'Aparajeyo Bangladesh', category: 'ngo', categoryLabelBn: 'শিশু অধিকার সংস্থা', categoryLabelEn: 'Child Rights Org', roleBn: 'শিশু অধিকার সুরক্ষা ও ঝুঁকিপূর্ণ কিশোরী সহায়তা', roleEn: 'Child rights protection & vulnerable adolescent safety' },
+  { nameBn: 'PSD', nameEn: 'PSD (Partnership for Social Dev)', category: 'ngo', categoryLabelBn: 'উন্নয়ন সংস্থা', categoryLabelEn: 'Development Org', roleBn: 'স্থানীয় সামাজিক উদ্যোগ ও স্বাস্থ্য ক্যাম্পেইন', roleEn: 'Grassroots community campaigns & public hygiene' },
+  { nameBn: 'আসমানি ফাউন্ডেশন', nameEn: 'Asmani Foundation', category: 'foundation', categoryLabelBn: 'দাতব্য সংস্থা', categoryLabelEn: 'Philanthropic Org', roleBn: 'মানবকল্যাণ ও শীতার্তদের ত্রাণ সহায়তা', roleEn: 'Humanitarian aid & emergency cold relief' },
+  { nameBn: 'কেয়ার বাংলাদেশ', nameEn: 'CARE Bangladesh', category: 'ngo', categoryLabelBn: 'আন্তর্জাতিক উন্নয়ন সংস্থা', categoryLabelEn: 'International NGO', roleBn: 'নারীর ক্ষমতায়ন ও তৃণমূল নেতৃত্ব কর্মশালা', roleEn: 'Women empowerment & community leadership support' },
+  { nameBn: 'ব্র্যাক (BRAC)', nameEn: 'BRAC', category: 'ngo', categoryLabelBn: 'উন্নয়ন সংস্থা', categoryLabelEn: 'Development Leader', roleBn: 'শিক্ষা, স্বাস্থ্য ও সচেতনতামূলক কার্যক্রমে সমন্বয়', roleEn: 'Education, health advocacy & skill development linkages' }
+];
+
+export const UNION_WARDS: UnionWardItem[] = [
+  {
+    id: 'ward-1',
+    wardNo: 1,
+    wardNoBn: '১ নং ওয়ার্ড',
+    wardNoEn: 'Ward No. 1',
+    titleBn: '১ নং ওয়ার্ড — অষ্টমীর ঘাট ও বকুলতলী',
+    titleEn: 'Ward 1 — Ashtamir Ghat & Bokultoli',
+    areasBn: ['অষ্টমীর ঘাট', 'বকুলতলী', 'চৌরাস্তা মোড়', 'ছোটখাটামারী উত্তর'],
+    areasEn: ['Ashtamir Ghat', 'Bokultoli', 'Chowrasta More', 'Chhoto Khatamari North'],
+    summaryBn: 'অষ্টমীর ঘাট, বকুলতলী, চৌরাস্তা মোড় এবং ছোটখাটামারী উত্তর।',
+    summaryEn: 'Ashtamir Ghat, Bokultoli, Chowrasta More and Chhoto Khatamari North.',
+    keyLandmarksBn: 'সংগঠনের প্রধান কার্যালয়, অষ্টমীর ঘাট ঘাটপার, চৌরাস্তা মোড় ও বকুলতলী বাজার',
+    keyLandmarksEn: 'JUYO Headquarters, Ashtamir Ghat Riverfront, Chowrasta More & Bokultoli Market',
+    volunteerCountEstimate: '১২+ নিবন্ধিত ভলান্টিয়ার',
+    coverageBadgeBn: 'প্রধান কার্যালয় ও ট্রানজিট হাব',
+    coverageBadgeEn: 'HQ & Key Transit Hub'
+  },
+  {
+    id: 'ward-2',
+    wardNo: 2,
+    wardNoBn: '২ নং ওয়ার্ড',
+    wardNoEn: 'Ward No. 2',
+    titleBn: '২ নং ওয়ার্ড — জয়মনিরহাট সদর ও ছোটখাটামারী দক্ষিণ',
+    titleEn: 'Ward 2 — Joymonirhat Sadar & Chhoto Khatamari South',
+    areasBn: ['জয়মনিরহাট সদর', 'ছোটখাটামারী দক্ষিণ'],
+    areasEn: ['Joymonirhat Sadar', 'Chhoto Khatamari South'],
+    summaryBn: 'জয়মনিরহাট সদর, ছোটখাটামারী দক্ষিণ।',
+    summaryEn: 'Joymonirhat Sadar, Chhoto Khatamari South.',
+    keyLandmarksBn: 'ইউনিয়ন সদর বাজার, উচ্চ বিদ্যালয়, ইউনিয়ন পরিষদ কমপ্লেক্স ও বাণিজ্যিক কেন্দ্র',
+    keyLandmarksEn: 'Union Central Bazaar, High School, Union Parishad Complex & Commercial Hub',
+    volunteerCountEstimate: '১০+ নিবন্ধিত ভলান্টিয়ার',
+    coverageBadgeBn: 'ইউনিয়ন সদর ও প্রশাসনিক এলাকা',
+    coverageBadgeEn: 'Civic Core & Administrative Hub'
+  },
+  {
+    id: 'ward-3',
+    wardNo: 3,
+    wardNoBn: '৩ নং ওয়ার্ড',
+    wardNoEn: 'Ward No. 3',
+    titleBn: '৩ নং ওয়ার্ড — ছোটখাটামারী পূর্ব ও রইয়া বিলের পাড়',
+    titleEn: 'Ward 3 — Chhoto Khatamari East & Rօiya Beel',
+    areasBn: ['ছোটখাটামারী পূর্ব', 'রইয়া বিলের পাড়'],
+    areasEn: ['Chhoto Khatamari East', 'Roya Beeler Par'],
+    summaryBn: 'ছোটখাটামারী পূর্ব, রইয়া বিলের পাড়।',
+    summaryEn: 'Chhoto Khatamari East, Roya Beeler Par.',
+    keyLandmarksBn: 'রইয়া বিল প্রাকৃতিক জলাশয়, মৎস্য চাষ বেল্ট ও পূর্ব খাটামারী পল্লি জনপদ',
+    keyLandmarksEn: 'Roya Beel Wetland, Community Fisheries Belt & Rural Neighborhood',
+    volunteerCountEstimate: '৮+ নিবন্ধিত ভলান্টিয়ার',
+    coverageBadgeBn: 'রইয়া বিল ও চরাঞ্চল সংযোগ',
+    coverageBadgeEn: 'Wetland & Rural Belt'
+  },
+  {
+    id: 'ward-4',
+    wardNo: 4,
+    wardNoBn: '৪ নং ওয়ার্ড',
+    wardNoEn: 'Ward No. 4',
+    titleBn: '৪ নং ওয়ার্ড — জয়মনিরহাট বটতলা ক্লাব ও বড় খাটামারী পূর্ব',
+    titleEn: 'Ward 4 — Bottola Club & Boro Khatamari East',
+    areasBn: ['জয়মনিরহাট বটতলা ক্লাব', 'বড় খাটামারী পূর্ব'],
+    areasEn: ['Joymonirhat Bottola Club', 'Boro Khatamari East'],
+    summaryBn: 'জয়মনিরহাট বটতলা ক্লাব, বড় খাটামারী পূর্ব।',
+    summaryEn: 'Joymonirhat Bottola Club, Boro Khatamari East.',
+    keyLandmarksBn: 'বটতলা ক্লাব সামাজিক কেন্দ্র, তরুণদের ক্রীড়াঙ্গন ও পূর্ব খাটামারী শিক্ষা বলয়',
+    keyLandmarksEn: 'Bottola Club Youth Center, Sports Ground & Educational Corridor',
+    volunteerCountEstimate: '৯+ নিবন্ধিত ভলান্টিয়ার',
+    coverageBadgeBn: 'যুব ক্লাব ও ক্রীড়া চর্চাকেন্দ্র',
+    coverageBadgeEn: 'Youth Club & Sports Center'
+  },
+  {
+    id: 'ward-5',
+    wardNo: 5,
+    wardNoBn: '৫ নং ওয়ার্ড',
+    wardNoEn: 'Ward No. 5',
+    titleBn: '৫ নং ওয়ার্ড — ভোলা মোড়, বাউসমারী ও দলবাড়ী',
+    titleEn: 'Ward 5 — Bhola More, Bausmari & Dalbari',
+    areasBn: ['ভোলা মোড়', 'বাউসমারী', 'দলবাড়ী'],
+    areasEn: ['Bhola More', 'Bausmari', 'Dalbari'],
+    summaryBn: 'ভোলা মোড়, বাউসমারী, দলবাড়ী।',
+    summaryEn: 'Bhola More, Bausmari, Dalbari.',
+    keyLandmarksBn: 'বাউসমারী ঘনবসতিপূর্ণ গ্রামীণ জনপদ, ভোলা মোড় ও দলবাড়ী কমিউনিটি নেটওয়ার্ক',
+    keyLandmarksEn: 'Bausmari High-Density Rural Center, Bhola More & Dalbari Neighborhood',
+    volunteerCountEstimate: '১১+ নিবন্ধিত ভলান্টিয়ার',
+    coverageBadgeBn: 'বাউসমারী ও গ্রামীণ সামাজিক বেল্ট',
+    coverageBadgeEn: 'Bausmari Rural & Social Belt'
+  },
+  {
+    id: 'ward-6',
+    wardNo: 6,
+    wardNoBn: '৬ নং ওয়ার্ড',
+    wardNoEn: 'Ward No. 6',
+    titleBn: '৬ নং ওয়ার্ড — বড় খাটামারী পশ্চিম ও পাঁচমাথা মোড়',
+    titleEn: 'Ward 6 — Boro Khatamari West & Panchmatha More',
+    areasBn: ['বড় খাটামারী পশ্চিম', 'পাঁচমাথা মোড়'],
+    areasEn: ['Boro Khatamari West', 'Panchmatha More'],
+    summaryBn: 'বড় খাটামারী পশ্চিম, পাঁচমাথা মোড়।',
+    summaryEn: 'Boro Khatamari West, Panchmatha More.',
+    keyLandmarksBn: 'পাঁচমাথা মোড় ট্রানজিট পয়েন্ট ও পশ্চিম খাটামারী সংযোগ সড়ক',
+    keyLandmarksEn: 'Panchmatha Major Crossroads & Western Khatamari Road',
+    volunteerCountEstimate: '৮+ নিবন্ধিত ভলান্টিয়ার',
+    coverageBadgeBn: 'পাঁচমাথা প্রধান সংযোগ মোড়',
+    coverageBadgeEn: 'Panchmatha Strategic Junction'
+  },
+  {
+    id: 'ward-7',
+    wardNo: 7,
+    wardNoBn: '৭ নং ওয়ার্ড',
+    wardNoEn: 'Ward No. 7',
+    titleBn: '৭ নং ওয়ার্ড — পাঁচমাথা একাংশ ও বড়খাটামারী উত্তর',
+    titleEn: 'Ward 7 — Panchmatha Sector & Boro Khatamari North',
+    areasBn: ['পাঁচমাথা একাংশ', 'বড়খাটামারী উত্তর'],
+    areasEn: ['Panchmatha Sector', 'Boro Khatamari North'],
+    summaryBn: 'পাঁচমাথা একাংশ, বড়খাটামারী উত্তর।',
+    summaryEn: 'Panchmatha Sector, Boro Khatamari North.',
+    keyLandmarksBn: 'উত্তর বড়খাটামারী সীমান্ত লাগোয়া অঞ্চল ও গ্রামীণ নজরদারি পয়েন্ট',
+    keyLandmarksEn: 'North Boro Khatamari Border Belt & Grassroots Vigilance Outpost',
+    volunteerCountEstimate: '৭+ নিবন্ধিত ভলান্টিয়ার',
+    coverageBadgeBn: 'উত্তর সীমান্ত সংলগ্ন পল্লী এলাকা',
+    coverageBadgeEn: 'Northern Border Rural Sector'
+  },
+  {
+    id: 'ward-8',
+    wardNo: 8,
+    wardNoBn: '৮ নং ওয়ার্ড',
+    wardNoEn: 'Ward No. 8',
+    titleBn: '৮ নং ওয়ার্ড — শিংঝাড় ক্যাম্পের বাজার ও শিংঝাড় বকনির পাড়',
+    titleEn: 'Ward 8 — Shingjhar Camp Bazaar & Boknir Par',
+    areasBn: ['শিংঝাড় ক্যাম্পের বাজার', 'শিংঝাড় বকনির পাড়'],
+    areasEn: ['Shingjhar Camp Bazaar', 'Shingjhar Boknir Par'],
+    summaryBn: 'শিংঝাড় ক্যাম্পের বাজার, শিংঝাড় বকনির পাড়।',
+    summaryEn: 'Shingjhar Camp Bazaar, Shingjhar Boknir Par.',
+    keyLandmarksBn: 'শিংঝাড় ক্যাম্পের বাজার, বর্ডার গার্ড ক্যাম্প এলাকা ও বকনির পাড় গ্রামীণ অঞ্চল',
+    keyLandmarksEn: 'Shingjhar Camp Bazaar, Border Guard Outpost Area & Boknir Par Village',
+    volunteerCountEstimate: '১০+ নিবন্ধিত ভলান্টিয়ার',
+    coverageBadgeBn: 'ক্যাম্প বাজার ও বর্ডার ক্যাম্প এলাকা',
+    coverageBadgeEn: 'Camp Bazaar & Border Corridor'
+  },
+  {
+    id: 'ward-9',
+    wardNo: 9,
+    wardNoBn: '৯ নং ওয়ার্ড',
+    wardNoEn: 'Ward No. 9',
+    titleBn: '৯ নং ওয়ার্ড — পাঁচমাথা মোড় একাংশ ও বল্লার ভিটা',
+    titleEn: 'Ward 9 — Panchmatha Sector & Bollar Vita',
+    areasBn: ['পাঁচমাথা মোড় একাংশ', 'বল্লার ভিটা'],
+    areasEn: ['Panchmatha Sector', 'Bollar Vita'],
+    summaryBn: 'পাঁচমাথা মোড় একাংশ, বল্লার ভিটা।',
+    summaryEn: 'Panchmatha Sector, Bollar Vita.',
+    keyLandmarksBn: 'বল্লার ভিটা পল্লি অঞ্চল, পাঁচমাথা মোড় একাংশ ও দক্ষিণ-পশ্চিম সীমান্ত প্রান্তর',
+    keyLandmarksEn: 'Bollar Vita Rural Belt, Panchmatha Sector & South-Western Border Boundary',
+    volunteerCountEstimate: '৮+ নিবন্ধিত ভলান্টিয়ার',
+    coverageBadgeBn: 'বল্লার ভিটা ও প্রান্তিক সীমান্ত জনপদ',
+    coverageBadgeEn: 'Bollar Vita & Frontier Community'
+  }
+];
+
+
+

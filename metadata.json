@@ -1,0 +1,6 @@
+{
+  "name": "জয়মনিরহাট ইউনিয়ন যুব সংগঠন - JUYO",
+  "description": "জয়মনিরহাট ইউনিয়ন যুব সংগঠন (JUYO) - অরাজনৈতিক স্বেচ্ছাসেবী সামাজিক সংগঠন। যুব উন্নয়ন অধিদপ্তর রেজি: যু.উ.অ/কুড়ি-৮৮/২০২৩, অষ্টমীর ঘাট, জয়মনিরহাট, ভূরুঙ্গামারী, কুড়িগ্রাম।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
