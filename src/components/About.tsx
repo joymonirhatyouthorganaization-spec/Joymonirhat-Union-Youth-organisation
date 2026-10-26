@@ -1,5 +1,5 @@
-import React from 'react';
-import { ShieldCheck, Target, Eye, Users, Award, MapPin, CheckCircle2, Quote, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import { ShieldCheck, Target, Eye, Users, Award, MapPin, CheckCircle2, Quote, Sparkles, ZoomIn, X, FileText } from 'lucide-react';
 import { ORG_DETAILS, COMMITTEE_MEMBERS } from '../data/organizationData';
 import { Language } from '../types';
 
@@ -8,6 +8,7 @@ interface AboutProps {
 }
 
 export const About: React.FC<AboutProps> = ({ language }) => {
+  const [previewImage, setPreviewImage] = useState<{ src: string; title: string; subtitle: string } | null>(null);
   const objectives = [
     {
       titleBn: 'দক্ষ ও দায়িত্বশীল নাগরিক গঠন',
@@ -259,6 +260,67 @@ export const About: React.FC<AboutProps> = ({ language }) => {
                     {language === 'bn' ? ORG_DETAILS.addressBn : ORG_DETAILS.addressEn}
                   </div>
                 </div>
+
+                {/* Certificate & Office Sign Visual Dossier */}
+                <div className="pt-2 grid grid-cols-2 gap-2.5">
+                  {/* Registration Certificate Thumbnail */}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setPreviewImage({
+                        src: ORG_DETAILS.registrationCertUrl,
+                        title: language === 'bn' ? 'গণপ্রজাতন্ত্রী বাংলাদেশ সরকার অনুমোদিত নিবন্ধন সনদ' : 'Official Government Registration Certificate',
+                        subtitle: language === 'bn' ? `রেজিস্ট্রেশন নম্বর: ${ORG_DETAILS.regNumberBn} · যুব উন্নয়ন অধিদপ্তর, কুড়িগ্রাম` : `Reg No: ${ORG_DETAILS.regNumberEn} · DYD Kurigram`,
+                      })
+                    }
+                    className="group relative rounded-xl overflow-hidden border border-amber-300/40 bg-blue-900/60 p-1.5 hover:border-amber-400 transition-all text-left cursor-pointer"
+                  >
+                    <div className="aspect-[4/3] rounded-lg overflow-hidden bg-slate-900 relative">
+                      <img
+                        src={ORG_DETAILS.registrationCertUrl}
+                        alt="Registration Certificate"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-blue-950/40 group-hover:bg-blue-950/20 flex items-center justify-center transition-colors">
+                        <ZoomIn className="w-5 h-5 text-amber-300 drop-shadow-md group-hover:scale-110 transition-transform" />
+                      </div>
+                    </div>
+                    <div className="mt-1.5 flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-amber-300 truncate">
+                        {language === 'bn' ? '📜 নিবন্ধন সনদ দেখুন' : '📜 View Certificate'}
+                      </span>
+                    </div>
+                  </button>
+
+                  {/* Office Signpost Thumbnail */}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setPreviewImage({
+                        src: ORG_DETAILS.officeSignUrl,
+                        title: language === 'bn' ? 'অষ্টমীর ঘাট প্রধান কার্যালয়ের আনুষ্ঠানিক সাইনবোর্ড' : 'Official Headquarters Signpost at Ashtamir Ghat',
+                        subtitle: language === 'bn' ? 'জয়মনিরহাট ইউনিয়ন যুব সংগঠন · স্থাপিত: ২১ ডিসেম্বর ২০২১' : 'Joymonirhat Union Youth Organization · Estd: Dec 21, 2021',
+                      })
+                    }
+                    className="group relative rounded-xl overflow-hidden border border-blue-400/40 bg-blue-900/60 p-1.5 hover:border-blue-300 transition-all text-left cursor-pointer"
+                  >
+                    <div className="aspect-[4/3] rounded-lg overflow-hidden bg-slate-900 relative">
+                      <img
+                        src={ORG_DETAILS.officeSignUrl}
+                        alt="Headquarters Signpost"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-blue-950/40 group-hover:bg-blue-950/20 flex items-center justify-center transition-colors">
+                        <ZoomIn className="w-5 h-5 text-blue-200 drop-shadow-md group-hover:scale-110 transition-transform" />
+                      </div>
+                    </div>
+                    <div className="mt-1.5 flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-blue-200 truncate">
+                        {language === 'bn' ? '🏢 কার্যালয় সাইনবোর্ড' : '🏢 Office Sign'}
+                      </span>
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -341,6 +403,57 @@ export const About: React.FC<AboutProps> = ({ language }) => {
           </div>
         </div>
       </div>
+
+      {/* Full Preview Lightbox Modal for Certificate & Signpost */}
+      {previewImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setPreviewImage(null)}
+        >
+          <div
+            className="bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between p-4 border-b border-slate-800 bg-slate-950">
+              <div className="min-w-0 pr-4">
+                <h4 className="text-base sm:text-lg font-bold text-white truncate">
+                  {previewImage.title}
+                </h4>
+                <p className="text-xs text-amber-300 font-mono truncate mt-0.5">
+                  {previewImage.subtitle}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setPreviewImage(null)}
+                className="p-2 text-stone-400 hover:text-white hover:bg-slate-800 rounded-full transition-colors cursor-pointer shrink-0"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-3 sm:p-5 flex-1 overflow-auto flex items-center justify-center bg-black/60">
+              <img
+                src={previewImage.src}
+                alt={previewImage.title}
+                className="max-w-full max-h-[72vh] object-contain rounded-lg shadow-lg"
+              />
+            </div>
+
+            <div className="p-3.5 border-t border-slate-800 bg-slate-950 flex items-center justify-between text-xs text-stone-400">
+              <span>{language === 'bn' ? 'বাস্তব সরকারি সনদ ও প্রাতিষ্ঠানিক প্রমাণ' : 'Official statutory verification document'}</span>
+              <button
+                type="button"
+                onClick={() => setPreviewImage(null)}
+                className="px-4 py-1.5 bg-blue-900 hover:bg-blue-800 text-white rounded-lg font-semibold transition-colors cursor-pointer"
+              >
+                {language === 'bn' ? 'বন্ধ করুন' : 'Close'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

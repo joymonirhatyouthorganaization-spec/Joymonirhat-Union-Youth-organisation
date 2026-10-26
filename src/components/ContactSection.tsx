@@ -10,10 +10,13 @@ import {
   Clock, 
   ShieldCheck, 
   CheckCircle2,
-  Droplet
+  Droplet,
+  Loader2,
+  AlertTriangle
 } from 'lucide-react';
 import { ORG_DETAILS, FAQS } from '../data/organizationData';
 import { Language } from '../types';
+import { sendBloodRequestNotification, sendGeneralContactNotification } from '../services/notificationService';
 
 interface ContactSectionProps {
   language: Language;
@@ -21,31 +24,70 @@ interface ContactSectionProps {
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ language }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [activeFormTab, setActiveFormTab] = useState<'blood' | 'general'>('blood');
+
+  // Blood Request State
+  const [patientName, setPatientName] = useState('');
+  const [bloodGroup, setBloodGroup] = useState('O+');
+  const [bagsCount, setBagsCount] = useState('১');
+  const [hospitalName, setHospitalName] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [urgencyTime, setUrgencyTime] = useState('জরুরি (আজই প্রয়োজন)');
+  const [notes, setNotes] = useState('');
+
+  // General Contact State
   const [senderName, setSenderName] = useState('');
   const [senderContact, setSenderContact] = useState('');
   const [subject, setSubject] = useState('সাধারণ অনুসন্ধান');
   const [message, setMessage] = useState('');
-  const [sentSuccess, setSentSuccess] = useState(false);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [sentSuccessType, setSentSuccessType] = useState<'blood' | 'general' | null>(null);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleBloodSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!patientName || !contactNumber || !hospitalName) return;
+
+    setIsSubmitting(true);
+    await sendBloodRequestNotification({
+      patientName,
+      bloodGroup,
+      bagsCount,
+      hospitalName,
+      contactNumber,
+      urgencyTime,
+      notes,
+    });
+
+    setIsSubmitting(false);
+    setSentSuccessType('blood');
+    setPatientName('');
+    setHospitalName('');
+    setContactNumber('');
+    setNotes('');
+  };
+
+  const handleGeneralSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!senderName || !senderContact || !message) return;
 
-    // Direct WhatsApp dispatch option
-    const queryText = encodeURIComponent(
-      `*ওয়েবসাইট বার্তা / অনুসন্ধান*\nনাম: ${senderName}\nযোগাযোগ: ${senderContact}\nবিষয়: ${subject}\nবার্তা: ${message}`
-    );
-    window.open(`https://wa.me/8801705929049?text=${queryText}`, '_blank');
+    setIsSubmitting(true);
+    await sendGeneralContactNotification({
+      senderName,
+      senderContact,
+      subject,
+      message,
+    });
 
-    setSentSuccess(true);
+    setIsSubmitting(false);
+    setSentSuccessType('general');
     setSenderName('');
     setSenderContact('');
     setMessage('');
-    setTimeout(() => setSentSuccess(false), 5000);
   };
 
   return (
@@ -210,105 +252,322 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ language }) => {
 
           {/* Right Column: Direct Message / Blood Inquiry Form */}
           <div className="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm">
-            <h3 className="text-xl font-bold text-slate-900 mb-2">
-              {language === 'bn' ? 'বার্তা অথবা রক্তের অনুরোধ পাঠান' : 'Send Message or Blood Request'}
-            </h3>
-            <p className="text-xs sm:text-sm text-stone-600 mb-6">
-              {language === 'bn'
-                ? 'ফর্মটি পূরণ করলেই আমাদের হটলাইন এবং সংশ্লিষ্ট ওয়ার্ডের স্বেচ্ছাসেবী সমন্বয়কের কাছে বার্তা পৌঁছে যাবে।'
-                : 'Fill out the form below to reach our local volunteers or urgent blood matching squad.'}
-            </p>
+            {/* Form Mode Selector Tabs */}
+            <div className="flex items-center gap-2 p-1 bg-stone-100 rounded-xl mb-6">
+              <button
+                type="button"
+                onClick={() => setActiveFormTab('blood')}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                  activeFormTab === 'blood'
+                    ? 'bg-rose-600 text-white shadow-xs'
+                    : 'text-stone-700 hover:text-rose-700 hover:bg-stone-200/60'
+                }`}
+              >
+                <Droplet className={`w-4 h-4 ${activeFormTab === 'blood' ? 'text-white' : 'text-rose-500'}`} />
+                <span>{language === 'bn' ? 'জরুরি রক্তের আবেদন' : 'Urgent Blood Request'}</span>
+              </button>
 
-            {sentSuccess && (
-              <div className="mb-4 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>
-                  {language === 'bn'
-                    ? 'আপনার বার্তাটি সফলভাবে প্রেরণ করা হয়েছে। ধন্যবাদ!'
-                    : 'Your message has been initiated. Thank you!'}
-                </span>
+              <button
+                type="button"
+                onClick={() => setActiveFormTab('general')}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                  activeFormTab === 'general'
+                    ? 'bg-blue-900 text-white shadow-xs'
+                    : 'text-stone-700 hover:text-blue-950 hover:bg-stone-200/60'
+                }`}
+              >
+                <Mail className={`w-4 h-4 ${activeFormTab === 'general' ? 'text-white' : 'text-blue-600'}`} />
+                <span>{language === 'bn' ? 'সাধারণ জিজ্ঞাসা ও বার্তা' : 'General Inquiry'}</span>
+              </button>
+            </div>
+
+            {/* Success notification banner */}
+            {sentSuccessType && (
+              <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 space-y-2">
+                <div className="flex items-center gap-2 font-bold text-emerald-900">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <span>
+                    {sentSuccessType === 'blood'
+                      ? (language === 'bn' ? 'রক্তের আবেদন সফলভাবে গৃহীত হয়েছে!' : 'Blood request received successfully!')
+                      : (language === 'bn' ? 'বার্তা সফলভাবে প্রেরিত হয়েছে!' : 'Message dispatched successfully!')}
+                  </span>
+                </div>
+                <p className="text-xs text-emerald-800 leading-relaxed font-medium">
+                  {language === 'bn' ? (
+                    <>
+                      ✅ আপনার আবেদনটি সরাসরি সংগঠনের অফিশিয়াল ইমেইল (<strong>{ORG_DETAILS.email}</strong>) এবং হোয়াটসঅ্যাপ নম্বরে (<strong>{ORG_DETAILS.whatsapp}</strong>) স্বয়ংক্রিয়ভাবে চলে এসেছে। আপনাকে অতিরিক্ত কোনো বাটনে চাপ দিতে হবে না। আমাদের টিম দ্রুত আপনার সাথে যোগাযোগ করছে।
+                    </>
+                  ) : (
+                    <>
+                      ✅ Dispatched automatically to official email (<strong>{ORG_DETAILS.email}</strong>) and WhatsApp (<strong>{ORG_DETAILS.whatsapp}</strong>). No extra clicks needed.
+                    </>
+                  )}
+                </p>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-800 mb-1">
-                    {language === 'bn' ? 'আপনার নাম *' : 'Your Name *'}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={senderName}
-                    onChange={(e) => setSenderName(e.target.value)}
-                    placeholder={language === 'bn' ? 'নাম লিখুন' : 'Enter name'}
-                    className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
-                  />
+            {/* TAB 1: Blood Request Form */}
+            {activeFormTab === 'blood' ? (
+              <div>
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+                    {language === 'bn' ? 'জরুরি রক্তের চাহিদা ফর্ম' : 'Emergency Blood Squad Request Form'}
+                  </h3>
+                  <p className="text-xs text-stone-600 mt-1">
+                    {language === 'bn'
+                      ? 'ফর্মটি সাবমিট করলেই তথ্য সরাসরি সংগঠনের ইমেইল এবং হটলাইন হোয়াটসঅ্যাপে চলে যাবে।'
+                      : 'Submitting automatically dispatches to email and WhatsApp squad.'}
+                  </p>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-800 mb-1">
-                    {language === 'bn' ? 'মোবাইল / হোয়াটসঅ্যাপ নম্বর *' : 'Phone / WhatsApp *'}
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={senderContact}
-                    onChange={(e) => setSenderContact(e.target.value)}
-                    placeholder="01XXXXXXXXX"
-                    className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
-                  />
+                <form onSubmit={handleBloodSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Patient Name */}
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-800 mb-1">
+                        {language === 'bn' ? 'রোগীর নাম *' : 'Patient Name *'}
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={patientName}
+                        onChange={(e) => setPatientName(e.target.value)}
+                        placeholder={language === 'bn' ? 'উদা: মো: রফিকুল ইসলাম' : 'e.g. Md. Rafiqul Islam'}
+                        className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      />
+                    </div>
+
+                    {/* Blood Group */}
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-800 mb-1">
+                        {language === 'bn' ? 'প্রয়োজনীয় রক্তের গ্রুপ *' : 'Blood Group Needed *'}
+                      </label>
+                      <select
+                        value={bloodGroup}
+                        onChange={(e) => setBloodGroup(e.target.value)}
+                        className="w-full px-3.5 py-2 text-xs sm:text-sm font-bold text-rose-700 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      >
+                        {['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map((bg) => (
+                          <option key={bg} value={bg}>
+                            {bg}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Quantity */}
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-800 mb-1">
+                        {language === 'bn' ? 'রক্তের পরিমাণ (ব্যাগ) *' : 'Units / Bags Needed *'}
+                      </label>
+                      <select
+                        value={bagsCount}
+                        onChange={(e) => setBagsCount(e.target.value)}
+                        className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      >
+                        <option value="১">১ ব্যাগ</option>
+                        <option value="২">২ ব্যাগ</option>
+                        <option value="৩">৩ ব্যাগ</option>
+                        <option value="৪">৪ ব্যাগ</option>
+                        <option value="৫+">৫+ ব্যাগ (জরুরি প্রয়োজন)</option>
+                      </select>
+                    </div>
+
+                    {/* Urgency */}
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-800 mb-1">
+                        {language === 'bn' ? 'কখন প্রয়োজন? *' : 'When is it Required? *'}
+                      </label>
+                      <select
+                        value={urgencyTime}
+                        onChange={(e) => setUrgencyTime(e.target.value)}
+                        className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      >
+                        <option value="জরুরি এখনই (অতি জরুরি)">জরুরি এখনই (অতি জরুরি)</option>
+                        <option value="আজ বিকেল/সন্ধ্যার মধ্যে">আজ বিকেল/সন্ধ্যার মধ্যে</option>
+                        <option value="আজ রাতের মধ্যে">আজ রাতের মধ্যে</option>
+                        <option value="আগামীকাল সকালে">আগামীকাল সকালে</option>
+                        <option value="আগামী ২৪ ঘণ্টার মধ্যে">আগামী ২৪ ঘণ্টার মধ্যে</option>
+                        <option value="পরবর্তী নির্দিষ্ট তারিখে">পরবর্তী নির্দিষ্ট তারিখে</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Hospital Name & Address */}
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-800 mb-1">
+                        {language === 'bn' ? 'হাসপাতালের নাম ও এলাকা *' : 'Hospital & Ward/Location *'}
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={hospitalName}
+                        onChange={(e) => setHospitalName(e.target.value)}
+                        placeholder={language === 'bn' ? 'উদা: ভূরুঙ্গামারী স্বাস্থ্য কমপ্লেক্স / কুড়িগ্রাম সদর' : 'Hospital name & city'}
+                        className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      />
+                    </div>
+
+                    {/* Contact Number */}
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-800 mb-1">
+                        {language === 'bn' ? 'যোগাযোগের মোবাইল / হোয়াটসঅ্যাপ নম্বর *' : 'Contact Mobile / WhatsApp *'}
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={contactNumber}
+                        onChange={(e) => setContactNumber(e.target.value)}
+                        placeholder="017XXXXXXXX"
+                        className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Notes / Patient Condition */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-800 mb-1">
+                      {language === 'bn' ? 'রোগীর সমস্যা বা অতিরিক্ত নির্দেশনা (ঐচ্ছিক)' : 'Patient Condition / Additional Remarks'}
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                      placeholder={language === 'bn' ? 'উদা: সিজারিয়ান অপারেশন / দুর্ঘটনা / হিমোগ্লোবিন কমে গেছে...' : 'Write brief remarks...'}
+                      className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+                    <span className="text-[11px] text-stone-500 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                      {language === 'bn' ? 'স্বয়ংক্রিয়ভাবে ইমেইল ও হোয়াটসঅ্যাপে পৌঁছাবে' : 'Dispatches directly to Email & WhatsApp'}
+                    </span>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 text-xs sm:text-sm font-semibold text-white bg-rose-600 hover:bg-rose-700 disabled:opacity-75 rounded-lg shadow-sm transition-all cursor-pointer"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin text-white" />
+                          <span>{language === 'bn' ? 'পাঠানো হচ্ছে...' : 'Sending...'}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Droplet className="w-4 h-4 fill-white text-white" />
+                          <span>{language === 'bn' ? 'রক্তের আবেদন পাঠান' : 'Submit Blood Request'}</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            ) : (
+              /* TAB 2: General Inquiry Form */
+              <div>
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-slate-900">
+                    {language === 'bn' ? 'সাধারণ বার্তা অথবা পরামর্শ' : 'Send General Inquiry'}
+                  </h3>
+                  <p className="text-xs text-stone-600 mt-1">
+                    {language === 'bn'
+                      ? 'সংগঠন বিষয়ক যেকোনো প্রশ্ন, সামাজিক অভিযোগ বা পরামর্শের বার্তা প্রেরণ করুন।'
+                      : 'Send organizational inquiries, community feedback, or collaboration proposals.'}
+                  </p>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-800 mb-1">
-                  {language === 'bn' ? 'বার্তার বিষয়' : 'Subject of Inquiry'}
-                </label>
-                <select
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
-                >
-                  <option value="জরুরি রক্তের প্রয়োজন">{language === 'bn' ? 'জরুরি রক্তের প্রয়োজন (Urgent Blood Request)' : 'Urgent Blood Request'}</option>
-                  <option value="সাধারণ অনুসন্ধান">{language === 'bn' ? 'সাধারণ অনুসন্ধান (General Inquiry)' : 'General Inquiry'}</option>
-                  <option value="ত্রাণ ও সহায়তা আবেদন">{language === 'bn' ? 'ত্রাণ ও সহায়তা আবেদন (Relief / Welfare Aid)' : 'Relief Aid Request'}</option>
-                  <option value="বৃক্ষরোপণ কর্মসূচি">{language === 'bn' ? 'বৃক্ষরোপণ কর্মসূচি সংক্রান্ত (Tree Plantation Drive)' : 'Tree Plantation'}</option>
-                  <option value="মাদক ও সামাজিক অভিযোগ">{language === 'bn' ? 'মাদক ও সামাজিক অভিযোগ (Social Grievance)' : 'Social Grievance'}</option>
-                </select>
-              </div>
+                <form onSubmit={handleGeneralSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-800 mb-1">
+                        {language === 'bn' ? 'আপনার নাম *' : 'Your Name *'}
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={senderName}
+                        onChange={(e) => setSenderName(e.target.value)}
+                        placeholder={language === 'bn' ? 'নাম লিখুন' : 'Enter name'}
+                        className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
+                      />
+                    </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-800 mb-1">
-                  {language === 'bn' ? 'বিস্তারিত বার্তা বা বিবরণ *' : 'Message or Details *'}
-                </label>
-                <textarea
-                  rows={4}
-                  required
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder={
-                    language === 'bn'
-                      ? 'রোগীর বিস্তারিত বা আপনার বার্তা এখানে লিখুন...'
-                      : 'Write patient details or inquiry here...'
-                  }
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
-                />
-              </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-800 mb-1">
+                        {language === 'bn' ? 'মোবাইল / হোয়াটসঅ্যাপ নম্বর *' : 'Phone / WhatsApp *'}
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={senderContact}
+                        onChange={(e) => setSenderContact(e.target.value)}
+                        placeholder="01XXXXXXXXX"
+                        className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
+                      />
+                    </div>
+                  </div>
 
-              <div className="flex items-center justify-between pt-2">
-                <span className="text-xs text-stone-500">
-                  {language === 'bn' ? 'বার্তা সরাসরি হোয়াটসঅ্যাপে প্রেরিত হবে' : 'Dispatches directly to WhatsApp'}
-                </span>
-                <button
-                  type="submit"
-                  className="flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-blue-900 hover:bg-blue-800 rounded-lg shadow-sm transition-all cursor-pointer"
-                >
-                  <Send className="w-4 h-4 text-amber-300" />
-                  <span>{language === 'bn' ? 'বার্তা প্রেরণ করুন' : 'Send Message'}</span>
-                </button>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-800 mb-1">
+                      {language === 'bn' ? 'বার্তার বিষয়' : 'Subject of Inquiry'}
+                    </label>
+                    <select
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
+                      className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
+                    >
+                      <option value="সাধারণ অনুসন্ধান">{language === 'bn' ? 'সাধারণ অনুসন্ধান (General Inquiry)' : 'General Inquiry'}</option>
+                      <option value="ত্রাণ ও সহায়তা আবেদন">{language === 'bn' ? 'ত্রাণ ও সহায়তা আবেদন (Relief / Welfare Aid)' : 'Relief Aid Request'}</option>
+                      <option value="বৃক্ষরোপণ কর্মসূচি">{language === 'bn' ? 'বৃক্ষরোপণ কর্মসূচি সংক্রান্ত (Tree Plantation Drive)' : 'Tree Plantation'}</option>
+                      <option value="মাদক ও সামাজিক অভিযোগ">{language === 'bn' ? 'মাদক ও সামাজিক অভিযোগ (Social Grievance)' : 'Social Grievance'}</option>
+                      <option value="অন্যান্য পরামর্শ">{language === 'bn' ? 'অন্যান্য পরামর্শ বা প্রস্তাব' : 'Other Suggestion'}</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-800 mb-1">
+                      {language === 'bn' ? 'বিস্তারিত বার্তা বা বিবরণ *' : 'Message or Details *'}
+                    </label>
+                    <textarea
+                      rows={3}
+                      required
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder={language === 'bn' ? 'আপনার বার্তা বিস্তারিত লিখুন...' : 'Write message details...'}
+                      className="w-full px-3.5 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+                    <span className="text-[11px] text-stone-500">
+                      {language === 'bn' ? 'সরাসরি ইমেইল ও হোয়াটসঅ্যাপে পাঠানো হবে' : 'Dispatches directly to Email & WhatsApp'}
+                    </span>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-blue-900 hover:bg-blue-800 disabled:opacity-75 rounded-lg shadow-sm transition-all cursor-pointer"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin text-amber-300" />
+                          <span>{language === 'bn' ? 'প্রেরণ করা হচ্ছে...' : 'Sending...'}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 text-amber-300" />
+                          <span>{language === 'bn' ? 'বার্তা প্রেরণ করুন' : 'Send Message'}</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
               </div>
-            </form>
+            )}
           </div>
         </div>
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { X, HeartHandshake, CheckCircle, Send, MessageCircle, AlertCircle } from 'lucide-react';
+import { X, HeartHandshake, CheckCircle, Send, MessageCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { ORG_DETAILS } from '../data/organizationData';
 import { Language, VolunteerFormData } from '../types';
+import { sendVolunteerNotification } from '../services/notificationService';
 
 interface VolunteerModalProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ export const VolunteerModal: React.FC<VolunteerModalProps> = ({
     message: '',
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [appId, setAppId] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -54,7 +56,6 @@ export const VolunteerModal: React.FC<VolunteerModalProps> = ({
     'অন্যান্য গ্রাম / প্রবাসী শুভাকাঙ্ক্ষী',
   ];
 
-
   const interestOptions = [
     { id: 'env', labelBn: 'বৃক্ষরোপণ ও পরিবেশ রক্ষা', labelEn: 'Tree Plantation & Green Drives' },
     { id: 'blood', labelBn: 'জরুরি রক্তদান ও স্কোয়াড', labelEn: 'Emergency Blood Squad' },
@@ -78,7 +79,7 @@ export const VolunteerModal: React.FC<VolunteerModalProps> = ({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName.trim() || !formData.mobile.trim()) {
       setErrorMsg(
@@ -89,10 +90,11 @@ export const VolunteerModal: React.FC<VolunteerModalProps> = ({
       return;
     }
 
+    setIsSubmitting(true);
     const generatedId = `JUYO-VOL-${Math.floor(1000 + Math.random() * 9000)}`;
     setAppId(generatedId);
 
-    // Save to localStorage for demo persistence
+    // Save to localStorage for persistence
     try {
       const existing = JSON.parse(localStorage.getItem('juyo_volunteers') || '[]');
       existing.push({
@@ -105,13 +107,27 @@ export const VolunteerModal: React.FC<VolunteerModalProps> = ({
       // ignore
     }
 
+    // Automatically dispatch both Email and WhatsApp without extra steps
+    await sendVolunteerNotification({
+      appId: generatedId,
+      fullName: formData.fullName,
+      mobile: formData.mobile,
+      email: formData.email,
+      bloodGroup: formData.bloodGroup,
+      village: formData.village,
+      occupation: formData.occupation,
+      interests: formData.interests,
+      message: formData.message,
+    });
+
+    setIsSubmitting(false);
     setErrorMsg('');
     setSubmitted(true);
   };
 
-  const sendWhatsAppNotification = () => {
+  const reOpenWhatsApp = () => {
     const text = encodeURIComponent(
-      `*নতুন স্বেচ্ছাসেবক নিবন্ধন (${appId})*\n` +
+      `*স্বেচ্ছাসেবক নিবন্ধন (${appId})*\n` +
       `নাম: ${formData.fullName}\n` +
       `মোবাইল: ${formData.mobile}\n` +
       `রক্তের গ্রুপ: ${formData.bloodGroup}\n` +
@@ -119,7 +135,7 @@ export const VolunteerModal: React.FC<VolunteerModalProps> = ({
       `আগ্রহ: ${formData.interests.join(', ')}\n` +
       `বার্তা: ${formData.message || 'সেবায় অংশ নিতে আগ্রহী'}`
     );
-    window.open(`https://wa.me/8801705929049?text=${text}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=8801705929049&text=${text}`, '_blank');
   };
 
   return (
@@ -327,16 +343,26 @@ export const VolunteerModal: React.FC<VolunteerModalProps> = ({
                 </button>
                 <button
                   type="submit"
-                  className="flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-blue-900 hover:bg-blue-800 rounded-lg shadow-sm transition-all cursor-pointer"
+                  disabled={isSubmitting}
+                  className="flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-blue-900 hover:bg-blue-800 disabled:opacity-75 rounded-lg shadow-sm transition-all cursor-pointer"
                 >
-                  <Send className="w-4 h-4 text-amber-300" />
-                  <span>{language === 'bn' ? 'আবেদন জমা দিন' : 'Submit Application'}</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-amber-300" />
+                      <span>{language === 'bn' ? 'স্বয়ংক্রিয়ভাবে পাঠানো হচ্ছে...' : 'Submitting automatically...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 text-amber-300" />
+                      <span>{language === 'bn' ? 'আবেদন জমা দিন' : 'Submit Application'}</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
           </div>
         ) : (
-          <div className="py-8 text-center space-y-4">
+          <div className="py-6 text-center space-y-4">
             <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center">
               <CheckCircle className="w-10 h-10" />
             </div>
@@ -345,30 +371,41 @@ export const VolunteerModal: React.FC<VolunteerModalProps> = ({
               {language === 'bn' ? 'আবেদন সফলভাবে গৃহীত হয়েছে!' : 'Application Successfully Received!'}
             </h3>
 
+            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl max-w-lg mx-auto text-xs text-emerald-950 font-medium leading-relaxed">
+              {language === 'bn' ? (
+                <span>
+                  ✅ আপনার আবেদনটি সংগঠনের অফিসিয়াল ইমেইল (<strong>{ORG_DETAILS.email}</strong>) এবং হোয়াটসঅ্যাপ নম্বরে (<strong>{ORG_DETAILS.whatsapp}</strong>) সরাসরি পৌঁছে গেছে। আপনাকে আর কোনো অতিরিক্ত বাটনে চাপ দিতে হবে না।
+                </span>
+              ) : (
+                <span>
+                  ✅ Your application has been dispatched directly to official email (<strong>{ORG_DETAILS.email}</strong>) and WhatsApp. No extra steps needed.
+                </span>
+              )}
+            </div>
+
             <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
               {language === 'bn' ? (
                 <>
                   অভিনন্দন, <strong>{formData.fullName}</strong>! জয়মনিরহাট ইউনিয়ন যুব সংগঠনে আপনার নিবন্ধন নম্বর:{' '}
-                  <span className="font-mono font-bold text-blue-900">{appId}</span>। আমাদের স্বেচ্ছাসেবী পরিষদ
-                  শীঘ্রই আপনার সাথে যোগাযোগ করবে।
+                  <span className="font-mono font-bold text-blue-900">{appId}</span>। আমাদের কেন্দ্রীয় পরিষদ শীঘ্রই আপনার সাথে যোগাযোগ করবে।
                 </>
               ) : (
                 <>
                   Congratulations, <strong>{formData.fullName}</strong>! Your registration ID is{' '}
-                  <span className="font-mono font-bold text-blue-900">{appId}</span>. Our organizing wing will connect
-                  with you soon.
+                  <span className="font-mono font-bold text-blue-900">{appId}</span>. Our central coordination council will contact you shortly.
                 </>
               )}
             </p>
 
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 type="button"
-                onClick={sendWhatsAppNotification}
+                onClick={reOpenWhatsApp}
                 className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-emerald-950 bg-emerald-100 hover:bg-emerald-200 border border-emerald-300 rounded-lg transition-colors cursor-pointer"
+                title="হোয়াটসঅ্যাপ উইন্ডো বন্ধ হয়ে থাকলে পুনরায় খুলুন"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-700" />
-                <span>{language === 'bn' ? 'হোয়াটসঅ্যাপে নিশ্চিত বার্তা পাঠান' : 'Send via WhatsApp'}</span>
+                <span>{language === 'bn' ? 'হোয়াটসঅ্যাপ বার্তা দেখুন / পুনরায় খুলুন' : 'View WhatsApp Details'}</span>
               </button>
 
               <button

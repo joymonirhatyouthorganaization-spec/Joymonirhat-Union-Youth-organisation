@@ -198,6 +198,22 @@ export const FlagshipProjectSection: React.FC<FlagshipProjectSectionProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {[
               {
+                src: '/assets/aistudio/FB_IMG_1792996694451_f74cf779.jpg',
+                badgeBn: 'সাইকেল র‍্যালি',
+                badgeEn: 'Bicycle Rally',
+                titleBn: '‘না বলুন মাদককে’ — শিক্ষার্থীদের সাইকেল র‍্যালি',
+                titleEn: '“Say No to Drugs” — Students Cycle Procession',
+                descBn: 'মাদকমুক্ত সমাজ গড়ার প্রত্যয়ে জয়মনিরহাটের রাজপথে শিক্ষার্থীদের স্বতঃস্ফূর্ত সাইকেল র‍্যালি।'
+              },
+              {
+                src: '/assets/aistudio/FB_IMG_1792996701895_edec3b04.jpg',
+                badgeBn: 'সংবাদপত্র কভারেজ',
+                badgeEn: 'Press Clipping',
+                titleBn: 'নতুন সময়ে প্রকাশিত সচিত্র প্রতিবেদন',
+                titleEn: 'Notun Shomoy Press Feature',
+                descBn: 'জয়মনিরহাট মহিউদ্দিন উচ্চ বিদ্যালয় মাঠে মাদকবিরোধী সাইকেল র‍্যালি ও ক্রীড়া উৎসবের সংবাদ।'
+              },
+              {
                 src: '/assets/aistudio/FB_IMG_1792936411324_95d46bc1.jpg',
                 badgeBn: 'নাইট উঠান বৈঠক',
                 badgeEn: 'Night Assembly',

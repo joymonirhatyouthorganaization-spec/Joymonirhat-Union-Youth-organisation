@@ -90,15 +90,15 @@ export const Gallery: React.FC<GalleryProps> = ({ language }) => {
             </h2>
             <p className="mt-3 text-base text-stone-600 leading-relaxed">
               {language === 'bn'
-                ? 'জয়মনিরহাট ইউনিয়নের প্রত্যন্ত অঞ্চলে মাদক প্রতিরোধ, বাল্যবিবাহ নিরোধ, বৃক্ষরোপণ, রাস্তা মেরামত ও যুব প্রশিক্ষণে আমাদের তরুণদের সরাসরি অংশগ্রহণের ২৯টি আলোকচিত্র।'
-                : 'Photographic documentation of grassroots vigilance, road rehabilitation, adolescent girl forums, sports festivals, and government collaborations across Joymonirhat.'}
+                ? `জয়মনিরহাট ইউনিয়নের প্রত্যন্ত অঞ্চলে মাদক প্রতিরোধ, বাল্যবিবাহ নিরোধ, বৃক্ষরোপণ, রাস্তা মেরামত ও যুব প্রশিক্ষণে আমাদের তরুণদের সরাসরি অংশগ্রহণের ${GALLERY_ITEMS.length}টি বাস্তব আলোকচিত্র ও দলিল।`
+                : `Photographic documentation of grassroots vigilance, road rehabilitation, adolescent girl forums, sports festivals, and government collaborations across Joymonirhat (${GALLERY_ITEMS.length} authentic photos).`}
             </p>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-blue-950 bg-white border border-blue-200 rounded-lg shadow-2xs">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>{language === 'bn' ? '২৯টি বাস্তব চিত্র' : '29 Authentic Photos'}</span>
+              <span>{language === 'bn' ? `${GALLERY_ITEMS.length}টি বাস্তব চিত্র` : `${GALLERY_ITEMS.length} Authentic Photos`}</span>
             </span>
             <a
               href={ORG_DETAILS.facebookPageUrl}
