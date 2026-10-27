@@ -19,7 +19,7 @@ import { SocialHub } from './components/SocialHub';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { VolunteerModal } from './components/VolunteerModal';
-import { AdminPortal } from './components/AdminPortal';
+import { AdminPortal, AdminTab } from './components/AdminPortal';
 import { ORG_DETAILS } from './data/organizationData';
 import { Language } from './types';
 import { MessageCircle, HeartHandshake, UploadCloud } from 'lucide-react';
@@ -28,12 +28,20 @@ export default function App() {
   const [language, setLanguage] = useState<Language>('bn');
   const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
   const [isAdminPortalOpen, setIsAdminPortalOpen] = useState(false);
+  const [adminInitialTab, setAdminInitialTab] = useState<AdminTab>('notice');
   const [selectedWardForModal, setSelectedWardForModal] = useState<string | undefined>(undefined);
+
+  const handleOpenAdminWithTab = (tab: AdminTab = 'notice') => {
+    setAdminInitialTab(tab);
+    setIsAdminPortalOpen(true);
+  };
 
   useEffect(() => {
     // Check if user came via #admin shortcut from PWA or link
     if (window.location.hash === '#admin') {
-      setIsAdminPortalOpen(true);
+      handleOpenAdminWithTab('notice');
+    } else if (window.location.hash === '#visitors') {
+      handleOpenAdminWithTab('analytics');
     }
   }, []);
 
@@ -111,10 +119,11 @@ export default function App() {
         <ContactSection language={language} />
       </main>
 
-      {/* Footer with Discreet Admin Login Access */}
+      {/* Footer with Direct Bottom Admin Access & Visitor Counter */}
       <Footer
         language={language}
-        onOpenAdmin={() => setIsAdminPortalOpen(true)}
+        onOpenAdmin={() => handleOpenAdminWithTab('notice')}
+        onOpenAdminTab={(tab) => handleOpenAdminWithTab(tab)}
       />
 
       {/* Interactive Volunteer Registration Modal */}
@@ -133,6 +142,7 @@ export default function App() {
         isOpen={isAdminPortalOpen}
         onClose={() => setIsAdminPortalOpen(false)}
         language={language}
+        initialTab={adminInitialTab}
       />
 
       {/* Persistent Floating Quick Action Strip */}

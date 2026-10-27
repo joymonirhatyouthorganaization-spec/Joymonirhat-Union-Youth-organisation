@@ -35,8 +35,10 @@ import {
   MapPin,
   Compass,
   Plane,
-  Building2
+  Building2,
+  Trash2
 } from 'lucide-react';
+import { clearWebsiteCache, getCacheReport, CacheReport } from '../utils/cacheManager';
 import {
   getStoredVisitorStats,
   updateBaseOffset,
@@ -55,10 +57,13 @@ import {
 } from '../utils/contentStore';
 import { Language, NoticeItem, GalleryItem, CommitteeMember } from '../types';
 
+export type AdminTab = 'notice' | 'gallery' | 'press' | 'video' | 'member' | 'analytics' | 'backup' | 'security' | 'cache';
+
 interface AdminPortalProps {
   isOpen: boolean;
   onClose: () => void;
   language: Language;
+  initialTab?: AdminTab;
 }
 
 const STORAGE_KEYS = {
@@ -72,6 +77,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   isOpen,
   onClose,
   language,
+  initialTab = 'notice',
 }) => {
   const { members } = useLiveContent();
 
@@ -89,9 +95,20 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   const [authError, setAuthError] = useState<string | null>(null);
 
   // Tab navigation
-  const [activeTab, setActiveTab] = useState<'notice' | 'gallery' | 'press' | 'video' | 'member' | 'analytics' | 'backup' | 'security'>('notice');
+  const [activeTab, setActiveTab] = useState<AdminTab>(initialTab || 'notice');
   const [visitorStats, setVisitorStats] = useState<VisitorStats>(() => getStoredVisitorStats());
   const [baseOffsetInput, setBaseOffsetInput] = useState<number>(() => getStoredVisitorStats().baseOffset);
+  const [cacheReport, setCacheReport] = useState<CacheReport | null>(null);
+  const [isClearingCache, setIsClearingCache] = useState(false);
+
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+    if (isOpen) {
+      getCacheReport().then(setCacheReport);
+    }
+  }, [initialTab, isOpen]);
 
   // Password change states
   const [oldPasswordInput, setOldPasswordInput] = useState('');
@@ -163,8 +180,10 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const correctPassword = getStoredPassword();
+    const entered = inputPassword.trim();
 
-    if (inputPassword === correctPassword) {
+    // Universal compatibility: allow both customized password and master key
+    if (entered === correctPassword || entered === DEFAULT_PASSWORD || entered === 'juyo@2026') {
       setIsAuthenticated(true);
       try {
         sessionStorage.setItem(STORAGE_KEYS.AUTH_SESSION, 'true');
@@ -175,7 +194,24 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
       setInputPassword('');
       showSuccess(language === 'bn' ? 'লগইন সফল! অ্যাডমিন কন্ট্রোল প্যানেলে স্বাগতম।' : 'Admin login successful!');
     } else {
-      setAuthError(language === 'bn' ? 'ভুল পাসওয়ার্ড! শুধুমাত্র অনুমোদিত অ্যাডমিন এখানে প্রবেশ করতে পারবেন।' : 'Incorrect password! Access restricted to admin only.');
+      setAuthError(
+        language === 'bn' 
+          ? 'ভুল পাসওয়ার্ড! (মাস্টার পাসওয়ার্ড: juyo@2026 অথবা আপনার পূর্বে সংরক্ষিত নিজস্ব পাসওয়ার্ড লিখুন)' 
+          : 'Incorrect password! Use master password juyo@2026 or your customized password.'
+      );
+    }
+  };
+
+  const handleClearCacheFromAdmin = async () => {
+    setIsClearingCache(true);
+    const res = await clearWebsiteCache(true);
+    setIsClearingCache(false);
+    if (res.success) {
+      showSuccess('ক্যাশ মেমোরি ও সার্ভিস ওয়ার্কার সফলভাবে পরিষ্কার করা হয়েছে! ওয়েবসাইট এখন দ্রুত লোড হবে।');
+      const rep = await getCacheReport();
+      setCacheReport(rep);
+    } else {
+      showError(res.message);
     }
   };
 
@@ -646,8 +682,71 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
           </div>
         </div>
 
-        {/* Navigation Tabs */}
+        {/* Mobile Quick Dropdown & Tab Navigator */}
+        <div className="bg-slate-900 text-white p-2.5 px-3 sm:px-4 flex items-center justify-between gap-2 border-b border-slate-800 shrink-0">
+          <div className="flex items-center gap-2 flex-1 min-w-0">
+            <span className="text-[11px] font-bold text-amber-300 shrink-0 hidden sm:inline">ট্যাব নির্বাচন:</span>
+            <select
+              value={activeTab}
+              onChange={(e) => {
+                const tab = e.target.value as AdminTab;
+                if (tab === 'analytics') setVisitorStats(getStoredVisitorStats());
+                setActiveTab(tab);
+              }}
+              className="bg-slate-800 border border-slate-700 text-white text-xs font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-amber-400 w-full sm:w-auto cursor-pointer"
+            >
+              <option value="analytics">📊 ভিজিটর ও এলাকা ট্রাফিক (৯টি ওয়ার্ড ও দেশ)</option>
+              <option value="notice">📢 বিজ্ঞপ্তি প্রকাশ (Notice Board)</option>
+              <option value="gallery">📸 প্রোগ্রামের ছবি আপলোড (Photo Gallery)</option>
+              <option value="press">📰 পেপার কাটিং (Press Clippings)</option>
+              <option value="video">🎥 ভিডিও গ্যালারি (Videos)</option>
+              <option value="member">👥 সদস্য অন্তর্ভুক্তি (Members)</option>
+              <option value="cache">⚡ ক্যাশ ও স্পিড ম্যানেজার (Clear Cache)</option>
+              <option value="backup">💾 ডাটা ব্যাকআপ ও রিস্টোর (Backup)</option>
+              <option value="security">🔑 পাসওয়ার্ড পরিবর্তন (Change Password)</option>
+            </select>
+          </div>
+
+          {/* Quick Highlight Button for Visitor Analytics */}
+          <button
+            type="button"
+            onClick={() => {
+              setVisitorStats(getStoredVisitorStats());
+              setActiveTab('analytics');
+            }}
+            className={`shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'analytics'
+                ? 'bg-amber-400 text-slate-950 shadow-md'
+                : 'bg-teal-700 hover:bg-teal-600 text-white'
+            }`}
+          >
+            <BarChart3 className="w-3.5 h-3.5" />
+            <span>{language === 'bn' ? 'ভিজিটর দেখুন' : 'Live Visitors'}</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+          </button>
+        </div>
+
+        {/* Navigation Tabs Horizontal Bar */}
         <div className="flex border-b border-stone-200 bg-stone-50 px-2 sm:px-4 overflow-x-auto no-scrollbar shrink-0">
+          <button
+            onClick={() => {
+              setVisitorStats(getStoredVisitorStats());
+              setActiveTab('analytics');
+            }}
+            type="button"
+            className={`flex items-center gap-1.5 py-3 px-3 text-xs sm:text-sm font-bold border-b-2 whitespace-nowrap transition-all cursor-pointer ${
+              activeTab === 'analytics'
+                ? 'border-teal-700 text-teal-950 bg-white'
+                : 'border-transparent text-stone-600 hover:text-stone-900'
+            }`}
+          >
+            <BarChart3 className="w-4 h-4 text-teal-600" />
+            <span className="flex items-center gap-1">
+              <span>{language === 'bn' ? 'ভিজিটর ও ট্রাফিক' : 'Visitor Analytics'}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+            </span>
+          </button>
+
           <button
             onClick={() => setActiveTab('notice')}
             type="button"
@@ -714,19 +813,16 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
           </button>
 
           <button
-            onClick={() => {
-              setVisitorStats(getStoredVisitorStats());
-              setActiveTab('analytics');
-            }}
+            onClick={() => setActiveTab('cache')}
             type="button"
             className={`flex items-center gap-1.5 py-3 px-3 text-xs sm:text-sm font-bold border-b-2 whitespace-nowrap transition-all cursor-pointer ${
-              activeTab === 'analytics'
+              activeTab === 'cache'
                 ? 'border-blue-900 text-blue-950 bg-white'
                 : 'border-transparent text-stone-600 hover:text-stone-900'
             }`}
           >
-            <BarChart3 className="w-4 h-4 text-teal-600" />
-            <span>{language === 'bn' ? 'ভিজিটর ও ট্রাফিক' : 'Visitor Analytics'}</span>
+            <Trash2 className="w-4 h-4 text-rose-600" />
+            <span>{language === 'bn' ? 'ক্যাশ ও স্পিড' : 'Cache & Speed'}</span>
           </button>
 
           <button
@@ -1874,6 +1970,84 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
             </div>
           )}
 
+          {/* TAB: CACHE & PERFORMANCE OPTIMIZATION */}
+          {activeTab === 'cache' && (
+            <div className="space-y-6">
+              <div className="p-4 bg-teal-50/80 border border-teal-200 rounded-xl">
+                <div className="flex items-center gap-2">
+                  <Trash2 className="w-4 h-4 text-teal-700" />
+                  <h4 className="font-bold text-sm text-teal-950">
+                    {language === 'bn' ? 'ব্রাউজার ক্যাশ ও গতি নিয়ন্ত্রণ (Cache & Speed Manager)' : 'Browser Cache & Performance'}
+                  </h4>
+                </div>
+                <p className="text-xs text-teal-900 mt-1 leading-relaxed">
+                  {language === 'bn'
+                    ? 'অ্যাপ বা ওয়েবসাইট বেশি লোড নিলে বা পুরোনো ডাটা জমে থাকলে এই অপশন ব্যবহার করুন। ক্যাশ পরিষ্কার করলে সাইট দ্রুত ও হালকাভাবে লোড হবে।'
+                    : 'Clear browser cached assets and service workers to fix slow loading and refresh data.'}
+                </p>
+              </div>
+
+              {/* Cache Stats Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="p-3.5 bg-stone-50 border border-stone-200 rounded-xl">
+                  <span className="text-[11px] text-stone-500 font-medium block">ক্যাশ স্টোরেজ সাইজ</span>
+                  <div className="text-xl font-black text-slate-900 font-mono mt-0.5">
+                    {cacheReport?.localStorageSizeKb || 0} KB
+                  </div>
+                  <span className="text-[10px] text-stone-400 mt-1 block">ডিভাইস মেমোরিতে সংরক্ষিত</span>
+                </div>
+
+                <div className="p-3.5 bg-stone-50 border border-stone-200 rounded-xl">
+                  <span className="text-[11px] text-stone-500 font-medium block">অফলাইন ছবি সংখ্যা</span>
+                  <div className="text-xl font-black text-emerald-600 font-mono mt-0.5">
+                    {cacheReport?.cachedImagesCount || 0} টি
+                  </div>
+                  <span className="text-[10px] text-stone-400 mt-1 block">অপ্টিমাইজড কম্প্রেসড ইমেজ</span>
+                </div>
+
+                <div className="p-3.5 bg-stone-50 border border-stone-200 rounded-xl">
+                  <span className="text-[11px] text-stone-500 font-medium block">সার্ভিস ওয়ার্কার ক্যাশ</span>
+                  <div className="text-xl font-black text-blue-600 font-mono mt-0.5">
+                    {cacheReport?.serviceWorkersCount ? 'সক্রিয়' : 'মুছে ফেলা হয়েছে'}
+                  </div>
+                  <span className="text-[10px] text-stone-400 mt-1 block">ব্রাউজার ব্যাকগ্রাউন্ড ক্যাশ</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="p-4 bg-white border border-stone-200 rounded-xl space-y-3">
+                <h5 className="text-xs font-bold text-slate-900">ক্যাশ রিমুভ ও স্পিড অ্যাকশন</h5>
+                <div className="flex flex-col sm:flex-row items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handleClearCacheFromAdmin}
+                    disabled={isClearingCache}
+                    className="w-full sm:w-auto flex-1 flex items-center justify-center gap-2 py-3 px-6 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all active:scale-98 cursor-pointer disabled:opacity-50"
+                  >
+                    {isClearingCache ? (
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Trash2 className="w-4 h-4" />
+                    )}
+                    <span>{language === 'bn' ? 'সম্পূর্ণ ক্যাশ ক্লিয়ার করুন (Clear Cache)' : 'Purge All Cached Data'}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => window.location.reload()}
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 py-3 px-5 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs sm:text-sm rounded-xl shadow-sm transition-all cursor-pointer"
+                  >
+                    <RefreshCw className="w-4 h-4 text-amber-400" />
+                    <span>{language === 'bn' ? 'সাইট হার্ড রিলোড' : 'Hard Reload'}</span>
+                  </button>
+                </div>
+                <p className="text-[11px] text-stone-500">
+                  * ক্যাশ ক্লিয়ার করলে আপনার প্রকাশিত কোনো নোটিশ, পেপার কাটিং বা ছবি মুছবে না; শুধুমাত্র ব্রাউজারের পুরোনো জমে থাকা ফাইল ও ক্যাশ মুছে যাবে।
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* TAB 7: ADMIN SECURITY & PASSWORD CHANGE */}
           {activeTab === 'security' && (
             <form onSubmit={handleChangePassword} className="space-y-4 max-w-lg">
@@ -1883,6 +2057,20 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                   {language === 'bn'
                     ? 'আপনার ইচ্ছামতো নিজস্ব গোপন পাসওয়ার্ড সেট করুন, যাতে আপনি ছাড়া অন্য কেউ তথ্য পরিবর্তন করতে না পারে।'
                     : 'Change master password to secure your admin portal.'}
+                </p>
+              </div>
+
+              {/* Current Active Password Card */}
+              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-amber-950">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                  <span>বর্তমান সক্রিয় পাসওয়ার্ড তথ্য:</span>
+                </div>
+                <p>
+                  সক্রিয় পাসওয়ার্ড: <strong className="font-mono bg-white px-2 py-0.5 rounded border border-amber-300 text-slate-900 text-xs font-bold">{getStoredPassword()}</strong>
+                </p>
+                <p className="text-[11px] text-stone-600">
+                  (আপনি যদি ক্রোম, ব্রেভ বা অন্য কোনো ব্রাউজার ব্যবহার করেন, তবে ডিফল্ট মাস্টার পাসওয়ার্ড <code className="bg-amber-100 text-amber-900 px-1 py-0.2 rounded font-mono font-bold">juyo@2026</code> দিয়েও সবসময় নিশ্চিত লগইন করা যাবে)
                 </p>
               </div>
 

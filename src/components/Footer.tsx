@@ -3,13 +3,16 @@ import { MapPin, Mail, Phone, Heart, Shield, ArrowUp, Lock } from 'lucide-react'
 import { ORG_DETAILS } from '../data/organizationData';
 import { Language } from '../types';
 import { VisitorCounter } from './VisitorCounter';
+import { BottomAdminBar } from './BottomAdminBar';
+import { AdminTab } from './AdminPortal';
 
 interface FooterProps {
   language: Language;
   onOpenAdmin?: () => void;
+  onOpenAdminTab?: (tab: AdminTab) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ language, onOpenAdmin }) => {
+export const Footer: React.FC<FooterProps> = ({ language, onOpenAdmin, onOpenAdminTab }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -187,12 +190,26 @@ export const Footer: React.FC<FooterProps> = ({ language, onOpenAdmin }) => {
         </div>
 
         {/* Real-time Website Visitor Counter Bar */}
-        <div className="pt-8 pb-4">
+        <div className="pt-8 pb-2">
           <VisitorCounter language={language} />
         </div>
 
+        {/* Direct Bottom Admin Login, Visitor Access & Cache Control */}
+        <div className="pb-4">
+          <BottomAdminBar
+            language={language}
+            onOpenAdminTab={(tab) => {
+              if (onOpenAdminTab) {
+                onOpenAdminTab(tab);
+              } else if (onOpenAdmin) {
+                onOpenAdmin();
+              }
+            }}
+          />
+        </div>
+
         {/* Bottom Copyright & Disclaimer */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
           <p className="text-center sm:text-left">
             © {ORG_DETAILS.establishedYearEn} - 2026 {ORG_DETAILS.nameBn} (JUYO)। সর্বস্বত্ব সংরক্ষিত।
           </p>
@@ -201,17 +218,15 @@ export const Footer: React.FC<FooterProps> = ({ language, onOpenAdmin }) => {
             <span className="hidden sm:inline">
               {language === 'bn' ? 'অরাজনৈতিক ও অলাভজনক স্বেচ্ছাসেবী যুব সংগঠন' : 'Non-political & voluntary organization'}
             </span>
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                type="button"
-                className="inline-flex items-center gap-1 text-[11px] text-stone-600 hover:text-amber-400 transition-colors cursor-pointer py-1 px-1.5 rounded"
-                title="Admin Control Panel / অ্যাডমিন প্যানেল"
-              >
-                <Lock className="w-3 h-3" />
-                <span>{language === 'bn' ? 'অ্যাডমিন' : 'Admin'}</span>
-              </button>
-            )}
+            <button
+              onClick={() => onOpenAdminTab ? onOpenAdminTab('analytics') : onOpenAdmin?.()}
+              type="button"
+              className="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 font-semibold transition-colors cursor-pointer py-1.5 px-3 rounded-lg bg-slate-900 border border-slate-800"
+              title="Admin Control Panel / অ্যাডমিন প্যানেল"
+            >
+              <Lock className="w-3.5 h-3.5 text-amber-400" />
+              <span>{language === 'bn' ? 'অ্যাডমিন পোর্টাল' : 'Admin Portal'}</span>
+            </button>
             <button
               onClick={scrollToTop}
               type="button"
