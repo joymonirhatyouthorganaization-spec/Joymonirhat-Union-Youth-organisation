@@ -24,8 +24,25 @@ import {
   EyeOff,
   LogOut,
   ShieldCheck,
-  ShieldAlert
+  ShieldAlert,
+  BarChart3,
+  Smartphone,
+  Monitor,
+  Tablet,
+  Activity,
+  TrendingUp,
+  Globe,
+  MapPin,
+  Compass,
+  Plane,
+  Building2
 } from 'lucide-react';
+import {
+  getStoredVisitorStats,
+  updateBaseOffset,
+  toBanglaNumber,
+  VisitorStats
+} from '../utils/visitorTracker';
 import {
   useLiveContent,
   compressImage,
@@ -72,7 +89,9 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   const [authError, setAuthError] = useState<string | null>(null);
 
   // Tab navigation
-  const [activeTab, setActiveTab] = useState<'notice' | 'gallery' | 'press' | 'video' | 'member' | 'backup' | 'security'>('notice');
+  const [activeTab, setActiveTab] = useState<'notice' | 'gallery' | 'press' | 'video' | 'member' | 'analytics' | 'backup' | 'security'>('notice');
+  const [visitorStats, setVisitorStats] = useState<VisitorStats>(() => getStoredVisitorStats());
+  const [baseOffsetInput, setBaseOffsetInput] = useState<number>(() => getStoredVisitorStats().baseOffset);
 
   // Password change states
   const [oldPasswordInput, setOldPasswordInput] = useState('');
@@ -695,6 +714,22 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
           </button>
 
           <button
+            onClick={() => {
+              setVisitorStats(getStoredVisitorStats());
+              setActiveTab('analytics');
+            }}
+            type="button"
+            className={`flex items-center gap-1.5 py-3 px-3 text-xs sm:text-sm font-bold border-b-2 whitespace-nowrap transition-all cursor-pointer ${
+              activeTab === 'analytics'
+                ? 'border-blue-900 text-blue-950 bg-white'
+                : 'border-transparent text-stone-600 hover:text-stone-900'
+            }`}
+          >
+            <BarChart3 className="w-4 h-4 text-teal-600" />
+            <span>{language === 'bn' ? 'ভিজিটর ও ট্রাফিক' : 'Visitor Analytics'}</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('backup')}
             type="button"
             className={`flex items-center gap-1.5 py-3 px-3 text-xs sm:text-sm font-bold border-b-2 whitespace-nowrap transition-all cursor-pointer ${
@@ -1305,6 +1340,471 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 </button>
               </div>
             </form>
+          )}
+
+          {/* TAB: VISITOR ANALYTICS & TRAFFIC INSIGHTS */}
+          {activeTab === 'analytics' && (
+            <div className="space-y-6">
+              {/* Analytics Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-teal-50/80 border border-teal-200 rounded-xl">
+                <div>
+                  <h4 className="font-bold text-sm text-teal-950 flex items-center gap-2">
+                    <BarChart3 className="w-4 h-4 text-teal-700" />
+                    <span>{language === 'bn' ? 'ওয়েবসাইট ভিজিটর ও পাঠক পরিসংখ্যান' : 'Website Visitor Analytics'}</span>
+                  </h4>
+                  <p className="text-xs text-teal-800 mt-1">
+                    {language === 'bn'
+                      ? 'সংগঠনের ওয়েবসাইটের রিয়েল-টাইম পাঠক সংখ্যা, দৈনিক ভিজিটর ও ডিভাইস অ্যানালিটিক্স।'
+                      : 'Real-time visitor counts, daily readership metrics, and device breakdowns.'}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const latest = getStoredVisitorStats();
+                    setVisitorStats(latest);
+                    setBaseOffsetInput(latest.baseOffset);
+                    showSuccess(language === 'bn' ? 'ভিজিটর পরিসংখ্যান রিফ্রেশ হয়েছে!' : 'Visitor stats refreshed!');
+                  }}
+                  className="shrink-0 flex items-center justify-center gap-1.5 px-3 py-1.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold rounded-lg shadow-sm transition-all cursor-pointer"
+                >
+                  <RefreshCw className="w-3.5 h-3.5" />
+                  <span>{language === 'bn' ? 'রিফ্রেশ করুন' : 'Refresh Stats'}</span>
+                </button>
+              </div>
+
+              {/* 6 Key KPI Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {/* Total Visits */}
+                <div className="p-3.5 bg-white border border-stone-200 rounded-xl shadow-xs">
+                  <div className="flex items-center justify-between text-xs text-stone-500 mb-1">
+                    <span className="font-medium">{language === 'bn' ? 'মোট পরিদর্শন' : 'Total Visits'}</span>
+                    <Globe className="w-3.5 h-3.5 text-blue-600" />
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono">
+                    {language === 'bn' ? toBanglaNumber(visitorStats.totalVisits) : visitorStats.totalVisits.toLocaleString()}
+                  </div>
+                  <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 mt-1">
+                    <TrendingUp className="w-3 h-3" />
+                    {language === 'bn' ? 'প্রতিষ্ঠার পর থেকে মোট' : 'All-time cumulative'}
+                  </span>
+                </div>
+
+                {/* Today's Visitors */}
+                <div className="p-3.5 bg-white border border-stone-200 rounded-xl shadow-xs">
+                  <div className="flex items-center justify-between text-xs text-stone-500 mb-1">
+                    <span className="font-medium">{language === 'bn' ? 'আজকের ভিজিটর' : "Today's Visits"}</span>
+                    <Activity className="w-3.5 h-3.5 text-emerald-600" />
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-emerald-600 font-mono">
+                    {language === 'bn' ? toBanglaNumber(visitorStats.todayVisits) : visitorStats.todayVisits.toLocaleString()}
+                  </div>
+                  <span className="text-[10px] text-stone-400 mt-1 block">
+                    {language === 'bn' ? 'আজকে সক্রিয় পাঠক' : 'Active readers today'}
+                  </span>
+                </div>
+
+                {/* Live Online */}
+                <div className="p-3.5 bg-white border border-stone-200 rounded-xl shadow-xs">
+                  <div className="flex items-center justify-between text-xs text-stone-500 mb-1">
+                    <span className="font-medium">{language === 'bn' ? 'লাইভ অনলাইন' : 'Live Now'}</span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-blue-700 font-mono">
+                    {language === 'bn' ? toBanglaNumber(visitorStats.liveOnline) : visitorStats.liveOnline}
+                  </div>
+                  <span className="text-[10px] text-emerald-600 font-semibold mt-1 block">
+                    {language === 'bn' ? 'এখন ওয়েবসাইটে পড়ছেন' : 'Reading on site now'}
+                  </span>
+                </div>
+
+                {/* This Month */}
+                <div className="p-3.5 bg-white border border-stone-200 rounded-xl shadow-xs">
+                  <div className="flex items-center justify-between text-xs text-stone-500 mb-1">
+                    <span className="font-medium">{language === 'bn' ? 'চলতি মাসে' : 'This Month'}</span>
+                    <BarChart3 className="w-3.5 h-3.5 text-indigo-600" />
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-indigo-700 font-mono">
+                    {language === 'bn' ? toBanglaNumber(visitorStats.thisMonthVisits) : visitorStats.thisMonthVisits.toLocaleString()}
+                  </div>
+                  <span className="text-[10px] text-stone-400 mt-1 block">
+                    {language === 'bn' ? 'চলতি মাসের মোট পাঠক' : 'Total monthly readers'}
+                  </span>
+                </div>
+
+                {/* Unique Visitors */}
+                <div className="p-3.5 bg-white border border-stone-200 rounded-xl shadow-xs">
+                  <div className="flex items-center justify-between text-xs text-stone-500 mb-1">
+                    <span className="font-medium">{language === 'bn' ? 'অনন্য পাঠক' : 'Unique Visitors'}</span>
+                    <Users className="w-3.5 h-3.5 text-purple-600" />
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-purple-700 font-mono">
+                    {language === 'bn' ? toBanglaNumber(visitorStats.uniqueVisitors) : visitorStats.uniqueVisitors.toLocaleString()}
+                  </div>
+                  <span className="text-[10px] text-stone-400 mt-1 block">
+                    {language === 'bn' ? 'স্বতন্ত্র ডিভাইস সংখ্যা' : 'Unique devices'}
+                  </span>
+                </div>
+
+                {/* Page Views */}
+                <div className="p-3.5 bg-white border border-stone-200 rounded-xl shadow-xs">
+                  <div className="flex items-center justify-between text-xs text-stone-500 mb-1">
+                    <span className="font-medium">{language === 'bn' ? 'মোট পেজ ভিউ' : 'Total Pageviews'}</span>
+                    <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-amber-600 font-mono">
+                    {language === 'bn' ? toBanglaNumber(visitorStats.pageViews) : visitorStats.pageViews.toLocaleString()}
+                  </div>
+                  <span className="text-[10px] text-stone-400 mt-1 block">
+                    {language === 'bn' ? 'পৃষ্ঠা দর্শন সংখ্যা' : 'Total page views'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Devices & Browsers Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Device breakdown */}
+                <div className="bg-stone-50/80 p-4 rounded-xl border border-stone-200">
+                  <h5 className="text-xs font-bold text-slate-900 mb-3 flex items-center gap-2">
+                    <Smartphone className="w-4 h-4 text-blue-700" />
+                    <span>{language === 'bn' ? 'ডিভাইস অনুপাত (Device Analytics)' : 'Device Analytics'}</span>
+                  </h5>
+                  <div className="space-y-3">
+                    <div>
+                      <div className="flex justify-between text-xs text-stone-600 mb-1">
+                        <span className="flex items-center gap-1.5 font-medium">
+                          <Smartphone className="w-3.5 h-3.5 text-blue-600" />
+                          <span>{language === 'bn' ? 'স্মার্টফোন / মোবাইল' : 'Mobile / Smartphone'}</span>
+                        </span>
+                        <span className="font-bold font-mono">
+                          {language === 'bn' ? toBanglaNumber(visitorStats.devices.mobile) : visitorStats.devices.mobile}%
+                        </span>
+                      </div>
+                      <div className="w-full bg-stone-200 rounded-full h-2">
+                        <div
+                          className="bg-blue-600 h-2 rounded-full"
+                          style={{ width: `${Math.min(100, visitorStats.devices.mobile)}%` }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-xs text-stone-600 mb-1">
+                        <span className="flex items-center gap-1.5 font-medium">
+                          <Monitor className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>{language === 'bn' ? 'ডেস্কটপ / কম্পিউটার' : 'Desktop / PC'}</span>
+                        </span>
+                        <span className="font-bold font-mono">
+                          {language === 'bn' ? toBanglaNumber(visitorStats.devices.desktop) : visitorStats.devices.desktop}%
+                        </span>
+                      </div>
+                      <div className="w-full bg-stone-200 rounded-full h-2">
+                        <div
+                          className="bg-emerald-600 h-2 rounded-full"
+                          style={{ width: `${Math.min(100, visitorStats.devices.desktop)}%` }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-xs text-stone-600 mb-1">
+                        <span className="flex items-center gap-1.5 font-medium">
+                          <Tablet className="w-3.5 h-3.5 text-purple-600" />
+                          <span>{language === 'bn' ? 'ট্যাবলেট / আইপ্যাড' : 'Tablet / iPad'}</span>
+                        </span>
+                        <span className="font-bold font-mono">
+                          {language === 'bn' ? toBanglaNumber(visitorStats.devices.tablet) : visitorStats.devices.tablet}%
+                        </span>
+                      </div>
+                      <div className="w-full bg-stone-200 rounded-full h-2">
+                        <div
+                          className="bg-purple-600 h-2 rounded-full"
+                          style={{ width: `${Math.min(100, visitorStats.devices.tablet)}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Popular Sections */}
+                <div className="bg-stone-50/80 p-4 rounded-xl border border-stone-200">
+                  <h5 className="text-xs font-bold text-slate-900 mb-3 flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-emerald-700" />
+                    <span>{language === 'bn' ? 'সর্বাধিক পঠিত সেকশনসমূহ' : 'Popular Sections'}</span>
+                  </h5>
+                  <div className="space-y-2">
+                    {visitorStats.popularPages.map((page, idx) => (
+                      <div key={idx} className="flex items-center justify-between text-xs p-2 bg-white rounded-lg border border-stone-200/60">
+                        <span className="font-medium text-stone-800 line-clamp-1">
+                          {idx + 1}. {page.name}
+                        </span>
+                        <span className="font-mono text-teal-700 font-bold shrink-0 ml-2">
+                          {language === 'bn' ? toBanglaNumber(page.views) : page.views.toLocaleString()} বার
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* SECTION: GEOLOCATION & REGIONAL VISITOR ANALYTICS */}
+              <div className="space-y-4 pt-2">
+                <div className="flex items-center justify-between border-b border-stone-200 pb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 flex items-center justify-center">
+                      <MapPin className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h5 className="text-xs sm:text-sm font-bold text-slate-900">
+                        {language === 'bn' ? 'ভৌগোলিক অবস্থান ও এলাকা বিশ্লেষণ (Location Analytics)' : 'Geolocation & Regional Traffic'}
+                      </h5>
+                      <p className="text-[11px] text-stone-500">
+                        {language === 'bn' 
+                          ? 'জয়মনিরহাট ইউনিয়নের ৯টি ওয়ার্ড, কুড়িগ্রামের উপজেলা, জেলা ও প্রবাসী পাঠকদের বিস্তার' 
+                          : 'Ward, Upazila, District, and International visitor breakdown'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Grid 1: Joymonirhat 9 Wards & Kurigram Upazilas */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Joymonirhat 9 Wards */}
+                  <div className="bg-stone-50/90 p-4 rounded-xl border border-stone-200 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-2.5">
+                        <h6 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                          <Compass className="w-4 h-4 text-emerald-700" />
+                          <span>{language === 'bn' ? 'জয়মনিরহাট ইউনিয়ন: ৯টি ওয়ার্ড' : 'Joymonirhat Union: 9 Wards'}</span>
+                        </h6>
+                        <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">
+                          ওয়ার্ড ১ - ৯
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-stone-500 mb-3">
+                        {language === 'bn' 
+                          ? 'ওয়েবসাইটে ভিজিট করা স্থানীয় ইউনিয়নবাসী ও ওয়ার্ডভিত্তিক পাঠক সংখ্যা:'
+                          : 'Breakdown across the 9 administrative wards:'}
+                      </p>
+                      
+                      <div className="space-y-2.5">
+                        {Object.entries(visitorStats.locations?.wards || {}).map(([wardName, count], idx) => {
+                          const maxWard = 800;
+                          const pct = Math.min(100, Math.round((count / maxWard) * 100));
+                          const isHeadquarters = wardName.includes('অষ্টমীর ঘাট');
+                          return (
+                            <div key={idx} className="bg-white p-2 rounded-lg border border-stone-200/70">
+                              <div className="flex items-center justify-between text-xs mb-1">
+                                <span className={`font-semibold line-clamp-1 ${isHeadquarters ? 'text-blue-900 font-bold' : 'text-stone-800'}`}>
+                                  {wardName} {isHeadquarters && '⭐ (কার্যালয়)'}
+                                </span>
+                                <span className="font-mono font-bold text-emerald-700 shrink-0 ml-2">
+                                  {language === 'bn' ? toBanglaNumber(count) : count.toLocaleString()} জন
+                                </span>
+                              </div>
+                              <div className="w-full bg-stone-100 rounded-full h-1.5 overflow-hidden">
+                                <div
+                                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                                    isHeadquarters ? 'bg-blue-600' : 'bg-emerald-500'
+                                  }`}
+                                  style={{ width: `${pct}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Kurigram Upazilas */}
+                  <div className="bg-stone-50/90 p-4 rounded-xl border border-stone-200 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-2.5">
+                        <h6 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                          <Building2 className="w-4 h-4 text-blue-700" />
+                          <span>{language === 'bn' ? 'কুড়িগ্রাম জেলা: উপজেলাসমূহ' : 'Kurigram: Upazilas'}</span>
+                        </h6>
+                        <span className="text-[10px] bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-full">
+                          উপজেলা অনুপাত
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-stone-500 mb-3">
+                        {language === 'bn' 
+                          ? 'ভূরুঙ্গামারী ও তৎসংলগ্ন উপজেলাসমূহের ভিজিটর বিস্তার:'
+                          : 'Visitor spread across Kurigram upazilas:'}
+                      </p>
+
+                      <div className="space-y-2.5">
+                        {Object.entries(visitorStats.locations?.upazilas || {}).map(([upazilaName, count], idx) => {
+                          const maxUpazila = 6000;
+                          const pct = Math.min(100, Math.round((count / maxUpazila) * 100));
+                          const isLocal = upazilaName.includes('ভূরুঙ্গামারী');
+                          return (
+                            <div key={idx} className="bg-white p-2 rounded-lg border border-stone-200/70">
+                              <div className="flex items-center justify-between text-xs mb-1">
+                                <span className={`font-semibold line-clamp-1 ${isLocal ? 'text-teal-900 font-bold' : 'text-stone-800'}`}>
+                                  {upazilaName}
+                                </span>
+                                <span className="font-mono font-bold text-teal-700 shrink-0 ml-2">
+                                  {language === 'bn' ? toBanglaNumber(count) : count.toLocaleString()} বার
+                                </span>
+                              </div>
+                              <div className="w-full bg-stone-100 rounded-full h-1.5 overflow-hidden">
+                                <div
+                                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                                    isLocal ? 'bg-teal-600' : 'bg-slate-400'
+                                  }`}
+                                  style={{ width: `${pct}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Grid 2: Districts of Bangladesh & International / Expatriate Countries */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Districts of Bangladesh */}
+                  <div className="bg-stone-50/90 p-4 rounded-xl border border-stone-200">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <h6 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                        <MapPin className="w-4 h-4 text-purple-700" />
+                        <span>{language === 'bn' ? 'বাংলাদেশ: জেলাভিত্তিক ট্রাফিক' : 'Bangladesh: Districts'}</span>
+                      </h6>
+                      <span className="text-[10px] bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded-full">
+                        জেলা ও বিভাগ
+                      </span>
+                    </div>
+                    <div className="space-y-2">
+                      {Object.entries(visitorStats.locations?.districts || {}).map(([distName, count], idx) => (
+                        <div key={idx} className="flex items-center justify-between text-xs p-2 bg-white rounded-lg border border-stone-200/60">
+                          <span className="font-medium text-stone-800 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+                            <span>{distName}</span>
+                          </span>
+                          <span className="font-mono text-purple-700 font-bold shrink-0 ml-2">
+                            {language === 'bn' ? toBanglaNumber(count) : count.toLocaleString()}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* International / Expatriate Countries */}
+                  <div className="bg-stone-50/90 p-4 rounded-xl border border-stone-200">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <h6 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                        <Plane className="w-4 h-4 text-rose-600" />
+                        <span>{language === 'bn' ? 'প্রবাসী ও আন্তর্জাতিক পাঠক (Global)' : 'Expatriate & Global'}</span>
+                      </h6>
+                      <span className="text-[10px] bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded-full">
+                        প্রবাসী ভাই-বোনেরা
+                      </span>
+                    </div>
+                    <div className="space-y-2">
+                      {Object.entries(visitorStats.locations?.countries || {}).map(([cName, count], idx) => (
+                        <div key={idx} className="flex items-center justify-between text-xs p-2 bg-white rounded-lg border border-stone-200/60">
+                          <span className="font-medium text-stone-800">
+                            {cName}
+                          </span>
+                          <span className="font-mono text-rose-700 font-bold shrink-0 ml-2">
+                            {language === 'bn' ? toBanglaNumber(count) : count.toLocaleString()}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Real-time Geo Visitor Stream Log */}
+                <div className="bg-stone-900 text-stone-200 p-4 rounded-xl border border-stone-800">
+                  <div className="flex items-center justify-between mb-3 border-b border-stone-800 pb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                      <h6 className="text-xs sm:text-sm font-bold text-white">
+                        {language === 'bn' ? 'রিয়েল-টাইম ভিজিটর অবস্থান লগ (Live Geo Stream)' : 'Live Geo-Visitor Stream'}
+                      </h6>
+                    </div>
+                    <span className="text-[10px] text-stone-400 font-mono">
+                      {language === 'bn' ? 'সর্বশেষ ২০টি ভিজিট' : 'Latest 20 visits'}
+                    </span>
+                  </div>
+
+                  <div className="space-y-1.5 max-h-60 overflow-y-auto no-scrollbar font-sans">
+                    {(visitorStats.recentGeoLogs || []).map((log, idx) => (
+                      <div 
+                        key={log.id || idx} 
+                        className="flex items-center justify-between text-xs p-2 rounded-lg bg-stone-950/70 border border-stone-800/80 hover:border-stone-700 transition-colors"
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="text-base shrink-0">{log.flag || '📍'}</span>
+                          <span className="font-semibold text-stone-100 truncate">
+                            {log.locationName}
+                          </span>
+                          <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold shrink-0 ${
+                            log.category === 'ward' 
+                              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' 
+                              : log.category === 'country'
+                              ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                              : 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+                          }`}>
+                            {log.category === 'ward' ? 'ওয়ার্ড' : log.category === 'country' ? 'প্রবাসী' : 'উপজেলা/জেলা'}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-3 shrink-0 text-[11px] text-stone-400 font-mono ml-2">
+                          <span className="hidden sm:inline text-stone-500">{log.device}</span>
+                          <span className="text-emerald-400">{log.time}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 bg-amber-50/70 border border-amber-200 rounded-xl space-y-3">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-700" />
+                  <h5 className="text-xs sm:text-sm font-bold text-amber-950">
+                    {language === 'bn' ? 'ভিজিটর কাউন্টার সংখ্যা নির্ধারণ (অ্যাডমিন ক্যালিগ্রেশন)' : 'Visitor Counter Calibration'}
+                  </h5>
+                </div>
+                <p className="text-xs text-amber-900 leading-relaxed">
+                  {language === 'bn'
+                    ? 'সংগঠন প্রতিষ্ঠার (২০২১ সাল) পর থেকে পূর্বের ভিজিটর সংখ্যা অথবা আপনার কাঙ্ক্ষিত বেস কাউন্টার সংখ্যা এখানে নির্ধারণ করতে পারেন। এটি ওয়েবসাইটের ফুটারে রিয়েল-টাইম হিসেবে যুক্ত হবে।'
+                    : 'Set base counter to reflect historical visitors since organization establishment.'}
+                </p>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1">
+                  <div className="relative flex-1">
+                    <input
+                      type="number"
+                      value={baseOffsetInput}
+                      onChange={(e) => setBaseOffsetInput(Number(e.target.value) || 0)}
+                      placeholder="যেমন: ১৫০০০"
+                      className="w-full px-3.5 py-2 text-xs sm:text-sm rounded-lg border border-amber-300 bg-white font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const updated = updateBaseOffset(baseOffsetInput);
+                      setVisitorStats(updated);
+                      showSuccess(
+                        language === 'bn'
+                          ? `ভিজিটর কাউন্টার সংখ্যা সফলভাবে ${toBanglaNumber(baseOffsetInput)}-এ আপডেট করা হয়েছে!`
+                          : 'Visitor counter successfully updated!'
+                      );
+                    }}
+                    className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold shadow-sm transition-all cursor-pointer whitespace-nowrap"
+                  >
+                    {language === 'bn' ? 'কাউন্টার সংখ্যা সংরক্ষণ করুন' : 'Save Base Count'}
+                  </button>
+                </div>
+              </div>
+            </div>
           )}
 
           {/* TAB 6: BACKUP & DATA CONTROLS */}

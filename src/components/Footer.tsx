@@ -2,6 +2,7 @@ import React from 'react';
 import { MapPin, Mail, Phone, Heart, Shield, ArrowUp, Lock } from 'lucide-react';
 import { ORG_DETAILS } from '../data/organizationData';
 import { Language } from '../types';
+import { VisitorCounter } from './VisitorCounter';
 
 interface FooterProps {
   language: Language;
@@ -183,6 +184,11 @@ export const Footer: React.FC<FooterProps> = ({ language, onOpenAdmin }) => {
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Real-time Website Visitor Counter Bar */}
+        <div className="pt-8 pb-4">
+          <VisitorCounter language={language} />
         </div>
 
         {/* Bottom Copyright & Disclaimer */}
