@@ -7,12 +7,14 @@ interface NavbarProps {
   language: Language;
   onToggleLanguage: () => void;
   onOpenVolunteerModal: () => void;
+  onOpenAdmin?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   language,
   onToggleLanguage,
   onOpenVolunteerModal,
+  onOpenAdmin,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerScrollRef = useRef<HTMLDivElement>(null);
@@ -136,6 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Zone 3: Action Buttons & Controls (Right anchored, neatly spaced) */}
             <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+
               {/* Language Switch */}
               <button
                 onClick={onToggleLanguage}

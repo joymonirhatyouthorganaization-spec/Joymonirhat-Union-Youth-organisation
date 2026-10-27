@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { Bell, Search, Calendar, FileText, Share2, Printer, Check, X, AlertCircle } from 'lucide-react';
-import { NOTICES, ORG_DETAILS } from '../data/organizationData';
+import { Bell, Search, Calendar, FileText, Share2, Printer, Check, X, AlertCircle, PlusCircle } from 'lucide-react';
+import { ORG_DETAILS } from '../data/organizationData';
 import { NoticeItem, Language } from '../types';
+import { useLiveContent } from '../utils/contentStore';
 
 interface NoticeBoardProps {
   language: Language;
+  onOpenAdmin?: () => void;
 }
 
-export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language }) => {
+export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, onOpenAdmin }) => {
+  const { notices } = useLiveContent();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedNotice, setSelectedNotice] = useState<NoticeItem | null>(null);
@@ -21,7 +24,7 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language }) => {
     { key: 'general', labelBn: 'প্রশিক্ষণ ও সাধারণ', labelEn: 'Training & General' },
   ];
 
-  const filteredNotices = NOTICES.filter((notice) => {
+  const filteredNotices = notices.filter((notice) => {
     const matchesCategory = selectedCategory === 'all' || notice.categoryType === selectedCategory;
     const q = searchQuery.toLowerCase();
     const matchesSearch =

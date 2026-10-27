@@ -13,32 +13,36 @@ import {
 } from 'lucide-react';
 import { GALLERY_ITEMS, ORG_DETAILS } from '../data/organizationData';
 import { GalleryItem, Language } from '../types';
+import { useLiveContent } from '../utils/contentStore';
 
 interface GalleryProps {
   language: Language;
+  onOpenAdmin?: () => void;
 }
 
-export const Gallery: React.FC<GalleryProps> = ({ language }) => {
+export const Gallery: React.FC<GalleryProps> = ({ language, onOpenAdmin }) => {
+  const { gallery } = useLiveContent();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null);
 
   const getCategoryCount = (categoryKey: string) => {
-    if (categoryKey === 'all') return GALLERY_ITEMS.length;
-    return GALLERY_ITEMS.filter((item) => item.categoryBn === categoryKey).length;
+    if (categoryKey === 'all') return gallery.length;
+    return gallery.filter((item) => item.categoryBn === categoryKey).length;
   };
 
   const filterTabs = [
-    { key: 'all', labelBn: `সকল স্থিরচিত্র (${GALLERY_ITEMS.length})`, labelEn: `All Photos (${GALLERY_ITEMS.length})` },
+    { key: 'all', labelBn: `সকল স্থিরচিত্র (${gallery.length})`, labelEn: `All Photos (${gallery.length})` },
     { key: 'মাদক প্রতিরোধ', labelBn: `মাদক প্রতিরোধ ও পাহারা (${getCategoryCount('মাদক প্রতিরোধ')})`, labelEn: `Anti-Drug & Vigilance (${getCategoryCount('মাদক প্রতিরোধ')})` },
     { key: 'বাল্যবিবাহ প্রতিরোধ', labelBn: `বাল্যবিবাহ ও কন্যাশিশু (${getCategoryCount('বাল্যবিবাহ প্রতিরোধ')})`, labelEn: `Child Protection (${getCategoryCount('বাল্যবিবাহ প্রতিরোধ')})` },
     { key: 'গ্রামীণ উন্নয়ন', labelBn: `রাস্তা ও অবকাঠামো সংস্কার (${getCategoryCount('গ্রামীণ উন্নয়ন')})`, labelEn: `Rural Development (${getCategoryCount('গ্রামীণ উন্নয়ন')})` },
     { key: 'পরিবেশ ও বৃক্ষরোপণ', labelBn: `বৃক্ষরোপণ ও সবুজায়ন (${getCategoryCount('পরিবেশ ও বৃক্ষরোপণ')})`, labelEn: `Afforestation (${getCategoryCount('পরিবেশ ও বৃক্ষরোপণ')})` },
     { key: 'যুব উন্নয়ন ও প্রশিক্ষণ', labelBn: `যুব প্রশিক্ষণ ও যুব দিবস (${getCategoryCount('যুব উন্নয়ন ও প্রশিক্ষণ')})`, labelEn: `Youth TVET (${getCategoryCount('যুব উন্নয়ন ও প্রশিক্ষণ')})` },
-    { key: 'খেলাধুলা ও শিক্ষা', labelBn: `ক্রীড়া, সাইকেল র‍্যালি ও শিক্ষা (${getCategoryCount('খেলাধুলা ও শিক্ষা')})`, labelEn: `Sports & Education (${getCategoryCount('খেলাধুলা ও শিক্ষা')})` },
+    { key: 'পেপার কাটিং ও মিডিয়া', labelBn: `পত্রিকার কাটিং ও সংবাদ (${getCategoryCount('পেপার কাটিং ও মিডিয়া')})`, labelEn: `Press Clippings (${getCategoryCount('পেপার কাটিং ও মিডিয়া')})` },
+    { key: 'ভিডিও ও হাইলাইটস', labelBn: `ভিডিও ও প্রতিবেদন (${getCategoryCount('ভিডিও ও হাইলাইটস')})`, labelEn: `Videos & Reports (${getCategoryCount('ভিডিও ও হাইলাইটস')})` },
     { key: 'প্রাতিষ্ঠানিক ও সাংগঠনিক', labelBn: `নেতৃত্ব ও প্রাতিষ্ঠানিক (${getCategoryCount('প্রাতিষ্ঠানিক ও সাংগঠনিক')})`, labelEn: `Leadership & Official (${getCategoryCount('প্রাতিষ্ঠানিক ও সাংগঠনিক')})` },
   ];
 
-  const filteredItems = GALLERY_ITEMS.filter((item) => {
+  const filteredItems = gallery.filter((item) => {
     if (selectedCategory === 'all') return true;
     return item.categoryBn === selectedCategory;
   });
@@ -98,7 +102,7 @@ export const Gallery: React.FC<GalleryProps> = ({ language }) => {
           <div className="flex items-center gap-2 shrink-0">
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-blue-950 bg-white border border-blue-200 rounded-lg shadow-2xs">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>{language === 'bn' ? `${GALLERY_ITEMS.length}টি বাস্তব চিত্র` : `${GALLERY_ITEMS.length} Authentic Photos`}</span>
+              <span>{language === 'bn' ? `${gallery.length}টি বাস্তব চিত্র` : `${gallery.length} Authentic Photos`}</span>
             </span>
             <a
               href={ORG_DETAILS.facebookPageUrl}

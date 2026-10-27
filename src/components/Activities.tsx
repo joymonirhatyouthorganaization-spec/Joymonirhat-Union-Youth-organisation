@@ -200,7 +200,7 @@ export const Activities: React.FC<ActivitiesProps> = ({ language, onOpenVoluntee
                       </span>
                     </div>
                     <span className="text-[11px] text-blue-700 font-medium">
-                      {language === 'bn' ? 'পোস্ট দেখুন →' : 'View →'}
+                      {language === 'bn' ? 'প্রতিবেদন দেখুন →' : 'View Details →'}
                     </span>
                   </div>
                 )}
@@ -324,7 +324,7 @@ export const Activities: React.FC<ActivitiesProps> = ({ language, onOpenVoluntee
                       </svg>
                     </div>
                     <h4 className="text-sm font-bold text-slate-900">
-                      {language === 'bn' ? 'অফিসিয়াল ফেসবুক পেজের মাদকবিরোধী কার্যক্রম ও পোস্টসমূহ' : 'Official Facebook Anti-Drug Campaign Posts'}
+                      {language === 'bn' ? 'অফিসিয়াল ফেসবুক পেজের মাদকবিরোধী কার্যক্রম ও সচিত্র প্রতিবেদন' : 'Official Facebook Anti-Drug Campaign Reports'}
                     </h4>
                   </div>
                   <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-blue-200/80 text-blue-900 shrink-0">
@@ -333,7 +333,7 @@ export const Activities: React.FC<ActivitiesProps> = ({ language, onOpenVoluntee
                 </div>
                 <p className="text-xs text-stone-600 mb-3">
                   {language === 'bn' 
-                    ? 'মাঠপর্যায়ে আয়োজিত মাদকবিরোধী সমাবেশ, সচেতনতামূলক পদযাত্রা ও শপথ গ্রহণের অফিসিয়াল ফেসবুক পোস্ট ও সচিত্র প্রতিবেদন দেখতে নিচের লিঙ্কগুলোতে ক্লিক করুন:'
+                    ? 'মাঠপর্যায়ে আয়োজিত মাদকবিরোধী সমাবেশ, সচেতনতামূলক পদযাত্রা ও শপথ গ্রহণের অফিসিয়াল সচিত্র প্রতিবেদন ও মাঠপর্যায়ের আপডেট দেখতে নিচের লিঙ্কগুলোতে ক্লিক করুন:'
                     : 'Click on the field reports below to read complete photo journals and event coverage on our official Facebook page:'}
                 </p>
                 <div className="space-y-2.5">
@@ -349,7 +349,7 @@ export const Activities: React.FC<ActivitiesProps> = ({ language, onOpenVoluntee
                         <div>
                           <div className="flex items-center gap-2 mb-1">
                             <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-100 text-blue-800">
-                              {post.highlight || `পোস্ট ${idx + 1}`}
+                              {post.highlight || `প্রতিবেদন ${idx + 1}`}
                             </span>
                             <span className="text-[11px] text-stone-400">
                               {language === 'bn' ? post.dateBn : post.dateEn}
@@ -363,7 +363,7 @@ export const Activities: React.FC<ActivitiesProps> = ({ language, onOpenVoluntee
                           </p>
                         </div>
                         <div className="shrink-0 flex items-center gap-1 text-xs font-semibold text-blue-700 group-hover:text-blue-900 mt-1">
-                          <span className="hidden sm:inline">{language === 'bn' ? 'ফেসবুকে দেখুন' : 'View Post'}</span>
+                          <span className="hidden sm:inline">{language === 'bn' ? 'ফেসবুকে দেখুন' : 'View on Facebook'}</span>
                           <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                         </div>
                       </div>

@@ -1,14 +1,17 @@
 import React, { useState, useMemo } from 'react';
-import { Users, PhoneCall, ShieldCheck, HeartHandshake, Sparkles, CheckCircle2, Search, LayoutGrid, Table as TableIcon } from 'lucide-react';
+import { Users, PhoneCall, ShieldCheck, HeartHandshake, Sparkles, CheckCircle2, Search, LayoutGrid, Table as TableIcon, UserPlus } from 'lucide-react';
 import { COMMITTEE_MEMBERS, COMMITTEE_SUMMARY } from '../data/organizationData';
 import { Language } from '../types';
+import { useLiveContent } from '../utils/contentStore';
 
 interface LeadershipProps {
   language: Language;
   onOpenVolunteerModal?: () => void;
+  onOpenAdmin?: () => void;
 }
 
-export const Leadership: React.FC<LeadershipProps> = ({ language, onOpenVolunteerModal }) => {
+export const Leadership: React.FC<LeadershipProps> = ({ language, onOpenVolunteerModal, onOpenAdmin }) => {
+  const { members } = useLiveContent();
   const [filterTab, setFilterTab] = useState<'all' | 'executive' | 'general'>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
@@ -52,7 +55,7 @@ export const Leadership: React.FC<LeadershipProps> = ({ language, onOpenVoluntee
   };
 
   const filteredMembers = useMemo(() => {
-    return COMMITTEE_MEMBERS.filter((member) => {
+    return members.filter((member) => {
       // Tab filter
       if (filterTab === 'executive' && member.serialNo > 11) return false;
       if (filterTab === 'general' && member.serialNo <= 11) return false;

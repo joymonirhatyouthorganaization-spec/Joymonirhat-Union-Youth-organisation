@@ -146,8 +146,8 @@ export const SocialHub: React.FC<SocialHubProps> = ({ language }) => {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-white">
                   {language === 'bn'
-                    ? 'অফিসিয়াল ফেসবুক পেজের মাদকবিরোধী ৫টি গুরুত্বপূর্ণ পোস্ট'
-                    : '5 Key Anti-Drug Movement Posts from Our Official Facebook Page'}
+                    ? 'অফিসিয়াল ফেসবুক পেজের ৫টি বিশেষ মাঠপর্যায়ের প্রতিবেদন'
+                    : '5 Key Anti-Drug Movement Reports from Our Official Facebook Page'}
                 </h3>
                 <p className="text-xs sm:text-sm text-blue-200 mt-1">
                   {language === 'bn'
@@ -155,14 +155,13 @@ export const SocialHub: React.FC<SocialHubProps> = ({ language }) => {
                     : 'Direct links to our youth rallies, anti-drug pledges, and community campaigns on Facebook:'}
                 </p>
               </div>
-
               <a
                 href={ORG_DETAILS.facebookPageUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-blue-950 bg-amber-300 hover:bg-amber-400 rounded-lg transition-colors"
               >
-                <span>{language === 'bn' ? 'সব পোস্ট দেখুন' : 'All Page Posts'}</span>
+                <span>{language === 'bn' ? 'সকল ফেসবুক আপডেট দেখুন' : 'All Updates'}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -196,7 +195,7 @@ export const SocialHub: React.FC<SocialHubProps> = ({ language }) => {
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-amber-300 font-semibold group-hover:text-amber-200">
-                    <span>{language === 'bn' ? 'ফেসবুকে সচিত্র পোস্ট পড়ুন' : 'Read on Facebook'}</span>
+                    <span>{language === 'bn' ? 'ফেসবুকে সচিত্র প্রতিবেদন দেখুন' : 'View on Facebook'}</span>
                     <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </a>

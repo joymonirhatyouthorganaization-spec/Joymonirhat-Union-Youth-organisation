@@ -1,13 +1,14 @@
 import React from 'react';
-import { MapPin, Mail, Phone, Heart, Shield, ArrowUp } from 'lucide-react';
+import { MapPin, Mail, Phone, Heart, Shield, ArrowUp, Lock } from 'lucide-react';
 import { ORG_DETAILS } from '../data/organizationData';
 import { Language } from '../types';
 
 interface FooterProps {
   language: Language;
+  onOpenAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ language }) => {
+export const Footer: React.FC<FooterProps> = ({ language, onOpenAdmin }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -194,6 +195,17 @@ export const Footer: React.FC<FooterProps> = ({ language }) => {
             <span className="hidden sm:inline">
               {language === 'bn' ? 'অরাজনৈতিক ও অলাভজনক স্বেচ্ছাসেবী যুব সংগঠন' : 'Non-political & voluntary organization'}
             </span>
+            {onOpenAdmin && (
+              <button
+                onClick={onOpenAdmin}
+                type="button"
+                className="inline-flex items-center gap-1 text-[11px] text-stone-600 hover:text-amber-400 transition-colors cursor-pointer py-1 px-1.5 rounded"
+                title="Admin Control Panel / অ্যাডমিন প্যানেল"
+              >
+                <Lock className="w-3 h-3" />
+                <span>{language === 'bn' ? 'অ্যাডমিন' : 'Admin'}</span>
+              </button>
+            )}
             <button
               onClick={scrollToTop}
               type="button"

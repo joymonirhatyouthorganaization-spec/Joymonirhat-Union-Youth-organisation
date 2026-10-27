@@ -107,7 +107,7 @@ export const ACTIVITIES: ActivityItem[] = [
         dateEn: 'Field Update',
         summaryBn: 'জয়মনিরহাট ইউনিয়নকে মাদকমুক্ত করতে তরুণদের শপথ ও সমন্বিত সামাজিক প্রতিরোধ গড়ে তোলার ঘোষণা।',
         summaryEn: 'Youth assembly and collective pledge advocating for an addiction-free Joymonirhat Union.',
-        highlight: 'অফিসিয়াল পোস্ট ১'
+        highlight: 'অফিসিয়াল প্রতিবেদন ১'
       },
       {
         url: 'https://www.facebook.com/share/p/1CBVRGqQ4b/',
@@ -115,9 +115,9 @@ export const ACTIVITIES: ActivityItem[] = [
         titleEn: '“Say No to Drugs” — School & Student Awareness Rally',
         dateBn: 'মাঠপর্যায়ের আপডেট',
         dateEn: 'Field Update',
-        summaryBn: 'শিক্ষার্থীদের সচেতন করে তুলতে মাদকবিরোধী পোস্টার, স্লোগান এবং জয়মনিরহাটের রাজপথে বর্ণাঢ্য পদযাত্রা।',
+        summaryBn: 'শিক্ষার্থীদের সচেতন করে তুলতে মাদকবিরোধী ব্যানার ও প্ল্যাকার্ড, স্লোগান এবং জয়মনিরহাটের রাজপথে বর্ণাঢ্য পদযাত্রা।',
         summaryEn: 'Vibrant student procession carrying anti-drug banners and slogans across key thoroughfares.',
-        highlight: 'অফিসিয়াল পোস্ট ২'
+        highlight: 'অফিসিয়াল প্রতিবেদন ২'
       },
       {
         url: 'https://www.facebook.com/share/p/1Emry7ow3v/',
@@ -127,7 +127,7 @@ export const ACTIVITIES: ActivityItem[] = [
         dateEn: 'Field Update',
         summaryBn: 'হাট-বাজারে গণসংযোগ, লিফলেট বিতরণ ও যুবকদের খেলাধুলার দিকে উৎসাহিত করার বিশেষ উদ্যোগ।',
         summaryEn: 'Marketplace outreach, leaflet distribution, and redirecting youth towards constructive sports.',
-        highlight: 'অফিসিয়াল পোস্ট ৩'
+        highlight: 'অফিসিয়াল প্রতিবেদন ৩'
       },
       {
         url: 'https://www.facebook.com/share/p/1CG56JyTBy/',
@@ -137,7 +137,7 @@ export const ACTIVITIES: ActivityItem[] = [
         dateEn: 'Field Update',
         summaryBn: 'সীমান্ত সংলগ্ন ওয়ার্ডসমূহে মাদক বিস্তার রুখতে সচেতনতামূলক আলোচনা এবং অভিভাবকদের সম্পৃক্তকরণ।',
         summaryEn: 'Border corridor community dialogue engaging parents and guardians against substance abuse.',
-        highlight: 'অফিসিয়াল পোস্ট ৪'
+        highlight: 'অফিসিয়াল প্রতিবেদন ৪'
       },
       {
         url: 'https://www.facebook.com/share/p/1HXd1GduPy/',
@@ -147,7 +147,7 @@ export const ACTIVITIES: ActivityItem[] = [
         dateEn: 'Field Update',
         summaryBn: 'যুব সংগঠনের প্রতিনিধিদের নিয়ে কর্মপরিকল্পনা প্রণয়ন এবং তরুণদের ইতিবাচক কাজে সম্পৃক্ত করার সিদ্ধান্ত।',
         summaryEn: 'Action blueprint to safeguard youth livelihoods and sustain an addiction-free community environment.',
-        highlight: 'অফিসিয়াল পোস্ট ৫'
+        highlight: 'অফিসিয়াল প্রতিবেদন ৫'
       }
     ]
   },
@@ -1702,7 +1702,7 @@ export const DRUG_PREVENTION_POSTS = [
     url: 'https://www.facebook.com/share/p/1MSNk1yDJa/',
     titleBn: 'মাদকবিরোধী যুব সংহতি ও অরাজনৈতিক সমাজসেবার শপথ',
     titleEn: 'Anti-Drug Youth Solidarity & Community Oath',
-    dateBn: 'মাঠপর্যায়ের পোস্ট ১',
+    dateBn: 'মাঠপর্যায়ের প্রতিবেদন ১',
     dateEn: 'Official Post 1',
     summaryBn: 'জয়মনিরহাট ইউনিয়নকে মাদকমুক্ত করতে তরুণদের শপথ ও সমন্বিত সামাজিক প্রতিরোধ গড়ে তোলার ঘোষণা।',
     summaryEn: 'Youth assembly and collective pledge advocating for an addiction-free Joymonirhat Union.',
@@ -1714,9 +1714,9 @@ export const DRUG_PREVENTION_POSTS = [
     url: 'https://www.facebook.com/share/p/1CBVRGqQ4b/',
     titleBn: '‘না বলুন মাদককে’ — শিক্ষাপ্রতিষ্ঠান ও শিক্ষার্থীদের নিয়ে সচেতনতামূলক র‍্যালি',
     titleEn: '“Say No to Drugs” — School & Student Awareness Rally',
-    dateBn: 'মাঠপর্যায়ের পোস্ট ২',
+    dateBn: 'মাঠপর্যায়ের প্রতিবেদন ২',
     dateEn: 'Official Post 2',
-    summaryBn: 'শিক্ষার্থীদের সচেতন করে তুলতে মাদকবিরোধী পোস্টার, স্লোগান এবং জয়মনিরহাটের রাজপথে বর্ণাঢ্য পদযাত্রা।',
+    summaryBn: 'শিক্ষার্থীদের সচেতন করে তুলতে মাদকবিরোধী ব্যানার ও প্ল্যাকার্ড, স্লোগান এবং জয়মনিরহাটের রাজপথে বর্ণাঢ্য পদযাত্রা।',
     summaryEn: 'Vibrant student procession carrying anti-drug banners and slogans across key thoroughfares.',
     highlightBn: 'শিক্ষার্থীদের সচেতনতা র‍্যালি',
     highlightEn: 'School Rally'
@@ -1726,7 +1726,7 @@ export const DRUG_PREVENTION_POSTS = [
     url: 'https://www.facebook.com/share/p/1Emry7ow3v/',
     titleBn: 'মাদক প্রতিরোধে যুব সমাবেশ ও জনসচেতনতামূলক ক্যাম্পেইন',
     titleEn: 'Anti-Drug Youth Gathering & Public Campaign',
-    dateBn: 'মাঠপর্যায়ের পোস্ট ৩',
+    dateBn: 'মাঠপর্যায়ের প্রতিবেদন ৩',
     dateEn: 'Official Post 3',
     summaryBn: 'হাট-বাজারে গণসংযোগ, লিফলেট বিতরণ ও যুবকদের খেলাধুলার দিকে উৎসাহিত করার বিশেষ উদ্যোগ।',
     summaryEn: 'Marketplace outreach, leaflet distribution, and redirecting youth towards constructive sports.',
@@ -1738,7 +1738,7 @@ export const DRUG_PREVENTION_POSTS = [
     url: 'https://www.facebook.com/share/p/1CG56JyTBy/',
     titleBn: 'সীমান্তবর্তী এলাকায় মাদকের কুফল বিষয়ক জনসচেতনতা সভা',
     titleEn: 'Border-Belt Drug Awareness Assembly',
-    dateBn: 'মাঠপর্যায়ের পোস্ট ৪',
+    dateBn: 'মাঠপর্যায়ের প্রতিবেদন ৪',
     dateEn: 'Official Post 4',
     summaryBn: 'সীমান্ত সংলগ্ন ওয়ার্ডসমূহে মাদক বিস্তার রুখতে সচেতনতামূলক আলোচনা এবং অভিভাবকদের সম্পৃক্তকরণ।',
     summaryEn: 'Border corridor community dialogue engaging parents and guardians against substance abuse.',
@@ -1750,7 +1750,7 @@ export const DRUG_PREVENTION_POSTS = [
     url: 'https://www.facebook.com/share/p/1HXd1GduPy/',
     titleBn: 'মাদকমুক্ত জয়মনিরহাট গঠনে তরুণ নেতৃত্বের ঐক্য ও কর্মপরিকল্পনা',
     titleEn: 'Youth Action Blueprint for a Drug-Free Joymonirhat',
-    dateBn: 'মাঠপর্যায়ের পোস্ট ৫',
+    dateBn: 'মাঠপর্যায়ের প্রতিবেদন ৫',
     dateEn: 'Official Post 5',
     summaryBn: 'যুব সংগঠনের প্রতিনিধিদের নিয়ে কর্মপরিকল্পনা প্রণয়ন এবং তরুণদের ইতিবাচক কাজে সম্পৃক্ত করার সিদ্ধান্ত।',
     summaryEn: 'Action blueprint to safeguard youth livelihoods and sustain an addiction-free community environment.',
@@ -1893,7 +1893,7 @@ export const PAST_ACHIEVEMENTS: AchievementItem[] = [
     titleEn: 'Anti-Drug Civic Awareness & Youth Mobilization',
     pointsBn: [
       'মাদকের কুফল ও সামাজিক পরিণতি নিয়ে ৪টি পৃথক উঠান বৈঠক ও উন্মুক্ত গণসংযোগ।',
-      'শিক্ষার্থীদের নিয়ে বর্ণাঢ্য সচেতনতামূলক র‍্যালি ও শিক্ষাপ্রতিষ্ঠানে মাদকবিরোধী পোস্টারিং।',
+      'শিক্ষার্থীদের নিয়ে বর্ণাঢ্য সচেতনতামূলক র‍্যালি ও শিক্ষাপ্রতিষ্ঠানে মাদকবিরোধী সচেতনতামূলক ক্যাম্পেইন।',
       'কিশোর-কিশোরীদের খেলাধুলা ও সাংস্কৃতিক কর্মকাণ্ডে সম্পৃক্ত করে মাদকমুক্ত বিনোদনের সুযোগ তৈরি।'
     ],
     pointsEn: [

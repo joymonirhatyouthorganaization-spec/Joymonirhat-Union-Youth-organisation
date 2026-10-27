@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -19,14 +19,23 @@ import { SocialHub } from './components/SocialHub';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { VolunteerModal } from './components/VolunteerModal';
+import { AdminPortal } from './components/AdminPortal';
 import { ORG_DETAILS } from './data/organizationData';
 import { Language } from './types';
-import { MessageCircle, HeartHandshake } from 'lucide-react';
+import { MessageCircle, HeartHandshake, UploadCloud } from 'lucide-react';
 
 export default function App() {
   const [language, setLanguage] = useState<Language>('bn');
   const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
+  const [isAdminPortalOpen, setIsAdminPortalOpen] = useState(false);
   const [selectedWardForModal, setSelectedWardForModal] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    // Check if user came via #admin shortcut from PWA or link
+    if (window.location.hash === '#admin') {
+      setIsAdminPortalOpen(true);
+    }
+  }, []);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === 'bn' ? 'en' : 'bn'));
@@ -37,7 +46,6 @@ export default function App() {
     setIsVolunteerModalOpen(true);
   };
 
-
   return (
     <div className="min-h-screen flex flex-col bg-[#fafaf9] text-slate-800">
       {/* Top Navigation */}
@@ -45,6 +53,7 @@ export default function App() {
         language={language}
         onToggleLanguage={toggleLanguage}
         onOpenVolunteerModal={() => handleOpenVolunteerModal()}
+        onOpenAdmin={() => setIsAdminPortalOpen(true)}
       />
 
 
@@ -102,8 +111,11 @@ export default function App() {
         <ContactSection language={language} />
       </main>
 
-      {/* Footer */}
-      <Footer language={language} />
+      {/* Footer with Discreet Admin Login Access */}
+      <Footer
+        language={language}
+        onOpenAdmin={() => setIsAdminPortalOpen(true)}
+      />
 
       {/* Interactive Volunteer Registration Modal */}
       <VolunteerModal
@@ -116,9 +128,16 @@ export default function App() {
         defaultWard={selectedWardForModal}
       />
 
+      {/* Live Admin Content Publishing Portal Modal */}
+      <AdminPortal
+        isOpen={isAdminPortalOpen}
+        onClose={() => setIsAdminPortalOpen(false)}
+        language={language}
+      />
 
-      {/* Persistent Floating Quick Assist Strip for WhatsApp */}
+      {/* Persistent Floating Quick Action Strip */}
       <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-2.5">
+        {/* WhatsApp Helpline */}
         <a
           href={ORG_DETAILS.whatsappUrl}
           target="_blank"
@@ -132,6 +151,7 @@ export default function App() {
           </span>
         </a>
 
+        {/* Join Volunteer */}
         <button
           onClick={() => setIsVolunteerModalOpen(true)}
           type="button"
